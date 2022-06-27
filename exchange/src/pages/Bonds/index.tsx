@@ -280,7 +280,7 @@ export default function Bonds() {
   const theme = useContext(ThemeContext)
   const { account, library } = useActiveWeb3React();
   const bondDepositoriesIsLoading = false;
-  const [contract, setContract] = useState(new Contract("0x62d31A0B13752e86f848cEb7b1388d856f114cc3", GameBondDepositoryABI, library));
+  const [contract, setContract] = useState(new Contract("0x150A50d050A7A1dF71BB54C101c6187eE942faf1", GameBondDepositoryABI, library));
   const [bondDepositories, setBondDepositories] = useState<BondDepository[]>([]);
   const [bondPeriodOver, setBondPeriodOver] = useState(true);
   const [totalUsdcDeposited, setTotalUsdcDeposited] = useState(BigNumber.from(0));
@@ -382,11 +382,11 @@ export default function Bonds() {
                       <Box>Bond Period Over</Box>)
                         :
                         ( <>
-                      <Box>USDC Deposited: {ethers.utils.formatEther(totalUsdcDeposited)}/{ethers.utils.formatEther(maxBuyAmountInUsdc)}</Box>
-                      <Box>GAME Available To Purchase: {ethers.utils.formatUnits(gameBalance)}</Box>
+                      <Box>USDC Deposited: {formatUSDC4(totalUsdcDeposited)}/{formatUSDC4(maxBuyAmountInUsdc)}</Box>
+                      <Box>GAME Available To Purchase: {ethers.utils.formatEther(gameBalance)}</Box>
                       <Box>Bond Period Ends: {bondPeriodEnd.toString()}</Box>
-                      <Box>Bond Price: ${ethers.utils.formatEther(oraclePrice.mul(8).div(10))}</Box>
-                      <Box>Vested for: 6 hours</Box>
+                      <Box>Bond Price: ${formatEther2(oraclePrice.mul(8).div(10))}</Box>
+                      <Box>Vested for: 7 days</Box>
                         </>)
                     }
 

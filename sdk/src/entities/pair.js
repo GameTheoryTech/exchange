@@ -14,7 +14,7 @@ export class Pair {
         const tokenAmounts = tokenAmountA.token.sortsBefore(tokenAmountB.token) // does safety checks
             ? [tokenAmountA, tokenAmountB]
             : [tokenAmountB, tokenAmountA];
-        this.liquidityToken = new Token(tokenAmounts[0].token.chainId, Pair.getAddress(tokenAmounts[0].token, tokenAmounts[1].token), 18, 'Cake-LP', 'Pancake LPs');
+        this.liquidityToken = new Token(tokenAmounts[0].token.chainId, Pair.getAddress(tokenAmounts[0].token, tokenAmounts[1].token), 18, 'TLP', 'Theory LP');
         this.tokenAmounts = tokenAmounts;
     }
     static getAddress(tokenA, tokenB) {

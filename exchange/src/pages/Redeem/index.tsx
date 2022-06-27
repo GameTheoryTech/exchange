@@ -189,7 +189,7 @@ const RedeemCard : React.FC<RedeemCardProps> = ({ redeemable, account }) => {
     const effect = async () =>
     {
       //https://migration.gametheory.tech
-      let res = await axios.post('http://localhost:3002/.netlify/functions/server/avalanche/multiplier', { address: account, token: redeemable.inAddress });
+      let res = await axios.post('https://migration.gametheory.tech/.netlify/functions/server/avalanche/multiplier', { address: account, token: redeemable.inAddress });
       if(res.data.amount !== "error")
       {
         const _multiplier = res.data.multiplier;
@@ -198,7 +198,7 @@ const RedeemCard : React.FC<RedeemCardProps> = ({ redeemable, account }) => {
       }
       setAllowRedeem(await redeemable.contract.allowRedeem());
       setRedeemed(await redeemable.contract.redeemedOutToken(account, redeemable.inAddress));
-      res = await axios.post('http://localhost:3002/.netlify/functions/server/avalanche', { address: account, token: redeemable.inAddress });
+      res = await axios.post('https://migration.gametheory.tech/.netlify/functions/server/avalanche', { address: account, token: redeemable.inAddress });
       if(res.data.amount !== "error") setSignature(res.data.signature);
     }
     effect();
@@ -243,13 +243,13 @@ const NftRedeemCard : React.FC<NftRedeemCardProps> = ({ generation, account }) =
   const [signature, setSignature] = useState("0");
   const [redeemed, setRedeemed] = useState(false);
   const [allowRedeem, setAllowRedeem] = useState(false);
-  const nftContract = useContract("0x5F23D5194E7cd670aA85725433bd8649Be2B63F7", ERC721_ABI, true);
+  const nftContract = useContract("0x77396e5a5b5d27dd4F22C8AdEcfa951e494f35aA", ERC721_ABI, true);
   const mountedRef = useRef(true);
   useEffect(() => {
     const effect = async () =>
     {
       //https://migration.gametheory.tech
-      let res = await axios.post('http://localhost:3002/.netlify/functions/server/avalanche/nft/ids', { address: account, generation: generation });
+      let res = await axios.post('https://migration.gametheory.tech/.netlify/functions/server/avalanche/nft/ids', { address: account, generation: generation });
       if(res.data.amount !== "error")
       {
         setIds(res.data.ids);
@@ -259,7 +259,7 @@ const NftRedeemCard : React.FC<NftRedeemCardProps> = ({ generation, account }) =
         setRedeemed(await nftContract.redeemed(account, generation));
         setAllowRedeem(await nftContract.allowRedeem());
       }
-      res = await axios.post('http://localhost:3002/.netlify/functions/server/avalanche/nft', { address: account, generation: generation });
+      res = await axios.post('https://migration.gametheory.tech/.netlify/functions/server/avalanche/nft', { address: account, generation: generation });
       if(res.data.amount !== "error") setSignature(res.data.signature);
     }
     effect();
@@ -302,7 +302,7 @@ export default function Redeem() {
   const theme = useContext(ThemeContext)
   const { account, library } = useActiveWeb3React();
   const redeemablesIsLoading = false;
-  const [contract, setContract] = useState(new Contract("0x6790B06F57892f9E9D941e1e7fBDb7Af065bf3AF", RedeemerABI, library));
+  const [contract, setContract] = useState(new Contract("0x434e3320235e88f5d0399B2Fba4913ef29273f3a", RedeemerABI, library));
   const [redeemables, setRedeemables] = useState([{name: "GAME", inAddress: "0x56EbFC2F3873853d799C155AF9bE9Cb8506b7817", contract: contract, earnTokenName: "GAME"}]);
 
   const mountedRef = useRef(true);

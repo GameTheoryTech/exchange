@@ -28,13 +28,13 @@ const useScript = url => {
 };
 
 const Altergene = () => {
-    useScript("web3/index.js");
-    const unityContext = useUnityContext({
-        loaderUrl: "Build/Client.loader.js",
-        dataUrl: "Build/Client.data",
-        frameworkUrl: "Build/Client.framework.js",
-        codeUrl: "Build/Client.wasm",
-    });
+    //useScript("web3/index.js");
+    // const unityContext = useUnityContext({
+    //     loaderUrl: "Build/Client.loader.js",
+    //     dataUrl: "Build/Client.data",
+    //     frameworkUrl: "Build/Client.framework.js",
+    //     codeUrl: "Build/Client.wasm",
+    // });
     const iframeRef = useRef();
     useEffect(() => {
         console.log("use effect content:");
@@ -51,17 +51,17 @@ const Altergene = () => {
             {/*<CardNav activeIndex={5} />*/}
             <AppBody>
                 <div id="iframeContainer" ref={iframeRef}>
-                <Unity unityProvider={unityContext.unityProvider} style={{
-                    height: '100vh',
-                    width: '100vw',
-                    display: 'block',
-                    position: 'fixed',
-                    top: 0,
-                    left: 0,
-                    right: 0,
-                    justifyContent: 'center',
-                    alignItems: 'center'
-                }}/>
+                {/*<Unity unityProvider={unityContext.unityProvider} style={{*/}
+                {/*    height: '100vh',*/}
+                {/*    width: '100vw',*/}
+                {/*    display: 'block',*/}
+                {/*    position: 'fixed',*/}
+                {/*    top: 0,*/}
+                {/*    left: 0,*/}
+                {/*    right: 0,*/}
+                {/*    justifyContent: 'center',*/}
+                {/*    alignItems: 'center'*/}
+                {/*}}/>*/}
                 </div>
             </AppBody>
         </Container>

@@ -1,7 +1,7 @@
 import { ChainId, JSBI, Percent, Token, WETH } from '@gametheory/sdk'
 import {ContractInterface} from "ethers";
 
-export const ROUTER_ADDRESS = '0x4F3681A69D1d15DFCD4E9f1C9F9664afd001B30e'
+export const ROUTER_ADDRESS = '0xe1167dd221f951EB2cCb84C3F2487A24ca856255'
 
 // a list of tokens by chain
 type ChainTokenList = {
@@ -9,31 +9,52 @@ type ChainTokenList = {
 }
 
 export const GAME = new Token(
-  ChainId.TESTNET,
-  '0x34796AD63900efdA794Fc4864FD0FCfC79C8E0CC',
+  ChainId.MAINNET,
+  '0x55915FD5433193a082434A280e7A460A3d529d2f',
   18,
   'GAME',
   'GAME Token'
 )
 export const WAVAX = new Token(ChainId.MAINNET, '0xB31f66AA3C1e785363F0875A1B74E27b85FD66c7', 18, 'WAVAX', 'Wrapped AVAX')
-export const DAI = new Token(ChainId.MAINNET, '0x1AF3F329e8BE154074D8769D1FFa4eE058B1DBc3', 18, 'DAI', 'Dai Stablecoin')
-export const BUSD = new Token(ChainId.MAINNET, '0xe9e7CEA3DedcA5984780Bafc599bD69ADd087D56', 18, 'BUSD', 'Binance USD')
-export const BTCB = new Token(ChainId.MAINNET, '0x7130d2A12B9BCbFAe4f2634d864A1Ee1Ce3Ead9c', 18, 'BTCB', 'Binance BTC')
-export const USDT = new Token(ChainId.MAINNET, '0x55d398326f99059fF775485246999027B3197955', 18, 'USDT', 'Tether USD')
-export const UST = new Token(
-  ChainId.MAINNET,
-  '0x23396cF899Ca06c4472205fC903bDB4de249D6fC',
-  18,
-  'UST',
-  'Wrapped UST Token'
-)
+export const DAIe = new Token(ChainId.MAINNET, '0xd586E7F844cEa2F87f50152665BCbc2C279D8d70',
+    18,
+    'DAI.e',
+    'Dai Stablecoin',
+);
+export const USDC = new Token(ChainId.MAINNET, '0xB97EF9Ef8734C71904D8002F8b6Bc66Dd9c48a6E',
+    6,
+    'USDC',
+    'USD Coin')
+export const BTCb = new Token(ChainId.MAINNET, '0x152b9d0FdC40C096757F570A51E494bd4b943E50', 8, 'BTC.b', 'Bitcoin')
+export const USDT = new Token(ChainId.MAINNET, '0xde3A24028580884448a5397872046a019649b084',
+    6,
+    'USDT',
+    'Tether USD');
+export const USDTe = new Token(ChainId.MAINNET, '0xc7198437980c041c805A1EDcbA50c1Ce5db95118',
+    6,
+    'USDT.e',
+    'Tether USD',
+);
+export const USDCe = new Token(
+        ChainId.MAINNET,
+        '0xA7D7079b0FEaD91F3e65f86E8915Cb59c1a4C664',
+        6,
+        'USDC.e',
+        'USD Coin',
+    );
+
 export const ETH = new Token(
   ChainId.MAINNET,
-  '0x2170Ed0880ac9A755fd29B2688956BD959F933F8',
+  '0x49D5c2BdFfac6CE2BFdB6640F4F80f226bc10bAB',
   18,
-  'ETH',
-  'Binance-Peg Ethereum Token'
+  'ETH.e',
+  'Wrapped Ether'
 )
+export const BUSDe = new Token(ChainId.MAINNET, '0xd586E7F844cEa2F87f50152665BCbc2C279D8d70',
+    18,
+    'BUSD.e',
+    'Binance USD',
+);
 
 const WETH_ONLY: ChainTokenList = {
   [ChainId.MAINNET]: [WETH[ChainId.MAINNET]],
@@ -43,7 +64,7 @@ const WETH_ONLY: ChainTokenList = {
 // used to construct intermediary pairs for trading
 export const BASES_TO_CHECK_TRADES_AGAINST: ChainTokenList = {
   ...WETH_ONLY,
-  [ChainId.MAINNET]: [...WETH_ONLY[ChainId.MAINNET], DAI, BUSD, BTCB, USDT, UST, ETH],
+  [ChainId.MAINNET]: [...WETH_ONLY[ChainId.MAINNET], USDC, DAIe, USDCe, BUSDe, BTCb, USDT, USDTe, ETH],
 }
 
 /**
@@ -57,20 +78,18 @@ export const CUSTOM_BASES: { [chainId in ChainId]?: { [tokenAddress: string]: To
 // used for display in the default list when adding liquidity
 export const SUGGESTED_BASES: ChainTokenList = {
   ...WETH_ONLY,
-  [ChainId.MAINNET]: [...WETH_ONLY[ChainId.MAINNET], DAI, BUSD, USDT],
+  [ChainId.MAINNET]: [...WETH_ONLY[ChainId.MAINNET], GAME, USDC, DAIe, USDCe, BUSDe, BTCb, USDT, USDTe, ETH],
 }
 
 // used to construct the list of all pairs we consider by default in the frontend
 export const BASES_TO_TRACK_LIQUIDITY_FOR: ChainTokenList = {
   ...WETH_ONLY,
-  [ChainId.MAINNET]: [...WETH_ONLY[ChainId.MAINNET], DAI, BUSD, BTCB, USDT],
+  [ChainId.MAINNET]: [...WETH_ONLY[ChainId.MAINNET], GAME, USDC, DAIe, USDCe, BUSDe, BTCb, USDT, USDTe, ETH],
 }
 
 export const PINNED_PAIRS: { readonly [chainId in ChainId]?: [Token, Token][] } = {
   [ChainId.MAINNET]: [
-    [GAME, WAVAX],
-    [BUSD, USDT],
-    [DAI, USDT],
+    [GAME, USDC],
   ],
 }
 

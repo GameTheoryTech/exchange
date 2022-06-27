@@ -34,8 +34,8 @@ var Rounding;
   Rounding[Rounding["ROUND_UP"] = 2] = "ROUND_UP";
 })(Rounding || (Rounding = {}));
 
-var FACTORY_ADDRESS = "0x82534123F2288Fecb1FCD8Bb56d11cd4BC70F5da";
-var INIT_CODE_HASH = "0xf9300979fee3c40d56aa140023483fae00bef0c17c38977fc054567853f70e16";
+var FACTORY_ADDRESS = "0xD234f2463236CC5c028CD4008ff2dc920f289657";
+var INIT_CODE_HASH = "0x774acb264f20f17167bf2c84fe3ee6e07545d102e11598b7a6027438984521ab";
 var MINIMUM_LIQUIDITY = /*#__PURE__*/JSBI.BigInt(1000); // exports for internal consumption
 
 var ZERO = /*#__PURE__*/JSBI.BigInt(0);
@@ -431,7 +431,7 @@ function currencyEquals(currencyA, currencyB) {
     return currencyA === currencyB;
   }
 }
-var WETH = (_WETH = {}, _WETH[ChainId.MAINNET] = /*#__PURE__*/new Token(ChainId.MAINNET, '0x1D308089a2D1Ced3f1Ce36B1FcaF815b07217be3', 18, 'WAVAX', 'Wrapped AVAX'), _WETH[ChainId.TESTNET] = /*#__PURE__*/new Token(ChainId.TESTNET, '0x1D308089a2D1Ced3f1Ce36B1FcaF815b07217be3', 18, 'WAVAX', 'Wrapped AVAX'), _WETH);
+var WETH = (_WETH = {}, _WETH[ChainId.MAINNET] = /*#__PURE__*/new Token(ChainId.MAINNET, '0xB31f66AA3C1e785363F0875A1B74E27b85FD66c7', 18, 'WAVAX', 'Wrapped AVAX'), _WETH[ChainId.TESTNET] = /*#__PURE__*/new Token(ChainId.TESTNET, '0x1D308089a2D1Ced3f1Ce36B1FcaF815b07217be3', 18, 'WAVAX', 'Wrapped AVAX'), _WETH);
 
 var _toSignificantRoundin, _toFixedRounding;
 var Decimal = /*#__PURE__*/toFormat(_Decimal);
@@ -754,7 +754,7 @@ var Pair = /*#__PURE__*/function () {
   function Pair(tokenAmountA, tokenAmountB) {
     var tokenAmounts = tokenAmountA.token.sortsBefore(tokenAmountB.token) // does safety checks
     ? [tokenAmountA, tokenAmountB] : [tokenAmountB, tokenAmountA];
-    this.liquidityToken = new Token(tokenAmounts[0].token.chainId, Pair.getAddress(tokenAmounts[0].token, tokenAmounts[1].token), 18, 'Cake-LP', 'Pancake LPs');
+    this.liquidityToken = new Token(tokenAmounts[0].token.chainId, Pair.getAddress(tokenAmounts[0].token, tokenAmounts[1].token), 18, 'TLP', 'Theory LP');
     this.tokenAmounts = tokenAmounts;
   }
 

@@ -304,6 +304,7 @@ const WithdrawModal = ({ onDismiss = defaultOnDismiss, farm, token, account }: F
     const effect = async () =>
     {
       if(!account) return;
+      if(BigNumber.from(farm.id).gte(await farm.contract.poolLength())) return;
       const userInfo = await farm.contract.userInfo(farm.id, account);
       setMaxAmount(ethers.utils.formatEther((userInfo.amount).sub(userInfo.lockedAmount)));
     };
@@ -335,7 +336,7 @@ const BoostModal = ({ onDismiss = defaultOnDismiss, farm, token, account }: Farm
   const [nftId, setNftId] = useState("1");
   const [approved, setApproved] = useState(false);
   const [owned, setOwned] = useState(false);
-  const nftAddress = "0x5F23D5194E7cd670aA85725433bd8649Be2B63F7"
+  const nftAddress = "0x77396e5a5b5d27dd4F22C8AdEcfa951e494f35aA"
   const nftContract = useContract(nftAddress, ERC721_ABI, true);
   const [refreshKey, setRefreshKey] = useState(0);
   useEffect(() => {
@@ -532,20 +533,23 @@ Your Yearly ${farm.earnTokenName} Emissions: ${ethers.utils.formatEther(tokensPe
         {(farm.depositTokenName === "GAME-USDC" ?
         <>
         <Box>Deposited (Total): {ethers.utils.formatEther(userInfo?.amount ?? BigNumber.from(0))} {farm.depositTokenName} ($
-          {ethers.utils.formatEther(((userInfo?.amount ?? BigNumber.from(0)))
+          {formatEther2(((userInfo?.amount ?? BigNumber.from(0)))
               .mul(oraclePrice).div(BigNumber.from(10).pow(18)))}
           )</Box>
         <Box>Deposited (Self): {ethers.utils.formatEther((userInfo?.amount ?? BigNumber.from(0)).sub(userInfo?.lockedAmount ?? BigNumber.from(0)))} {farm.depositTokenName} ($
-          {ethers.utils.formatEther(((userInfo?.amount ?? BigNumber.from(0)).sub(userInfo?.lockedAmount ?? BigNumber.from(0)))
+          {formatEther2(((userInfo?.amount ?? BigNumber.from(0)).sub(userInfo?.lockedAmount ?? BigNumber.from(0)))
               .mul(oraclePrice).div(BigNumber.from(10).pow(18)))}
           )</Box>
         <Box>Deposited (MASTER): {ethers.utils.formatEther(userInfo?.lockedAmount ?? BigNumber.from(0))} {farm.depositTokenName} ($
-          {ethers.utils.formatEther(((userInfo?.lockedAmount ?? BigNumber.from(0)))
+          {formatEther2(((userInfo?.lockedAmount ?? BigNumber.from(0)))
               .mul(oraclePrice).div(BigNumber.from(10).pow(18)))}
           )</Box>
         </> :
         <>
-        <Box>Deposited: {ethers.utils.formatEther(userInfo?.amount ?? BigNumber.from(0))} {farm.depositTokenName} ($)</Box>
+          <Box>Deposited: {ethers.utils.formatEther(userInfo?.amount ?? BigNumber.from(0))} {farm.depositTokenName} ($
+            {formatEther2(((userInfo?.amount ?? BigNumber.from(0)))
+                .mul(oraclePrice).div(BigNumber.from(10).pow(18)))}
+            )</Box>
         </>)
         }
         <Flex flexDirection="row" justifyContent="center" alignItems="center">
@@ -565,7 +569,7 @@ Your Yearly ${farm.earnTokenName} Emissions: ${ethers.utils.formatEther(tokensPe
             Withdraw
           </Button>
         </Flex>
-        <Box>Earned: {ethers.utils.formatEther(pendingGame)} {farm.earnTokenName}</Box>
+        <Box>Earned: {formatEther4(pendingGame)} {farm.earnTokenName}</Box>
         <Flex flexDirection="row" justifyContent="center" alignItems="center">
           <Button disabled={userInfo?.amount.eq(0) ?? true} onClick={onClaim} my="10px" mx="5px">
             Claim
@@ -662,16 +666,16 @@ const TheoryRewardCard = ({ }) => {
         <Box>THEORY Rewards</Box>
         <Question
             text={`THEORY Amount Per $1 USD of GAME: 1
-THEORY Total Supply: ${ethers.utils.formatEther(totalSupply)}
-THEORY Balance: ${ethers.utils.formatEther(balance)}`}
+THEORY Total Supply: ${formatEther4(totalSupply)}
+THEORY Balance: ${formatEther4(balance)}`}
         />
         </Flex>
         {/*<Box>USDC.e Claimable: {}</Box>*/}
         { redeemTaxAmounts?.length > 0 && totalRedeemTaxOutAmounts?.length > 0 &&
             (
           <>
-            <Box>Total USDC Unclaimed: {ethers.utils.formatEther(totalRedeemTaxOutAmounts[0])}</Box>
-            <Box>USDC Claimable: {ethers.utils.formatEther(redeemTaxAmounts[0])}</Box>
+            <Box>Total USDC Unclaimed: {ethers.utils.formatUnits(totalRedeemTaxOutAmounts[0], 6)}</Box>
+            <Box>USDC Claimable: {ethers.utils.formatUnits(redeemTaxAmounts[0], 6)}</Box>
           </>
             )
         }
@@ -689,7 +693,7 @@ export default function Farms() {
   const theme = useContext(ThemeContext);
   const { account, library } = useActiveWeb3React();
   const farmsIsLoading = false;
-  const [contract, setContract] = useState(new Contract("0x1596490ceC2eC309aDA47c0519AbD718E47A62B2", MasterChefABI, library));
+  const [contract, setContract] = useState(new Contract("0x50ad0F743278893Ed7184F8B0272c51E88493528", MasterChefABI, library));
   const [farms, setFarms] = useState([{name: "GAME-USDC", id: 0, contract: contract, depositTokenName: "GAME-USDC", earnTokenName: "GAME"}]);
   const [tokenAddress, setTokenAddress] = useState("");
   const mountedRef = useRef(true);
@@ -783,7 +787,7 @@ type MasterRewardProps = {
 
 const MasterRewardCard = ({ tokenAddress } : MasterRewardProps) => {
   const { account, library } = useActiveWeb3React();
-  const [contract, setContract] = useState(new Contract("0x6efab29db603590598A2ae7C9Dd68DD85343B163", MasterABI, library));
+  const [contract, setContract] = useState(new Contract("0x93F71fcc39B278D4B5c0dB1Cab844b4d36e4575B", MasterABI, library));
   let token = useToken(tokenAddress === "" ? undefined : tokenAddress);
   if(token)
   {

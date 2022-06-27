@@ -1,7 +1,7 @@
 {
   "name": "@gametheory/interface",
   "description": "Interface",
-  "homepage": ".",
+  "homepage": "https://gametheory.tech",
   "private": true,
   "dependencies": {
     "@binance-chain/bsc-connector": "^1.0.0",
@@ -67,6 +67,7 @@
     "@types/jest": "^26.0.20",
     "@types/testing-library__cypress": "^5.0.8",
     "cypress": "^4.11.0",
+    "gh-pages": "^4.0.0",
     "qs": "^6.9.4",
     "serve": "^11.3.0",
     "start-server-and-test": "^1.11.0"
@@ -82,7 +83,9 @@
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
-    "integration-test": "start-server-and-test 'serve build -l 3000' http://localhost:3000 'cypress run'"
+    "integration-test": "start-server-and-test 'serve build -l 3000' http://localhost:3000 'cypress run'",
+    "predeploy": "react-scripts build",
+    "deploy": "gh-pages -b pages -d build"
   },
   "browserslist": {
     "production": [

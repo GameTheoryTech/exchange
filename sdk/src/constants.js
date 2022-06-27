@@ -15,8 +15,8 @@ export var Rounding;
     Rounding[Rounding["ROUND_HALF_UP"] = 1] = "ROUND_HALF_UP";
     Rounding[Rounding["ROUND_UP"] = 2] = "ROUND_UP";
 })(Rounding || (Rounding = {}));
-export const FACTORY_ADDRESS = "0x82534123F2288Fecb1FCD8Bb56d11cd4BC70F5da";
-export const INIT_CODE_HASH = "0xf9300979fee3c40d56aa140023483fae00bef0c17c38977fc054567853f70e16";
+export const FACTORY_ADDRESS = "0xD234f2463236CC5c028CD4008ff2dc920f289657";
+export const INIT_CODE_HASH = "0x774acb264f20f17167bf2c84fe3ee6e07545d102e11598b7a6027438984521ab";
 export const MINIMUM_LIQUIDITY = JSBI.BigInt(1000);
 // exports for internal consumption
 export const ZERO = JSBI.BigInt(0);
