@@ -1,0 +1,28 @@
+{
+  "name": "Default Testnet Tokenlist",
+  "keywords": [
+  ],
+  "version": {
+    "major": 1,
+    "minor": 0,
+    "patch": 0
+  },
+  "timestamp": "2022-05-24T05:47:00+00:00",
+  "tokens": [
+    {
+      "chainId": 43113,
+      "address": "0x1D308089a2D1Ced3f1Ce36B1FcaF815b07217be3",
+      "decimals": 18,
+      "name": "Wrapped AVAX",
+      "symbol": "WAVAX",
+      "logoURI": "https://raw.githubusercontent.com/pangolindex/tokens/main/assets/0xB31f66AA3C1e785363F0875A1B74E27b85FD66c7/logo.png"
+    },
+    {
+      "chainId": 43113,
+      "address": "0x34796AD63900efdA794Fc4864FD0FCfC79C8E0CC",
+      "decimals": 18,
+      "name": "Game Token",
+      "symbol": "GAME"
+    }
+  ]
+}

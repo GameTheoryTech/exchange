@@ -1,0 +1,11 @@
+{
+  "version": "v1",
+  "packages": {
+    "@gametheory/uikit": {
+      "signature": "34ed18bcb867d96ad134f4cc4f6b0a59"
+    },
+    "@gametheory/sdk": {
+      "signature": "2be5862de57dc67afbf2ac03132bd91a"
+    }
+  }
+}

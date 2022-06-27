@@ -1,0 +1,9 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+var react_1 = require("react");
+var testHelpers_1 = require("../../testHelpers");
+var Radio_1 = require("../../components/Radio/Radio");
+it("renders correctly", function () {
+    var asFragment = testHelpers_1.renderWithTheme(<Radio_1.default name="radio" value="1"/>).asFragment;
+    expect(asFragment()).toMatchInlineSnapshot("\n    <DocumentFragment>\n      .c0 {\n      -webkit-appearance: none;\n      -moz-appearance: none;\n      appearance: none;\n      overflow: hidden;\n      cursor: pointer;\n      position: relative;\n      display: inline-block;\n      height: 32px;\n      width: 32px;\n      vertical-align: middle;\n      -webkit-transition: background-color 0.2s ease-in-out;\n      transition: background-color 0.2s ease-in-out;\n      border: 0;\n      border-radius: 50%;\n      background-color: #eeeaf4;\n      box-shadow: inset 0px 2px 2px -1px rgba(74,74,104,0.1);\n      margin: 0;\n    }\n\n    .c0:after {\n      border-radius: 50%;\n      content: \"\";\n      height: 20px;\n      left: 6px;\n      position: absolute;\n      top: 6px;\n      width: 20px;\n    }\n\n    .c0:hover:not(:disabled):not(:checked) {\n      box-shadow: 0px 0px 0px 1px #7645D9,0px 0px 0px 4px rgba(118,69,217,0.6);\n    }\n\n    .c0:focus {\n      outline: none;\n      box-shadow: 0px 0px 0px 1px #7645D9,0px 0px 0px 4px rgba(118,69,217,0.6);\n    }\n\n    .c0:checked {\n      background-color: #31D0AA;\n    }\n\n    .c0:checked:after {\n      background-color: #FFFFFF;\n    }\n\n    .c0:disabled {\n      cursor: default;\n      opacity: 0.6;\n    }\n\n    <input\n        class=\"c0\"\n        name=\"radio\"\n        scale=\"md\"\n        type=\"radio\"\n        value=\"1\"\n      />\n    </DocumentFragment>\n  ");
+});
