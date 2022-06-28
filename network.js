@@ -22,6 +22,6 @@ Used to set the network: https://chainlist.org/
 338 Cronos Testnet
 */
 
-window.web3ChainId = 43113;
+window.web3ChainId = 43114;
 //window.web3ServerChainId = 137;
 window.web3ServerRpcUrl = "https://polygon-rpc.com/";
