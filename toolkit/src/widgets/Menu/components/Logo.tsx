@@ -62,6 +62,7 @@ const Logo: React.FC<Props> = ({ isPushed, togglePush, isDark, href }) => {
   const theme = useContext(ThemeContext);
   return (
     <Flex flexDirection="row" justifyContent="space-between" mx="10px">
+      <Box mx="8px">
       {isAbsoluteUrl ? (
         // @ts-ignore
         <StyledLink style={{color: theme.colors.text}} as="a" href={href} aria-label="Home page">
@@ -72,8 +73,29 @@ const Logo: React.FC<Props> = ({ isPushed, togglePush, isDark, href }) => {
           Home
         </StyledLink>
       )}
+      </Box>
       <Box mx="8px">
-      <StyledLink style={{color: theme.colors.text}} as="a" href={"https://old.gametheory.tech"} aria-label="Home page">
+      <StyledLink style={{color: theme.colors.text}} as="a" href="https://gametheory.link/WbTw" aria-label="Home page">
+        Twitter
+      </StyledLink>
+      </Box>
+      <Box mx="8px">
+      <StyledLink style={{color: theme.colors.text}} as="a" href="https://gametheory.link/WbDc" aria-label="Home page">
+        Discord
+      </StyledLink>
+      </Box>
+      <Box mx="8px">
+      <StyledLink style={{color: theme.colors.text}} as="a" href="https://gametheory.link/WbYt" aria-label="Home page">
+        YouTube
+      </StyledLink>
+      </Box>
+      <Box mx="8px">
+      <StyledLink style={{color: theme.colors.text}} as="a" href="https://gametheory.link/WbMd" aria-label="Home page">
+        Medium
+      </StyledLink>
+      </Box>
+      <Box mx="8px">
+      <StyledLink style={{color: theme.colors.text}} as="a" href="https://old.gametheory.tech" aria-label="Home page">
         Old Site
       </StyledLink>
       </Box>

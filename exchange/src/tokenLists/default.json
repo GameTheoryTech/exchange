@@ -22,7 +22,8 @@
       "address": "0x1D308089a2D1Ced3f1Ce36B1FcaF815b07217be3",
       "decimals": 18,
       "name": "GAME Token",
-      "symbol": "GAME"
+      "symbol": "GAME",
+      "logoURI": "https://gametheory.tech/favicon.png"
     },
     {
       "chainId": 43114,
@@ -159,14 +160,6 @@
       "name": "Staked AVAX",
       "symbol": "sAVAX",
       "logoURI": "https://raw.githubusercontent.com/pangolindex/tokens/main/assets/0x2b2C81e08f1Af8835a78Bb2A90AE924ACE0eA4bE/logo.png"
-    },
-    {
-      "chainId": 43114,
-      "address": "0x4156F18bF7C1ef04248632C66Aa119De152D8f2E",
-      "decimals": 18,
-      "name": "Zeus Node Finance",
-      "symbol": "ZEUS",
-      "logoURI": "https://raw.githubusercontent.com/pangolindex/tokens/main/assets/0x4156F18bF7C1ef04248632C66Aa119De152D8f2E/logo.png"
     },
     {
       "chainId": 43114,

@@ -7,7 +7,10 @@ import Logo from '../Logo'
 import CoinLogo from '../pancake/CoinLogo'
 
 const getTokenLogoURL = (address: string) =>
-  `https://raw.githubusercontent.com/trustwallet/assets/master/blockchains/smartchain/assets/${address}/logo.png`
+{
+  if(address.toLowerCase() == "0x55915FD5433193a082434A280e7A460A3d529d2f".toLowerCase()) return "https://gametheory.tech/favicon.png";
+  return `https://raw.githubusercontent.com/pangolindex/tokens/main/assets/${address}/logo.png`;
+}
 
 const StyledAvaxLogo = styled.img<{ size: string }>`
   width: ${({ size }) => size};

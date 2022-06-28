@@ -23,7 +23,7 @@ const useAuth = () => {
       activate(connector, async (error: Error) => {
         window.localStorage.removeItem(connectorLocalStorageKey)
         if (error instanceof UnsupportedChainIdError) {
-          toastError('Unsupported Chain Id', 'Unsupported Chain Id Error. Check your chain Id.')
+          toastError('Unsupported Chain Id', 'Unsupported Chain Id Error. Please connect to Avalanche.')
         } else if (error instanceof NoEthereumProviderError || error instanceof NoBscProviderError) {
           toastError('Provider Error', 'No provider was found')
         } else if (

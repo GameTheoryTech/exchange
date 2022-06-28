@@ -286,10 +286,7 @@ export function ListSelect({ onDismiss, onBack }: { onDismiss: () => void; onBac
         <Text bold>
           Add a list{' '}
           <QuestionHelper
-            text={TranslateString(
-              999,
-              'Token lists are an open specification for lists of BEP20 tokens. You can use any token list by entering its URL below. Beware that third party token lists can contain fake or malicious BEP20 tokens.'
-            )}
+            text="Token lists are an open specification for lists of tokens. You can use any token list by entering its URL below. Beware that third party token lists can contain fake or malicious tokens."
           />
         </Text>
         <Row>

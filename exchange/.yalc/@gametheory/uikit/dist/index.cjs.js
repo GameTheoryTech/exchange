@@ -3429,9 +3429,17 @@ var Logo = function (_a) {
     (React__default['default'].createElement(React__default['default'].Fragment, null));
     var theme = React.useContext(styled.ThemeContext);
     return (React__default['default'].createElement(Flex, { flexDirection: "row", justifyContent: "space-between", mx: "10px" },
-        (
+        React__default['default'].createElement(Box, { mx: "8px" }, (
         // @ts-ignore
-        React__default['default'].createElement(StyledLink, { style: { color: theme.colors.text }, as: "a", href: href, "aria-label": "Home page" }, "Home")) ,
+        React__default['default'].createElement(StyledLink, { style: { color: theme.colors.text }, as: "a", href: href, "aria-label": "Home page" }, "Home")) ),
+        React__default['default'].createElement(Box, { mx: "8px" },
+            React__default['default'].createElement(StyledLink, { style: { color: theme.colors.text }, as: "a", href: "https://gametheory.link/WbTw", "aria-label": "Home page" }, "Twitter")),
+        React__default['default'].createElement(Box, { mx: "8px" },
+            React__default['default'].createElement(StyledLink, { style: { color: theme.colors.text }, as: "a", href: "https://gametheory.link/WbDc", "aria-label": "Home page" }, "Discord")),
+        React__default['default'].createElement(Box, { mx: "8px" },
+            React__default['default'].createElement(StyledLink, { style: { color: theme.colors.text }, as: "a", href: "https://gametheory.link/WbYt", "aria-label": "Home page" }, "YouTube")),
+        React__default['default'].createElement(Box, { mx: "8px" },
+            React__default['default'].createElement(StyledLink, { style: { color: theme.colors.text }, as: "a", href: "https://gametheory.link/WbMd", "aria-label": "Home page" }, "Medium")),
         React__default['default'].createElement(Box, { mx: "8px" },
             React__default['default'].createElement(StyledLink, { style: { color: theme.colors.text }, as: "a", href: "https://old.gametheory.tech", "aria-label": "Home page" }, "Old Site"))));
 };

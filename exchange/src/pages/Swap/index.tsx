@@ -1,4 +1,4 @@
-import { CurrencyAmount, JSBI, Token, Trade } from '@gametheory/sdk'
+import {ChainId, CurrencyAmount, JSBI, Token, Trade} from '@gametheory/sdk'
 import React, { useCallback, useContext, useEffect, useMemo, useState } from 'react'
 import { ArrowDown } from 'react-feather'
 import { CardBody, ArrowDownIcon, Button, IconButton, Text, Link } from '@gametheory/uikit'
@@ -20,7 +20,7 @@ import SafeMoonWarningModal from 'components/SafeMoonWarningModal'
 import ProgressSteps from 'components/ProgressSteps'
 import Container from 'components/Container'
 
-import { INITIAL_ALLOWED_SLIPPAGE } from 'constants/index'
+import {BASES_TO_TRACK_LIQUIDITY_FOR, INITIAL_ALLOWED_SLIPPAGE} from 'constants/index'
 import { useActiveWeb3React } from 'hooks'
 import { useCurrency } from 'hooks/Tokens'
 import { ApprovalState, useApproveCallbackFromTrade } from 'hooks/useApproveCallback'
@@ -286,10 +286,27 @@ const Swap = () => {
     [onCurrencySelection, checkForWarning]
   )
 
+  // const isTokenOnList = (defaultTokens: TokenAddressMap, chainId: ChainId, currency?: Currency): boolean => {
+  //   if (chainId && currency === CAVAX[chainId]) return true;
+  //   return Boolean(currency instanceof Token && defaultTokens[currency.chainId]?.[currency.address]);
+  // }
+  //
+  const isTrustedToken = useCallback(
+      (token: Token) => {
+        //if (!chainId || !selectedTokens) return true // Assume trusted at first to avoid flashing a warning
+        return (
+            BASES_TO_TRACK_LIQUIDITY_FOR[ChainId.MAINNET].some((t) => t.address.toLowerCase() == token.address.toLowerCase()) //|| // trust token from manually whitelisted token
+            // isTokenOnList(selectedTokens, chainId, token) || // trust all tokens from selected token list by user
+            // isTokenOnList(whitelistedTokens, chainId, token) // trust all defi + AB tokens
+        );
+      },
+      [BASES_TO_TRACK_LIQUIDITY_FOR]
+  )
+
   return (
     <Container>
       <TokenWarningModal
-        isOpen={urlLoadedTokens.length > 0 && !dismissTokenWarning}
+        isOpen={urlLoadedTokens.length > 0 && !dismissTokenWarning && !urlLoadedTokens.every(isTrustedToken)}
         tokens={urlLoadedTokens}
         onConfirm={handleConfirmTokenWarning}
       />
@@ -311,7 +328,7 @@ const Swap = () => {
           />
           <PageHeader
             title={TranslateString(8, 'Exchange')}
-            description={TranslateString(1192, 'Trade tokens in an instant')}
+            description="Trade tokens in an instant."
           />
           <CardBody>
             <AutoColumn gap="md">

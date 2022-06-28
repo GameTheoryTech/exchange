@@ -3415,9 +3415,17 @@ var Logo = function (_a) {
     (React.createElement(React.Fragment, null));
     var theme = useContext(ThemeContext);
     return (React.createElement(Flex, { flexDirection: "row", justifyContent: "space-between", mx: "10px" },
-        (
+        React.createElement(Box, { mx: "8px" }, (
         // @ts-ignore
-        React.createElement(StyledLink, { style: { color: theme.colors.text }, as: "a", href: href, "aria-label": "Home page" }, "Home")) ,
+        React.createElement(StyledLink, { style: { color: theme.colors.text }, as: "a", href: href, "aria-label": "Home page" }, "Home")) ),
+        React.createElement(Box, { mx: "8px" },
+            React.createElement(StyledLink, { style: { color: theme.colors.text }, as: "a", href: "https://gametheory.link/WbTw", "aria-label": "Home page" }, "Twitter")),
+        React.createElement(Box, { mx: "8px" },
+            React.createElement(StyledLink, { style: { color: theme.colors.text }, as: "a", href: "https://gametheory.link/WbDc", "aria-label": "Home page" }, "Discord")),
+        React.createElement(Box, { mx: "8px" },
+            React.createElement(StyledLink, { style: { color: theme.colors.text }, as: "a", href: "https://gametheory.link/WbYt", "aria-label": "Home page" }, "YouTube")),
+        React.createElement(Box, { mx: "8px" },
+            React.createElement(StyledLink, { style: { color: theme.colors.text }, as: "a", href: "https://gametheory.link/WbMd", "aria-label": "Home page" }, "Medium")),
         React.createElement(Box, { mx: "8px" },
             React.createElement(StyledLink, { style: { color: theme.colors.text }, as: "a", href: "https://old.gametheory.tech", "aria-label": "Home page" }, "Old Site"))));
 };
