@@ -95,6 +95,11 @@ const Logo: React.FC<Props> = ({ isPushed, togglePush, isDark, href }) => {
       </StyledLink>
       </Box>
       <Box mx="8px">
+      <StyledLink style={{color: theme.colors.text}} as="a" href="https://gametheory.link/WbGb" aria-label="Home page">
+          Docs
+      </StyledLink>
+      </Box>
+      <Box mx="8px">
       <StyledLink style={{color: theme.colors.text}} as="a" href="https://old.gametheory.tech" aria-label="Home page">
         Old Site
       </StyledLink>

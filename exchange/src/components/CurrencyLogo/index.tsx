@@ -9,6 +9,7 @@ import CoinLogo from '../pancake/CoinLogo'
 const getTokenLogoURL = (address: string) =>
 {
   if(address.toLowerCase() == "0x55915FD5433193a082434A280e7A460A3d529d2f".toLowerCase()) return "https://gametheory.tech/favicon.png";
+  if(address.toLowerCase() == "0x152b9d0FdC40C096757F570A51E494bd4b943E50".toLowerCase()) return "https://gametheory.tech/btc.png";
   return `https://raw.githubusercontent.com/pangolindex/tokens/main/assets/${address}/logo.png`;
 }
 

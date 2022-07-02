@@ -26,6 +26,7 @@ export const USDC = new Token(ChainId.MAINNET, '0xB97EF9Ef8734C71904D8002F8b6Bc6
     'USDC',
     'USD Coin')
 export const BTCb = new Token(ChainId.MAINNET, '0x152b9d0FdC40C096757F570A51E494bd4b943E50', 8, 'BTC.b', 'Bitcoin')
+export const WBTCe = new Token(ChainId.MAINNET, '0x50b7545627a5162F82A992c33b87aDc75187B218', 8, 'BTC.b', 'Bitcoin')
 export const USDT = new Token(ChainId.MAINNET, '0xde3A24028580884448a5397872046a019649b084',
     6,
     'USDT',
@@ -64,7 +65,7 @@ const WETH_ONLY: ChainTokenList = {
 // used to construct intermediary pairs for trading
 export const BASES_TO_CHECK_TRADES_AGAINST: ChainTokenList = {
   ...WETH_ONLY,
-  [ChainId.MAINNET]: [...WETH_ONLY[ChainId.MAINNET], USDC, DAIe, USDCe, BUSDe, BTCb, USDT, USDTe, ETH],
+  [ChainId.MAINNET]: [...WETH_ONLY[ChainId.MAINNET], USDC, DAIe, USDCe, BUSDe, BTCb, WBTCe, USDT, USDTe, ETH],
 }
 
 /**
@@ -78,13 +79,13 @@ export const CUSTOM_BASES: { [chainId in ChainId]?: { [tokenAddress: string]: To
 // used for display in the default list when adding liquidity
 export const SUGGESTED_BASES: ChainTokenList = {
   ...WETH_ONLY,
-  [ChainId.MAINNET]: [...WETH_ONLY[ChainId.MAINNET], GAME, USDC, DAIe, USDCe, BUSDe, BTCb, USDT, USDTe, ETH],
+  [ChainId.MAINNET]: [...WETH_ONLY[ChainId.MAINNET], GAME, USDC, DAIe, USDCe, BUSDe, BTCb, WBTCe, USDT, USDTe, ETH],
 }
 
 // used to construct the list of all pairs we consider by default in the frontend
 export const BASES_TO_TRACK_LIQUIDITY_FOR: ChainTokenList = {
   ...WETH_ONLY,
-  [ChainId.MAINNET]: [...WETH_ONLY[ChainId.MAINNET], GAME, USDC, DAIe, USDCe, BUSDe, BTCb, USDT, USDTe, ETH],
+  [ChainId.MAINNET]: [...WETH_ONLY[ChainId.MAINNET], GAME, USDC, DAIe, USDCe, BUSDe, BTCb, WBTCe, USDT, USDTe, ETH],
 }
 
 export const PINNED_PAIRS: { readonly [chainId in ChainId]?: [Token, Token][] } = {

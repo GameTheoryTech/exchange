@@ -20,7 +20,7 @@ import SafeMoonWarningModal from 'components/SafeMoonWarningModal'
 import ProgressSteps from 'components/ProgressSteps'
 import Container from 'components/Container'
 
-import {BASES_TO_TRACK_LIQUIDITY_FOR, INITIAL_ALLOWED_SLIPPAGE} from 'constants/index'
+import {BASES_TO_TRACK_LIQUIDITY_FOR, GAME, INITIAL_ALLOWED_SLIPPAGE, USDC} from 'constants/index'
 import { useActiveWeb3React } from 'hooks'
 import { useCurrency } from 'hooks/Tokens'
 import { ApprovalState, useApproveCallbackFromTrade } from 'hooks/useApproveCallback'

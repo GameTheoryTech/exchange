@@ -1,0 +1,229 @@
+{
+  "name": "Default Tokenlist",
+  "keywords": [
+  ],
+  "version": {
+    "major": 1,
+    "minor": 0,
+    "patch": 0
+  },
+  "timestamp": "2022-06-27T05:00:00+00:00",
+  "tokens": [
+    {
+      "chainId": 43114,
+      "address": "0xB31f66AA3C1e785363F0875A1B74E27b85FD66c7",
+      "decimals": 18,
+      "name": "Wrapped AVAX",
+      "symbol": "WAVAX",
+      "logoURI": "https://raw.githubusercontent.com/pangolindex/tokens/main/assets/0xB31f66AA3C1e785363F0875A1B74E27b85FD66c7/logo.png"
+    },
+    {
+      "chainId": 43114,
+      "address": "0x55915FD5433193a082434A280e7A460A3d529d2f",
+      "decimals": 18,
+      "name": "GAME Token",
+      "symbol": "GAME",
+      "logoURI": "https://gametheory.tech/favicon.png"
+    },
+    {
+      "chainId": 43114,
+      "address": "0xB97EF9Ef8734C71904D8002F8b6Bc66Dd9c48a6E",
+      "decimals": 6,
+      "name": "USD Coin",
+      "symbol": "USDC",
+      "logoURI": "https://raw.githubusercontent.com/pangolindex/tokens/main/assets/0xB97EF9Ef8734C71904D8002F8b6Bc66Dd9c48a6E/logo.png"
+    },
+    {
+      "chainId": 43114,
+      "address": "0x488F73cddDA1DE3664775fFd91623637383D6404",
+      "decimals": 18,
+      "name": "YetiSwap",
+      "symbol": "YTS",
+      "logoURI": "https://raw.githubusercontent.com/pangolindex/tokens/main/assets/0x488F73cddDA1DE3664775fFd91623637383D6404/logo.png"
+    },
+    {
+      "chainId": 43114,
+      "address": "0xC38f41A296A4493Ff429F1238e030924A1542e50",
+      "decimals": 18,
+      "name": "Snowball",
+      "symbol": "SNOB",
+      "logoURI": "https://raw.githubusercontent.com/pangolindex/tokens/main/assets/0xC38f41A296A4493Ff429F1238e030924A1542e50/logo.png"
+    },
+    {
+      "chainId": 43114,
+      "address": "0x6e7f5C0b9f4432716bDd0a77a3601291b9D9e985",
+      "decimals": 9,
+      "name": "Spore",
+      "symbol": "SPORE",
+      "logoURI": "https://raw.githubusercontent.com/pangolindex/tokens/main/assets/0x6e7f5C0b9f4432716bDd0a77a3601291b9D9e985/logo.png"
+    },
+    {
+      "chainId": 43114,
+      "address": "0xe896CDeaAC9615145c0cA09C8Cd5C25bced6384c",
+      "decimals": 18,
+      "name": "PenguinToken",
+      "symbol": "PEFI",
+      "logoURI": "https://raw.githubusercontent.com/pangolindex/tokens/main/assets/0xe896CDeaAC9615145c0cA09C8Cd5C25bced6384c/logo.png"
+    },
+    {
+      "chainId": 43114,
+      "address": "0xd1c3f94DE7e5B45fa4eDBBA472491a9f4B166FC4",
+      "decimals": 18,
+      "name": "Avalaunch",
+      "symbol": "XAVA",
+      "logoURI": "https://raw.githubusercontent.com/pangolindex/tokens/main/assets/0xd1c3f94DE7e5B45fa4eDBBA472491a9f4B166FC4/logo.png"
+    },
+    {
+      "chainId": 43114,
+      "address": "0x264c1383EA520f73dd837F915ef3a732e204a493",
+      "decimals": 18,
+      "name": "Binance Token",
+      "symbol": "BNB",
+      "logoURI": "https://raw.githubusercontent.com/pangolindex/tokens/main/assets/0x264c1383EA520f73dd837F915ef3a732e204a493/logo.png"
+    },
+    {
+      "chainId": 43114,
+      "address": "0x59414b3089ce2AF0010e7523Dea7E2b35d776ec7",
+      "decimals": 18,
+      "name": "Yak Token",
+      "symbol": "YAK",
+      "logoURI": "https://raw.githubusercontent.com/pangolindex/tokens/main/assets/0x59414b3089ce2AF0010e7523Dea7E2b35d776ec7/logo.png"
+    },
+    {
+      "chainId": 43114,
+      "address": "0x8729438EB15e2C8B576fCc6AeCdA6A148776C0F5",
+      "decimals": 18,
+      "name": "BENQI",
+      "symbol": "QI",
+      "logoURI": "https://raw.githubusercontent.com/pangolindex/tokens/main/assets/0x8729438EB15e2C8B576fCc6AeCdA6A148776C0F5/logo.png"
+    },
+    {
+      "chainId": 43114,
+      "address": "0x6e84a6216eA6dACC71eE8E6b0a5B7322EEbC0fDd",
+      "decimals": 18,
+      "name": "JoeToken",
+      "symbol": "JOE",
+      "logoURI": "https://raw.githubusercontent.com/pangolindex/tokens/main/assets/0x6e84a6216eA6dACC71eE8E6b0a5B7322EEbC0fDd/logo.png"
+    },
+    {
+      "chainId": 43114,
+      "address": "0x60781C2586D68229fde47564546784ab3fACA982",
+      "decimals": 18,
+      "name": "Pangolin",
+      "symbol": "PNG",
+      "logoURI": "https://raw.githubusercontent.com/pangolindex/tokens/main/assets/0x60781C2586D68229fde47564546784ab3fACA982/logo.png"
+    },
+    {
+      "chainId": 43114,
+      "address": "0xD67de0e0a0Fd7b15dC8348Bb9BE742F3c5850454",
+      "decimals": 18,
+      "name": "Frax Share (Old)",
+      "symbol": "FXS (Old)",
+      "logoURI": "https://raw.githubusercontent.com/pangolindex/tokens/main/assets/0xD67de0e0a0Fd7b15dC8348Bb9BE742F3c5850454/logo.png"
+    },
+    {
+      "chainId": 43114,
+      "address": "0xCE1bFFBD5374Dac86a2893119683F4911a2F7814",
+      "decimals": 18,
+      "name": "Spell Token",
+      "symbol": "SPELL",
+      "logoURI": "https://raw.githubusercontent.com/pangolindex/tokens/main/assets/0xCE1bFFBD5374Dac86a2893119683F4911a2F7814/logo.png"
+    },
+    {
+      "chainId": 43114,
+      "address": "0x214DB107654fF987AD859F34125307783fC8e387",
+      "decimals": 18,
+      "name": "Frax Share",
+      "symbol": "FXS",
+      "logoURI": "https://raw.githubusercontent.com/pangolindex/tokens/main/assets/0x214DB107654fF987AD859F34125307783fC8e387/logo.png"
+    },
+    {
+      "chainId": 43114,
+      "address": "0x50b7545627a5162F82A992c33b87aDc75187B218",
+      "decimals": 8,
+      "name": "Wrapped BTC",
+      "symbol": "WBTC.e",
+      "logoURI": "https://raw.githubusercontent.com/pangolindex/tokens/main/assets/0x50b7545627a5162F82A992c33b87aDc75187B218/logo.png"
+    },
+    {
+      "chainId": 43114,
+      "address": "0x152b9d0FdC40C096757F570A51E494bd4b943E50",
+      "decimals": 8,
+      "name": "Bitcoin",
+      "symbol": "BTC.b",
+      "logoURI": "https://gametheory.tech/btc.png"
+    },
+    {
+      "chainId": 43114,
+      "address": "0x49D5c2BdFfac6CE2BFdB6640F4F80f226bc10bAB",
+      "decimals": 18,
+      "name": "Wrapped Ether",
+      "symbol": "WETH.e",
+      "logoURI": "https://raw.githubusercontent.com/pangolindex/tokens/main/assets/0x49D5c2BdFfac6CE2BFdB6640F4F80f226bc10bAB/logo.png"
+    },
+    {
+      "chainId": 43114,
+      "address": "0x2b2C81e08f1Af8835a78Bb2A90AE924ACE0eA4bE",
+      "decimals": 18,
+      "name": "Staked AVAX",
+      "symbol": "sAVAX",
+      "logoURI": "https://raw.githubusercontent.com/pangolindex/tokens/main/assets/0x2b2C81e08f1Af8835a78Bb2A90AE924ACE0eA4bE/logo.png"
+    },
+    {
+      "chainId": 43114,
+      "address": "0xde3A24028580884448a5397872046a019649b084",
+      "decimals": 6,
+      "name": "Tether USD",
+      "symbol": "USDT",
+      "logoURI": "https://raw.githubusercontent.com/pangolindex/tokens/main/assets/0xc7198437980c041c805A1EDcbA50c1Ce5db95118/logo.png"
+    },
+    {
+      "chainId": 43114,
+      "address": "0xc7198437980c041c805A1EDcbA50c1Ce5db95118",
+      "decimals": 6,
+      "name": "Tether USD",
+      "symbol": "USDT.e",
+      "logoURI": "https://raw.githubusercontent.com/pangolindex/tokens/main/assets/0xc7198437980c041c805A1EDcbA50c1Ce5db95118/logo.png"
+    },
+    {
+      "chainId": 43114,
+      "address": "0xA7D7079b0FEaD91F3e65f86E8915Cb59c1a4C664",
+      "decimals": 6,
+      "name": "USD Coin",
+      "symbol": "USDC.e",
+      "logoURI": "https://raw.githubusercontent.com/pangolindex/tokens/main/assets/0xA7D7079b0FEaD91F3e65f86E8915Cb59c1a4C664/logo.png"
+    },
+    {
+      "chainId": 43114,
+      "address": "0xd586E7F844cEa2F87f50152665BCbc2C279D8d70",
+      "decimals": 18,
+      "name": "Dai Stablecoin",
+      "symbol": "DAI.e",
+      "logoURI": "https://raw.githubusercontent.com/pangolindex/tokens/main/assets/0xd586E7F844cEa2F87f50152665BCbc2C279D8d70/logo.png"
+    },
+    {
+      "chainId": 43114,
+      "address": "0x19860CCB0A68fd4213aB9D8266F7bBf05A8dDe98",
+      "decimals": 18,
+      "name": "Binance USD",
+      "symbol": "BUSD.e",
+      "logoURI": "https://raw.githubusercontent.com/pangolindex/tokens/main/assets/0x19860CCB0A68fd4213aB9D8266F7bBf05A8dDe98/logo.png"
+    },
+    {
+      "chainId": 43114,
+      "address": "0x130966628846BFd36ff31a822705796e8cb8C18D",
+      "decimals": 18,
+      "name": "Magic Internet Money",
+      "symbol": "MIM",
+      "logoURI": "https://raw.githubusercontent.com/pangolindex/tokens/main/assets/0x130966628846BFd36ff31a822705796e8cb8C18D/logo.png"
+    },
+    {
+      "chainId": 43114,
+      "address": "0xD24C2Ad096400B6FBcd2ad8B24E7acBc21A1da64",
+      "decimals": 18,
+      "name": "Frax",
+      "symbol": "FRAX",
+      "logoURI": "https://raw.githubusercontent.com/pangolindex/tokens/main/assets/0xD24C2Ad096400B6FBcd2ad8B24E7acBc21A1da64/logo.png"
+    }
+  ]
+}

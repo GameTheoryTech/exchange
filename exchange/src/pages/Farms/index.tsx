@@ -21,6 +21,8 @@ import {Link} from "react-router-dom";
 import MasterChefABI from '../../constants/abis/MasterChef.json';
 import MasterABI from '../../constants/abis/master.json';
 import ERC721_ABI from '../../constants/abis/erc721.json'
+import PairABI from '../../constants/abis/pair.json';
+
 import {Dots} from "../Pool/styleds";
 import {useHasPendingApproval, useTransactionAdder} from "../../state/transactions/hooks";
 import {useContract, useGameContract, useTokenContract} from "../../hooks/useContract";
@@ -42,6 +44,7 @@ import CurrencyLogo from "../../components/CurrencyLogo";
 import CurrencySearchModal from "../../components/SearchModal/CurrencySearchModal";
 import {darken} from "polished";
 import NumericalInput from "../../components/NumericalInput";
+import {ERC20_ABI} from "../../constants/abis/erc20";
 
 interface Farm
 {
@@ -415,10 +418,11 @@ const FarmCard : React.FC<FarmCardProps> = ({ farm, account }) => {
   const [oraclePrice, setOraclePrice] = useState(BigNumber.from(0));
   const [depositPrice, setDepositPrice] = useState(BigNumber.from(0));
   const game = useGameContract(GAME?.address);
-  const lpToken = useTokenContract(poolInfo?.lpToken);
+  const lpToken = useContract(poolInfo?.lpToken, PairABI, true);
   const [refreshKey, setRefreshKey] = useState(0);
   const connectedFarmContract = useContract(farm.contract.address, MasterChefABI, true);
   const mountedRef = useRef(true);
+  const { library } = useActiveWeb3React()
   useEffect(() => {
     const effect = async () =>
     {
@@ -453,9 +457,19 @@ const FarmCard : React.FC<FarmCardProps> = ({ farm, account }) => {
               if(lpToken) {
                 const totalSupply = await lpToken.totalSupply();
                 //Get amount of tokenA
-                const tokenSupply = await game.balanceOf(lpToken.address);
-                const priceOfToken = _oraclePrice;
-                const tokenInLP = tokenSupply.mul(BigNumber.from(10).pow(18)).div(totalSupply);
+                let otherToken = await lpToken.token0();
+                if(otherToken.toLowerCase() == game.address.toLowerCase()) otherToken = await lpToken.token1();
+
+                // const totalSupply = await lpToken.totalSupply();
+                // //Get amount of tokenA
+                // const tokenSupply = await game.balanceOf(lpToken.address);
+                // const priceOfToken = _oraclePrice;
+                // const tokenInLP = tokenSupply.mul(BigNumber.from(10).pow(18)).div(totalSupply);
+                // const _depositPrice = (priceOfToken.mul(tokenInLP).mul(2).div(BigNumber.from(10).pow(18))); //We multiply by 2 since half the price of the lp token is the price of each piece of the pair. So twice gives the total.
+
+                const tokenSupply = await new Contract(otherToken, ERC20_ABI, library).balanceOf(lpToken.address);
+                const priceOfToken = BigNumber.from(10).pow(18); //Lazy... USDC = $1
+                const tokenInLP = tokenSupply.mul(BigNumber.from(10).pow(12)).mul(BigNumber.from(10).pow(18)).div(totalSupply);
                 const _depositPrice = (priceOfToken.mul(tokenInLP).mul(2).div(BigNumber.from(10).pow(18))); //We multiply by 2 since half the price of the lp token is the price of each piece of the pair. So twice gives the total.
                 setDepositPrice(_depositPrice);
                 const totalStakingPriceInPool =
@@ -532,23 +546,23 @@ Your Yearly ${farm.earnTokenName} Emissions: ${ethers.utils.formatEther(tokensPe
         {/*<Box>Total Emissions Per Year ({farm.earnTokenName}): {totalTokensPerYear}</Box> removed due to confusion about what this means (it means if everyone had your boost, this would be total emissions. To be replaced with personal emissions.)*/}
         {(farm.depositTokenName === "GAME-USDC" ?
         <>
-        <Box>Deposited (Total): {ethers.utils.formatEther(userInfo?.amount ?? BigNumber.from(0))} {farm.depositTokenName} ($
+        <Box>Deposited (Both): {ethers.utils.formatEther(userInfo?.amount ?? BigNumber.from(0))} {farm.depositTokenName} ($
           {formatEther2(((userInfo?.amount ?? BigNumber.from(0)))
-              .mul(oraclePrice).div(BigNumber.from(10).pow(18)))}
+              .mul(depositPrice).div(BigNumber.from(10).pow(18)))}
           )</Box>
-        <Box>Deposited (Self): {ethers.utils.formatEther((userInfo?.amount ?? BigNumber.from(0)).sub(userInfo?.lockedAmount ?? BigNumber.from(0)))} {farm.depositTokenName} ($
+        <Box>Deposited (GAME-USDC): {ethers.utils.formatEther((userInfo?.amount ?? BigNumber.from(0)).sub(userInfo?.lockedAmount ?? BigNumber.from(0)))} {farm.depositTokenName} ($
           {formatEther2(((userInfo?.amount ?? BigNumber.from(0)).sub(userInfo?.lockedAmount ?? BigNumber.from(0)))
-              .mul(oraclePrice).div(BigNumber.from(10).pow(18)))}
+              .mul(depositPrice).div(BigNumber.from(10).pow(18)))}
           )</Box>
         <Box>Deposited (MASTER): {ethers.utils.formatEther(userInfo?.lockedAmount ?? BigNumber.from(0))} {farm.depositTokenName} ($
           {formatEther2(((userInfo?.lockedAmount ?? BigNumber.from(0)))
-              .mul(oraclePrice).div(BigNumber.from(10).pow(18)))}
+              .mul(depositPrice).div(BigNumber.from(10).pow(18)))}
           )</Box>
         </> :
         <>
           <Box>Deposited: {ethers.utils.formatEther(userInfo?.amount ?? BigNumber.from(0))} {farm.depositTokenName} ($
             {formatEther2(((userInfo?.amount ?? BigNumber.from(0)))
-                .mul(oraclePrice).div(BigNumber.from(10).pow(18)))}
+                .mul(depositPrice).div(BigNumber.from(10).pow(18)))}
             )</Box>
         </>)
         }
@@ -569,7 +583,8 @@ Your Yearly ${farm.earnTokenName} Emissions: ${ethers.utils.formatEther(tokensPe
             Withdraw
           </Button>
         </Flex>
-        <Box>Earned: {formatEther4(pendingGame)} {farm.earnTokenName}</Box>
+        <Box>Earned: {formatEther4(pendingGame)} {farm.earnTokenName} (${formatEther2(pendingGame
+            .mul(oraclePrice).div(BigNumber.from(10).pow(18)))})</Box>
         <Flex flexDirection="row" justifyContent="center" alignItems="center">
           <Button disabled={userInfo?.amount.eq(0) ?? true} onClick={onClaim} my="10px" mx="5px">
             Claim

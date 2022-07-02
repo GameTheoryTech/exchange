@@ -1,7 +1,7 @@
 {
   "name": "@gametheory/interface",
   "description": "Interface",
-  "homepage": "https://gametheory.tech",
+  "homepage": ".",
   "private": true,
   "dependencies": {
     "@binance-chain/bsc-connector": "^1.0.0",

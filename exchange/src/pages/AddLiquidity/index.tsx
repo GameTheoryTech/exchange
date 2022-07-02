@@ -35,7 +35,7 @@ import AppBody from '../AppBody'
 import { Dots, Wrapper } from '../Pool/styleds'
 import { ConfirmAddModalBottom } from './ConfirmAddModalBottom'
 import { PoolPriceBar } from './PoolPriceBar'
-import {GAME, ROUTER_ADDRESS} from '../../constants'
+import {GAME, ROUTER_ADDRESS, USDC} from '../../constants'
 import useENS from "../../hooks/useENS";
 import {useCurrencyBalances} from "../../state/wallet/hooks";
 import {useAllCommonPairs, useTradeExactIn, useTradeExactOut} from "../../hooks/Trades";
@@ -48,8 +48,10 @@ export default function AddLiquidity({
   history,
 }: RouteComponentProps<{ currencyIdA?: string; currencyIdB?: string }>) {
   const { account, chainId, library } = useActiveWeb3React()
-  const currencyA = useCurrency(currencyIdA)
-  const currencyB = useCurrency(currencyIdB)
+  if(!currencyIdA) currencyIdA = USDC?.address;
+  if(!currencyIdB) currencyIdB = GAME?.address;
+  const currencyA = useCurrency(currencyIdA);
+  const currencyB = useCurrency(currencyIdB);
   const TranslateString = useI18n()
 
   const oneCurrencyIsWAVAX = Boolean(

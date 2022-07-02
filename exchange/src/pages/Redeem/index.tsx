@@ -256,7 +256,9 @@ const NftRedeemCard : React.FC<NftRedeemCardProps> = ({ generation, account }) =
       }
       if(nftContract)
       {
-        setRedeemed(await nftContract.redeemed(account, generation));
+        const _redeemed = await nftContract.redeemed(account, generation);
+        const _canRedeem = await nftContract.canRedeem(generation, res.data.ids);
+        setRedeemed(_redeemed && !_canRedeem);
         setAllowRedeem(await nftContract.allowRedeem());
       }
       res = await axios.post('https://migration.gametheory.tech/.netlify/functions/server/avalanche/nft', { address: account, generation: generation });

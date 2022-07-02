@@ -3441,6 +3441,8 @@ var Logo = function (_a) {
         React__default['default'].createElement(Box, { mx: "8px" },
             React__default['default'].createElement(StyledLink, { style: { color: theme.colors.text }, as: "a", href: "https://gametheory.link/WbMd", "aria-label": "Home page" }, "Medium")),
         React__default['default'].createElement(Box, { mx: "8px" },
+            React__default['default'].createElement(StyledLink, { style: { color: theme.colors.text }, as: "a", href: "https://gametheory.link/WbGb", "aria-label": "Home page" }, "Docs")),
+        React__default['default'].createElement(Box, { mx: "8px" },
             React__default['default'].createElement(StyledLink, { style: { color: theme.colors.text }, as: "a", href: "https://old.gametheory.tech", "aria-label": "Home page" }, "Old Site"))));
 };
 var Logo$1 = React__default['default'].memo(Logo, function (prev, next) { return prev.isPushed === next.isPushed && prev.isDark === next.isDark; });

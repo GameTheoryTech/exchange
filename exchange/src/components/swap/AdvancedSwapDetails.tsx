@@ -84,8 +84,8 @@ export interface AdvancedSwapDetailsProps {
 export function AdvancedSwapDetails({ trade }: AdvancedSwapDetailsProps) {
   const [allowedSlippage] = useUserSlippageTolerance()
   const rawInput = trade?.inputAmount.raw.toString() ?? "0";
-  const [sellTax] = useSellTax(trade?.inputAmount.currency, ethers.utils.formatEther(rawInput), trade?.route, trade?.inputAmount?.raw?.toString());
-  const slippage = allowedSlippage + Math.ceil(parseFloat(ethers.utils.formatUnits(sellTax, 2)) * 100);
+  const [sellTax, amountInWithTax, extraSlippage] = useSellTax(trade?.inputAmount.currency, ethers.utils.formatEther(rawInput), trade?.route, trade?.inputAmount?.raw?.toString());
+  const slippage = allowedSlippage + extraSlippage;//+ Math.ceil(parseFloat(ethers.utils.formatUnits(sellTax, 2)) * 100);
   const TranslateString = useI18n()
   const showRoute = Boolean(trade && trade.route.path.length > 2)
 
