@@ -1,4 +1,4 @@
-import {ChainId, CurrencyAmount, JSBI, Token, Trade} from '@gametheory/sdk'
+import {ChainId, CurrencyAmount, currencyEquals, JSBI, Token, Trade, TradeType} from '@gametheory/sdk'
 import React, { useCallback, useContext, useEffect, useMemo, useState } from 'react'
 import { ArrowDown } from 'react-feather'
 import { CardBody, ArrowDownIcon, Button, IconButton, Text, Link } from '@gametheory/uikit'
@@ -97,6 +97,7 @@ const Swap = () => {
   )
   const showWrap: boolean = wrapType !== WrapType.NOT_APPLICABLE
   const trade = showWrap ? undefined : v2Trade
+  if(trade && currencyEquals(trade.inputAmount.currency, GAME)) trade.tradeType = TradeType.EXACT_INPUT;
 
   const parsedAmounts = showWrap
     ? {
@@ -334,7 +335,7 @@ const Swap = () => {
             <AutoColumn gap="md">
               <CurrencyInputPanel
                 label={
-                  independentField === Field.OUTPUT && !showWrap && trade
+                  independentField === Field.OUTPUT && !showWrap && trade && !currencyEquals(trade.inputAmount.currency, GAME)
                     ? TranslateString(194, 'From (estimated)')
                     : TranslateString(76, 'From')
                 }
@@ -374,7 +375,7 @@ const Swap = () => {
                 value={formattedAmounts[Field.OUTPUT]}
                 onUserInput={handleTypeOutput}
                 label={
-                  independentField === Field.INPUT && !showWrap && trade
+                  trade && (independentField === Field.INPUT || currencyEquals(trade.inputAmount.currency, GAME)) && !showWrap
                     ? TranslateString(196, 'To (estimated)')
                     : TranslateString(80, 'To')
                 }

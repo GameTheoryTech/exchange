@@ -1,5 +1,5 @@
 import { parseUnits } from '@ethersproject/units'
-import { Currency, CurrencyAmount, ETHER, JSBI, Token, TokenAmount, Trade } from '@gametheory/sdk'
+import {Currency, CurrencyAmount, currencyEquals, ETHER, JSBI, Token, TokenAmount, Trade} from '@gametheory/sdk'
 import { ParsedQs } from 'qs'
 import { useCallback, useEffect, useState } from 'react'
 import {useDispatch, useSelector, useStore} from 'react-redux'
@@ -123,8 +123,8 @@ export function useDerivedSwapInfo(): {
     recipient,
   } = useSwapState();
 
-  const inputCurrency = useCurrency(inputCurrencyId)
-  const outputCurrency = useCurrency(outputCurrencyId)
+  const inputCurrency = useCurrency(inputCurrencyId);
+  const outputCurrency = useCurrency(outputCurrencyId);
   const recipientLookup = useENS(recipient ?? undefined)
   const to: string | null = (recipient === null ? account : recipientLookup.address) ?? null
 

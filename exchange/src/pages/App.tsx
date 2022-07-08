@@ -17,6 +17,7 @@ import Farms from './Farms'
 import Redeem from './Redeem'
 import Bonds from './Bonds'
 import Altergene from './Altergene'
+import AltergeneClaim from './AltergeneClaim'
 import { RedirectPathToSwapOnly } from './Swap/redirects'
 import { EN, allLanguages } from '../constants/localisation/languageCodes'
 import { LanguageContext } from '../hooks/LanguageContext'
@@ -97,6 +98,7 @@ export default function App() {
                       <Route exact strict path="/redeem" component={Redeem} />
                       <Route exact strict path="/bonds" component={Bonds} />
                       <Route exact strict path="/altergene" component={Altergene} />
+                      <Route exact strict path="/alterClaim" component={AltergeneClaim} />
 
                       {/* Redirection: These old routes are still used in the code base */}
                       <Route exact path="/add/:currencyIdA" component={RedirectOldAddLiquidityPathStructure} />

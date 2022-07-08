@@ -27,7 +27,7 @@ export declare class Trade {
     /**
      * The type of the trade, either exact in or exact out.
      */
-    readonly tradeType: TradeType;
+    tradeType: TradeType;
     /**
      * The input amount for the trade assuming no slippage.
      */

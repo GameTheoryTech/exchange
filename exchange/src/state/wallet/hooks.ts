@@ -154,11 +154,13 @@ export function useSellTax(currency : Currency | undefined | null, value : strin
                     return;
                 }
                 const revenue = await gameContract.revenue();
+                let revenueSub = await gameContract.canDecreaseAmount();
+                if(revenueSub.gt(revenue)) revenueSub = revenue;
                 const routePair = await Fetcher.fetchPairData(route.path[1], GAME, library);
                 const liquidity = currencyEquals(routePair.token0, GAME) ? routePair.reserve0.raw.toString() : routePair.reserve1.raw.toString();
                 const amount = ethers.utils.parseEther(value);
-                const start = revenue;
-                const end = revenue.add(amount);
+                const start = revenue.sub(revenueSub);
+                const end = start.add(amount);
                 const taxIn = await gameContract.taxAmountIn(start, end, liquidity);
                 const amountInWithTaxStr = amount.sub(taxIn).toString();
                 const amountOut = BigNumber.from(routePair.getOutputAmount(

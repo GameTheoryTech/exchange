@@ -31,6 +31,9 @@ function Nav({ activeIndex = 0 }: { activeIndex?: number }) {
         <ButtonMenuItem id="redeem-nav-link" to="/altergene" as={Link}>
           Altergene
         </ButtonMenuItem>
+        <ButtonMenuItem id="redeem-nav-link" to="/alterClaim" as={Link} style={{visibility: "hidden", display:"none"}}>
+            Altergene Claim
+        </ButtonMenuItem>
       </ButtonMenu>
     </StyledNav>
   )

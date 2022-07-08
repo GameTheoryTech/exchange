@@ -1,17 +1,15 @@
-import { BigNumber } from '@ethersproject/bignumber'
-import { Contract } from '@ethersproject/contracts'
+import {BigNumber} from '@ethersproject/bignumber'
+import {Contract} from '@ethersproject/contracts'
 import {CurrencyAmount, currencyEquals, JSBI, Percent, Router, SwapParameters, Trade, TradeType} from '@gametheory/sdk'
-import { useMemo } from 'react'
+import {useMemo} from 'react'
 import {BIPS_BASE, DEFAULT_DEADLINE_FROM_NOW, GAME, INITIAL_ALLOWED_SLIPPAGE} from '../constants'
-import { useTransactionAdder } from '../state/transactions/hooks'
-import { calculateGasMargin, getRouterContract, isAddress, shortenAddress } from '../utils'
+import {useTransactionAdder} from '../state/transactions/hooks'
+import {calculateGasMargin, getRouterContract, isAddress, shortenAddress} from '../utils'
 import isZero from '../utils/isZero'
-import { useActiveWeb3React } from './index'
+import {useActiveWeb3React} from './index'
 import useENS from './useENS'
-import swap from "../pages/Swap";
-import {BigNumberish} from "ethers";
 
- enum SwapCallbackState {
+enum SwapCallbackState {
   INVALID,
   LOADING,
   VALID,

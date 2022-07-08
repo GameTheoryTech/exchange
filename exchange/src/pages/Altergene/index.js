@@ -52,13 +52,14 @@ const Altergene = () => {
             <AppBody>
                 <div id="iframeContainer" ref={iframeRef}>
                 <Unity unityProvider={unityContext.unityProvider} style={{
-                    height: '100vh',
-                    width: '100vw',
                     display: 'block',
                     position: 'fixed',
-                    top: 0,
-                    left: 0,
-                    right: 0,
+                    width: "90%",
+                    height: "90%",
+                    //top: "50%",
+                    left: "50%",
+                    marginTop: "-2%", /* Negative half of height. */
+                    marginLeft: "-45%", /* Negative half of width. */
                     justifyContent: 'center',
                     alignItems: 'center'
                 }}/>
