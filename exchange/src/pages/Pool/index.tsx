@@ -1,8 +1,7 @@
 import React, { useContext, useMemo } from 'react'
-import { ThemeContext } from 'styled-components'
+import styled, { ThemeContext } from 'styled-components'
 import { Pair } from '@gametheory/sdk'
 import { Button, CardBody, Text } from '@gametheory/uikit'
-import CardNav from 'components/CardNav'
 import Question from 'components/QuestionHelper'
 import FullPositionCard from 'components/PositionCard'
 import { useTokenBalancesWithLoadingIndicator } from 'state/wallet/hooks'
@@ -17,9 +16,10 @@ import { usePairs } from 'data/Reserves'
 import { toV2LiquidityToken, useTrackedTokenPairs } from 'state/user/hooks'
 import { Dots } from 'components/swap/styleds'
 import useI18n from 'hooks/useI18n'
-import PageHeader from 'components/PageHeader'
+import PageHeader, {PageTitle} from 'components/PageHeader'
 import { Link } from 'react-router-dom'
 import AppBody from '../AppBody'
+import { SwapNav } from 'components/CardNav'
 
 export default function Pool() {
   const theme = useContext(ThemeContext)
@@ -57,7 +57,13 @@ export default function Pool() {
 
   return (
     <Container>
-      <CardNav activeIndex={1} />
+      <PageTitle>
+        Celestial Exchange
+      </PageTitle>
+      <Text textAlign={'center'} marginBottom="40px">
+      Buy and sell GAME and create liquidity pool tokens.
+      </Text>
+      <SwapNav activeIndex={1} />
       <AppBody>
         <PageHeader
           title={TranslateString(262, 'Liquidity')}
@@ -108,13 +114,7 @@ export default function Pool() {
 
               <div>
                 <Text fontSize="14px" style={{ padding: '.5rem 0 .5rem 0' }}>
-                  {TranslateString(106, "Don't see a pool you joined?")}{' '}
-                  <StyledInternalLink id="import-pool-link" to="/find">
-                    {TranslateString(108, 'Import it.')}
-                  </StyledInternalLink>
-                </Text>
-                <Text fontSize="14px" style={{ padding: '.5rem 0 .5rem 0' }}>
-                  {TranslateString(1172, 'Or, if you staked your LP tokens in a farm, unstake them to see them here.')}
+                  {TranslateString(1172, 'If you staked your LP tokens in a farm, unstake them to see them here.')}
                 </Text>
               </div>
             </AutoColumn>

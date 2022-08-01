@@ -23,6 +23,7 @@ const style = {
 
 const Heading = styled(Text).attrs({ bold: true })<HeadingProps>`
   font-size: ${({ scale }) => style[scale || scales.MD].fontSize};
+  font-family: "kallisto", sans-serif;
   font-weight: 600;
   line-height: 1.1;
 

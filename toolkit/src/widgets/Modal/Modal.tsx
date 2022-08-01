@@ -20,9 +20,9 @@ const Modal: React.FC<ModalProps> = ({
   return (
     <ModalContainer minWidth={minWidth} {...props}>
       <ModalHeader background={getThemeValue(`colors.${headerBackground}`, headerBackground)(theme)}>
-        <ModalTitle>
+        <ModalTitle className="textGlow pink">
           {onBack && <ModalBackButton onBack={onBack} />}
-          <Heading>{title}</Heading>
+          <Heading color="var(--accent)">{title}</Heading>
         </ModalTitle>
         {!hideCloseButton && <ModalCloseButton onDismiss={onDismiss} />}
       </ModalHeader>

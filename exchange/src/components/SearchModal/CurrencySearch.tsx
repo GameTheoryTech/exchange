@@ -188,7 +188,7 @@ export function CurrencySearch({
         </AutoSizer>
       </div>
 
-      <>
+      {/*<>
           <Separator />
           <Card>
             <RowBetween>
@@ -213,7 +213,7 @@ export function CurrencySearch({
               </LinkStyledButton>
             </RowBetween>
           </Card>
-        </>
+                  </>*/}
     </Column>
   )
 }

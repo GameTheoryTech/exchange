@@ -7,16 +7,27 @@ import { IconButton } from "../../components/Button";
 import { ModalProps } from "./types";
 
 export const ModalHeader = styled.div<{ background?: string }>`
-  align-items: center;
-  background: ${({ background }) => background || "transparent"};
-  border-bottom: 1px solid ${({ theme }) => theme.colors.cardBorder};
+  position: relative;
   display: flex;
-  padding: 12px 24px;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+
+  button {
+    position: absolute;
+    right: 20px;
+    font-size: 35px;
+
+    svg {
+      width: 1em;
+      height: 1em;
+      filter: drop-shadow(0 0 5px var(--accent));
+    }
+  }
 `;
 
 export const ModalTitle = styled(Flex)`
-  align-items: center;
-  flex: 1;
+
 `;
 
 export const ModalBody = styled(Flex)`
@@ -43,17 +54,15 @@ export const ModalBackButton: React.FC<{ onBack: ModalProps["onBack"] }> = ({ on
 
 export const ModalContainer = styled(Box)<{ minWidth: string }>`
   overflow: hidden;
-  background: ${({ theme }) => theme.modal.background};
-  box-shadow: 0px 20px 36px -8px rgba(14, 14, 44, 0.1), 0px 1px 1px rgba(0, 0, 0, 0.05);
-  border: 1px solid ${({ theme }) => theme.colors.cardBorder};
-  border-radius: 32px;
+  background: #212e4d;
+  border-radius: 20px;
   width: 100%;
   max-height: 100vh;
+  min-width: 500px;
+  max-width: 500px;
   z-index: ${({ theme }) => theme.zIndices.modal};
 
-  ${({ theme }) => theme.mediaQueries.xs} {
-    width: auto;
-    min-width: ${({ minWidth }) => minWidth};
-    max-width: 100%;
+  @media (max-width: 500px) {
+    min-width: 100%;
   }
 `;

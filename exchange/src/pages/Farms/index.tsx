@@ -1,8 +1,8 @@
 import React, {useCallback, useContext, useEffect, useMemo, useRef, useState} from 'react'
 import styled, { ThemeContext } from 'styled-components'
 import {currencyEquals, ETHER, Pair, Token, TokenAmount, Trade} from '@gametheory/sdk'
-import {Box, Button, CardBody, ChevronDownIcon, Flex, Grid, Modal, Slider, Text, useModal} from '@gametheory/uikit'
-import CardNav from 'components/CardNav'
+import {Box, Button, Card,CardBody, ChevronDownIcon, Flex, Grid, Modal, Slider, Text, useModal} from '@gametheory/uikit'
+import {EarnNav} from 'components/CardNav'
 import Question from 'components/QuestionHelper'
 import FullPositionCard from 'components/PositionCard'
 import { useTokenBalancesWithLoadingIndicator } from 'state/wallet/hooks'
@@ -16,7 +16,7 @@ import {ApprovalState, useApproveCallback} from "../../hooks/useApproveCallback"
 import {Currency, CurrencyAmount} from "@gametheory/sdk";
 import {useActiveWeb3React} from "../../hooks";
 import AppBody from "../AppBody";
-import PageHeader from "../../components/PageHeader";
+import PageHeader, {PageTitle} from "../../components/PageHeader";
 import {Link} from "react-router-dom";
 import MasterChefABI from '../../constants/abis/MasterChef.json';
 import MasterABI from '../../constants/abis/master.json';
@@ -45,6 +45,8 @@ import CurrencySearchModal from "../../components/SearchModal/CurrencySearchModa
 import {darken} from "polished";
 import NumericalInput from "../../components/NumericalInput";
 import {ERC20_ABI} from "../../constants/abis/erc20";
+import TokenSymbol, {TokenSymbolWrapper} from 'components/TokenSymbol';
+import Wrapper, { Grid as GridWrap, GridItem } from 'components/Grid'
 
 interface Farm
 {
@@ -420,7 +422,7 @@ const FarmCard : React.FC<FarmCardProps> = ({ farm, account }) => {
   const game = useGameContract(GAME?.address);
   const lpToken = useContract(poolInfo?.lpToken, PairABI, true);
   const [refreshKey, setRefreshKey] = useState(0);
-  const connectedFarmContract = useContract(farm.contract.address, MasterChefABI, true);
+
   const mountedRef = useRef(true);
   const { library } = useActiveWeb3React()
   useEffect(() => {
@@ -520,9 +522,6 @@ const FarmCard : React.FC<FarmCardProps> = ({ farm, account }) => {
   const [approvalSubmitted, setApprovalSubmitted] = useState<boolean>(false)
   const [onPresentDeposit] = useModal(<DepositModal farm={farm} token={token} account={account} />);
   const [onPresentWithdraw] = useModal(<WithdrawModal farm={farm} token={token} account={account} />);
-  const [onPresentBoost] = useModal(<BoostModal farm={farm} token={token} account={account} />);
-  const onClaim = useTransactionCallback(connectedFarmContract, "withdraw", `Claim ${farm.earnTokenName} from ${farm.name} farm.`, farm.id, 0);
-  const onUnboost = useTransactionCallback(connectedFarmContract, "withdrawNft", `Withdraw Boost NFT from ${farm.name} farm.`, farm.id);
 
   // mark when a user has submitted an approval, reset onTokenSelection for input field
   useEffect(() => {
@@ -530,45 +529,67 @@ const FarmCard : React.FC<FarmCardProps> = ({ farm, account }) => {
       setApprovalSubmitted(true)
     }
   }, [approvalState, approvalSubmitted]);
-  return (<LightCard padding="40px">
-    <Text textAlign="center">
-      <Grid>
-        <Flex flexDirection="row" justifyContent="center" alignItems="center">
-          <Box>{farm.name}</Box>
-          <Question
-              text={`Your Daily ${farm.earnTokenName} Emissions: ${ethers.utils.formatEther(tokensPerDay)}
+
+
+  return (<div className="boxed">
+    <CardBody style={{textAlign: 'center'}}>
+    <TokenSymbolWrapper>
+      <TokenSymbol symbol={`${token}`} />
+      <TokenSymbol symbol="USDC" />
+    </TokenSymbolWrapper>
+    <CardTitle>
+      {farm.name} Liquidity Pool
+    </CardTitle>
+    {/*<Question
+          text={`Your Daily ${farm.earnTokenName} Emissions: ${ethers.utils.formatEther(tokensPerDay)}
 Your Yearly ${farm.earnTokenName} Emissions: ${ethers.utils.formatEther(tokensPerYear)}`}
-          />
-        </Flex>
-        <Box>APR ($): {apr.toFixed(2)}%</Box>
+/>*/}
+    <Text textAlign="center" marginBottom="40px" fontSize="14px">  
+      Deposit GAME-USDC LP tokens & earn yield. No locking time period. Withdraw at any time.
+    </Text>
+
+    <CardMeta style={{marginBottom:'40px'}}>
+      <GridWrap>
+        <GridItem width="lg" mobile>
+          <Text color="var(--extra-color-2)" fontSize="20px">{apr.toFixed(2)}%</Text>
+          <Text className="textGlow" fontSize="14px">Yearly Rewards</Text>
+        </GridItem>
+        <GridItem width="lg" mobile>
+          <Text color="var(--extra-color-2)" fontSize="20px">{dpr.toFixed(2)}%</Text>
+          <Text className="textGlow" fontSize="14px">Daily Rewards</Text>
+        </GridItem>
+      </GridWrap>
+    </CardMeta>
+          
         {/*<Box>Total Emissions Per Day ({farm.earnTokenName}): {totalTokensPerDay}</Box>*/}
-        <Box>DPR ($): {dpr.toFixed(2)}%</Box>
         {/*<Box>Total Emissions Per Year ({farm.earnTokenName}): {totalTokensPerYear}</Box> removed due to confusion about what this means (it means if everyone had your boost, this would be total emissions. To be replaced with personal emissions.)*/}
         {(farm.depositTokenName === "GAME-USDC" ?
         <>
-        <Box>Deposited (Both): {ethers.utils.formatEther(userInfo?.amount ?? BigNumber.from(0))} {farm.depositTokenName} ($
-          {formatEther2(((userInfo?.amount ?? BigNumber.from(0)))
+          <Text fontSize="36px" fontWeight="700" lineHeight="1">{formatEther4((userInfo?.amount ?? BigNumber.from(0)).sub(userInfo?.lockedAmount ?? BigNumber.from(0)))}</Text>
+          <Text color="var(--extra-color-2)" fontSize="20px">
+          ${formatEther2(((userInfo?.amount ?? BigNumber.from(0)).sub(userInfo?.lockedAmount ?? BigNumber.from(0)))
               .mul(depositPrice).div(BigNumber.from(10).pow(18)))}
-          )</Box>
-        <Box>Deposited (GAME-USDC): {ethers.utils.formatEther((userInfo?.amount ?? BigNumber.from(0)).sub(userInfo?.lockedAmount ?? BigNumber.from(0)))} {farm.depositTokenName} ($
-          {formatEther2(((userInfo?.amount ?? BigNumber.from(0)).sub(userInfo?.lockedAmount ?? BigNumber.from(0)))
-              .mul(depositPrice).div(BigNumber.from(10).pow(18)))}
-          )</Box>
-        <Box>Deposited (MASTER): {ethers.utils.formatEther(userInfo?.lockedAmount ?? BigNumber.from(0))} {farm.depositTokenName} ($
-          {formatEther2(((userInfo?.lockedAmount ?? BigNumber.from(0)))
-              .mul(depositPrice).div(BigNumber.from(10).pow(18)))}
-          )</Box>
+          </Text>
+          <Text className="textGlow" fontSize="14px" marginBottom='30px'>
+            GAME-USDC LP Tokens Staked
+          </Text>
         </> :
         <>
-          <Box>Deposited: {ethers.utils.formatEther(userInfo?.amount ?? BigNumber.from(0))} {farm.depositTokenName} ($
-            {formatEther2(((userInfo?.amount ?? BigNumber.from(0)))
+          <Text fontSize="36px" fontWeight="700" lineHeight="1">{formatEther4(userInfo?.amount ?? BigNumber.from(0))}</Text>
+            <Text color="var(--extra-color-2)" fontSize="20px">
+            ${formatEther2(((userInfo?.amount ?? BigNumber.from(0)))
                 .mul(depositPrice).div(BigNumber.from(10).pow(18)))}
-            )</Box>
+          </Text>
+            <Text className="textGlow" fontSize="14px" marginBottom='30px'>
+              Deposited
+          </Text>
         </>)
         }
-        <Flex flexDirection="row" justifyContent="center" alignItems="center">
+        <div style={{marginTop: 'auto'}}>
+          <GridWrap>
+            <GridItem width="lg" mobile>
           {approvalState !== ApprovalState.APPROVED ?
-          (<Button my="10px" mx="5px" onClick={approveCallback}
+          (<Button width={'100%'} onClick={approveCallback}
                    disabled={approvalState !== ApprovalState.NOT_APPROVED || approvalSubmitted}
                    variant={
                      //@ts-ignore
@@ -576,132 +597,187 @@ Your Yearly ${farm.earnTokenName} Emissions: ${ethers.utils.formatEther(tokensPe
                        ? 'success' : 'primary'}>
             Approve
           </Button>) :
-          (<Button onClick={onPresentDeposit} my="10px" mx="5px">
+          (<Button onClick={onPresentDeposit} width={'100%'}>
             Deposit
           </Button>)}
-          <Button disabled={userInfo?.amount.eq(0) ?? true} onClick={onPresentWithdraw} my="10px" mx="5px">
+          </GridItem>
+          <GridItem width="lg" mobile>
+          <Button disabled={userInfo?.amount.eq(0) ?? true} onClick={onPresentWithdraw} width={'100%'}>
             Withdraw
           </Button>
-        </Flex>
-        <Box>Earned: {formatEther4(pendingGame)} {farm.earnTokenName} (${formatEther2(pendingGame
-            .mul(oraclePrice).div(BigNumber.from(10).pow(18)))})</Box>
-        <Flex flexDirection="row" justifyContent="center" alignItems="center">
-          <Button disabled={userInfo?.amount.eq(0) ?? true} onClick={onClaim} my="10px" mx="5px">
-            Claim
-          </Button>
-          {(userInfo && userInfo.nft.addr !== "0x0000000000000000000000000000000000000000" ?
-          <Button onClick={onUnboost} my="10px" mx="5px">
-            Unboost
-          </Button>
-          : <Button disabled={!userInfo || userInfo.nft.addr !== "0x0000000000000000000000000000000000000000"} onClick={onPresentBoost} my="10px" mx="5px">
-            Boost
-          </Button>)}
-        </Flex>
-      </Grid>
-    </Text>
-  </LightCard>);
+          </GridItem>
+          </GridWrap>
+          </div>
+      </CardBody>
+  </div>);
 }
 
-const GameRewardCard = ({ }) => {
+const FarmCardClaim = (props: {farm: Farm, account: any}) => {
+  const {farm, account} = props;
+  const [poolInfo, setPoolInfo] = useState<any>(null);
+  const [userInfo, setUserInfo] = useState<any>(null);
+  const [token, setToken] = useState<Token | undefined>(undefined);
+  const [tokenAmount, setTokenAmount] = useState<TokenAmount | undefined>(undefined);
+  const [pendingGame, setPendingGame] = useState(BigNumber.from(0));
+  const [apr, setApr] = useState(0);
+  const [dpr, setDpr] = useState(0);
+  const [tokensPerDay, setTokensPerDay] = useState(BigNumber.from(0));
+  const [tokensPerYear, setTokensPerYear] = useState(BigNumber.from(0));
+  const [oraclePrice, setOraclePrice] = useState(BigNumber.from(0));
+  const [depositPrice, setDepositPrice] = useState(BigNumber.from(0));
   const game = useGameContract(GAME?.address);
-  const { account } = useActiveWeb3React();
-  const [totalEarned, setTotalEarned] = useState(BigNumber.from(0));
+  const lpToken = useContract(poolInfo?.lpToken, PairABI, true);
   const [refreshKey, setRefreshKey] = useState(0);
+
   const mountedRef = useRef(true);
+  const { library } = useActiveWeb3React()
+
   useEffect(() => {
     const effect = async () =>
     {
-      if(!account || !game) return;
-      //console.log(await game.totalEarned(account))
-      setTotalEarned(await game.totalEarned(account));
-    };
-    effect();
-    return () => { mountedRef.current = false }
-  }, [setTotalEarned, account, game, refreshKey]);
-  useEffect(() => {
-    const interval=setInterval(()=>{
-      setRefreshKey(oldKey => oldKey + 1);
-    },10000)
+        if(BigNumber.from(farm.id).gte(await farm.contract.poolLength())) return;
+        const _poolInfo = await farm.contract.poolInfo(farm.id);
+        setPoolInfo(_poolInfo);
+        if(!account) return;
+        setUserInfo(await farm.contract.userInfo(farm.id, account));
+        setPendingGame(await farm.contract.pendingGame(farm.id, account));
+        //setPendingGame(ethers.utils.parseEther("0.019545254223099787").mul(59));
+        if (_poolInfo && farm.earnTokenName === 'GAME')
+        {
+          const _token = new Token(43113, _poolInfo.lpToken, 18, farm.depositTokenName, farm.depositTokenName);
+          setToken(_token);
+          if(_token)
+            setTokenAmount(new TokenAmount(_token, "0xFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF"));
+          if(game)
+          {
+            const tokenPerSecond = await farm.contract.getGamePerSecondInPool(farm.id, account);
+            const tokenPerHour = tokenPerSecond.mul(60).mul(60);
+            const totalRewardTokensPerDay = tokenPerHour.mul(24);
+            const totalRewardTokensPerYear = totalRewardTokensPerDay.mul(365);
+            const totalStakingTokensInPool = _poolInfo.totalDeposited;
+            if ((await game.oracle()) !== "0x0000000000000000000000000000000000000000") {
+              const _oraclePrice = await game.getPrice();
+              setOraclePrice(_oraclePrice);
+              const totalRewardPricePerDay =
+                  totalRewardTokensPerDay.mul(_oraclePrice).div(BigNumber.from(10).pow(18));
+              const totalRewardPricePerYear =
+                  totalRewardTokensPerYear.mul(_oraclePrice).div(BigNumber.from(10).pow(18));
 
-    return()=>clearInterval(interval)
-  }, [setRefreshKey]);
-  const onClaim = useTransactionCallback(game, "claimReward", `Claim GAME HODL rewards.`);
-  return (<LightCard padding="40px">
-    <Text textAlign="center">
-      <Grid>
-        <Box>GAME Rewards</Box>
-        <Box>Claimable: {ethers.utils.formatEther(totalEarned)}</Box>
-        <Box>Claiming here while having MASTER available to withdraw will set your MASTER lock time to 30 days!</Box>
-        <Button disabled={totalEarned.eq(0)} onClick={onClaim} my="10px" mx="5px">
-          Claim
-        </Button>
-      </Grid>
-    </Text>
-  </LightCard>);
-}
+              if(lpToken) {
+                const totalSupply = await lpToken.totalSupply();
+                //Get amount of tokenA
+                let otherToken = await lpToken.token0();
+                if(otherToken.toLowerCase() == game.address.toLowerCase()) otherToken = await lpToken.token1();
 
-const TheoryRewardCard = ({ }) => {
-  const game = useGameContract(GAME?.address);
-  const { account } = useActiveWeb3React();
-  const [totalRedeemTaxOutAmounts, setTotalRedeemTaxOutAmounts] = useState([BigNumber.from(0)]);
-  const [redeemTaxAmounts, setTaxRedeemAmounts] = useState([BigNumber.from(0)]);
-  const [totalSupply, setTotalSupply] = useState(BigNumber.from(0));
-  const [balance, setBalance] = useState(BigNumber.from(0));
-  const [canTaxOut, setCanTaxOut] = useState(false);
-  const [refreshKey, setRefreshKey] = useState(0);
-  const mountedRef = useRef(true);
-  useEffect(() => {
-    const effect = async () =>
-    {
-      if(!game) return;
-      setTotalRedeemTaxOutAmounts(await game.totalRedeemTaxOutAmounts());
-      setTotalSupply(await game.totalCredits());
-      if(!account) return;
-      setTaxRedeemAmounts(await game.redeemTaxOutAmounts(account));
-      setBalance(await game.credits(account));
-      setCanTaxOut(await game.canTaxOut((await game.claimableTokens(0)).addr));
-    };
-    effect();
-    return () => { mountedRef.current = false }
-  }, [setTaxRedeemAmounts, setTotalRedeemTaxOutAmounts, account, game, refreshKey]);
-  useEffect(() => {
-    const interval=setInterval(()=>{
-      setRefreshKey(oldKey => oldKey + 1);
-    },10000)
+                // const totalSupply = await lpToken.totalSupply();
+                // //Get amount of tokenA
+                // const tokenSupply = await game.balanceOf(lpToken.address);
+                // const priceOfToken = _oraclePrice;
+                // const tokenInLP = tokenSupply.mul(BigNumber.from(10).pow(18)).div(totalSupply);
+                // const _depositPrice = (priceOfToken.mul(tokenInLP).mul(2).div(BigNumber.from(10).pow(18))); //We multiply by 2 since half the price of the lp token is the price of each piece of the pair. So twice gives the total.
 
-    return()=>clearInterval(interval)
-  }, [setRefreshKey]);
-  // const redeemTaxAmounts = await game?.redeemTaxOutAmounts(account);
-  const onClaim = useTransactionCallback(game, "redeemTaxOut", `Claim GAME buy rewards.`);
-
-  return (<LightCard padding="40px">
-    <Text textAlign="center">
-      <Grid>
-        <Flex flexDirection="row" justifyContent="center" alignItems="center">
-        <Box>THEORY Rewards</Box>
-        <Question
-            text={`THEORY Amount Per $1 USD of GAME: 1
-THEORY Total Supply: ${formatEther4(totalSupply)}
-THEORY Balance: ${formatEther4(balance)}`}
-        />
-        </Flex>
-        {/*<Box>USDC.e Claimable: {}</Box>*/}
-        { redeemTaxAmounts?.length > 0 && totalRedeemTaxOutAmounts?.length > 0 &&
-            (
-          <>
-            <Box>Total USDC Unclaimed: {ethers.utils.formatUnits(totalRedeemTaxOutAmounts[0], 6)}</Box>
-            <Box>USDC Claimable: {ethers.utils.formatUnits(redeemTaxAmounts[0], 6)}</Box>
-          </>
-            )
+                const tokenSupply = await new Contract(otherToken, ERC20_ABI, library).balanceOf(lpToken.address);
+                const priceOfToken = BigNumber.from(10).pow(18); //Lazy... USDC = $1
+                const tokenInLP = tokenSupply.mul(BigNumber.from(10).pow(12)).mul(BigNumber.from(10).pow(18)).div(totalSupply);
+                const _depositPrice = (priceOfToken.mul(tokenInLP).mul(2).div(BigNumber.from(10).pow(18))); //We multiply by 2 since half the price of the lp token is the price of each piece of the pair. So twice gives the total.
+                setDepositPrice(_depositPrice);
+                const totalStakingPriceInPool =
+                    totalStakingTokensInPool.mul(_depositPrice).div(BigNumber.from(10).pow(18))
+                const dailyAPR = (+ethers.utils.formatEther(totalRewardPricePerDay) / +ethers.utils.formatEther(totalStakingPriceInPool)) * 100;
+                const yearlyAPR = (+ethers.utils.formatEther(totalRewardPricePerYear) / +ethers.utils.formatEther(totalStakingPriceInPool)) * 100;
+                setDpr(dailyAPR);
+                setApr(yearlyAPR);
+              }
+            }
+            {
+              if(_poolInfo.totalDeposited.eq(0)) return; //Temp
+              const tokensPerSecond = await farm.contract.getPersonalGamePerSecondInPool(farm.id, account);
+              const _tokensPerDay = tokensPerSecond.mul(60).mul(60).mul(24);
+              setTokensPerDay(_tokensPerDay);
+              setTokensPerYear(_tokensPerDay.mul(365));
+            }
+          }
         }
-        <br/>
-        <Box>These are rewards for buying GAME while the price is under $1. They become available once the price of GAME is over $1.</Box>
-        <Button disabled={canTaxOut || !redeemTaxAmounts.some((bn) => {return bn.gt(0)})} onClick={onClaim} my="10px" mx="5px">
-          Claim
+        // return tokenContract
+        //     .approve(spender, useExact ? amountToApprove.raw.toString() : MaxUint256, {
+        //       gasLimit: calculateGasMargin(estimatedGas),
+        //     })
+        //     .then((response: TransactionResponse) => {
+        //       addTransaction(response, {
+        //         summary: `Approve ${amountToApprove.currency.symbol}`,
+        //         approval: { tokenAddress: token.address, spender },
+        //       })
+        //     })
+        //     .catch((error: Error) => {
+        //       console.error('Failed to approve token', error)
+        //       throw error
+        //     })
+    }
+    effect();
+    return () => { mountedRef.current = false }
+  }, [setUserInfo, setPoolInfo, setPendingGame, setToken, setTokenAmount, farm, account, game, lpToken, refreshKey]);
+  useEffect(() => {
+    const interval=setInterval(()=>{
+      setRefreshKey(oldKey => oldKey + 1);
+    },10000)
+
+    return()=>clearInterval(interval)
+  }, [setRefreshKey]);
+
+  const connectedFarmContract = useContract(farm.contract.address, MasterChefABI, true);
+  const [onPresentBoost] = useModal(<BoostModal farm={farm} token={token} account={account} />);
+  const onClaim = useTransactionCallback(connectedFarmContract, "withdraw", `Claim ${farm.earnTokenName} from ${farm.name} farm.`, farm.id, 0);
+  const onUnboost = useTransactionCallback(connectedFarmContract, "withdrawNft", `Withdraw Boost NFT from ${farm.name} farm.`, farm.id);
+
+  const [approvalState, approveCallback] = useApproveCallback(tokenAmount, farm.contract.address);
+  // check if user has gone through approval process, used to show two step buttons, reset on token change
+  const [approvalSubmitted, setApprovalSubmitted] = useState<boolean>(false)
+
+  // mark when a user has submitted an approval, reset onTokenSelection for input field
+  useEffect(() => {
+    if (approvalState === ApprovalState.PENDING) {
+      setApprovalSubmitted(true)
+    }
+  }, [approvalState, approvalSubmitted]);
+
+  return (
+    <Card>
+      <CardBody style={{textAlign: 'center'}}>
+        <CardTitle>
+        Claim Your Staking Rewards
+        </CardTitle>
+        <Text fontSize='14px' marginBottom="30px">
+        Your GAME rewards from both Liquidity Pool and MASTER Rewards Pool.
+        </Text>
+
+
+        <Text fontSize="36px" fontWeight="700" lineHeight="1">{formatEther4(pendingGame)}</Text>
+        <Text color="var(--extra-color-2)" fontSize="20px">
+        ${formatEther2(pendingGame
+      .mul(oraclePrice).div(BigNumber.from(10).pow(18)))}
+        </Text>
+        <Text className="textGlow" fontSize="14px" marginBottom='30px'>
+          GAME Earned
+        </Text>
+
+        <Button disabled={userInfo?.amount.eq(0) ?? true} onClick={onClaim} width="100%" marginBottom={'30px'}>
+          Claim Rewards
         </Button>
-      </Grid>
-    </Text>
-  </LightCard>);
+
+        <Text fontSize="14px" marginBottom='30px'>
+          Boost your APR percentage rates with a Game Theory NFT! Simply enter your NFT ID number to earn more!
+        </Text>
+
+        {(userInfo && userInfo.nft.addr !== "0x0000000000000000000000000000000000000000" ?
+    <Button onClick={onUnboost} width="100%">
+      Unboost
+    </Button>
+    : <Button disabled={!userInfo || userInfo.nft.addr !== "0x0000000000000000000000000000000000000000"} onClick={onPresentBoost} width="100%">
+      Boost
+    </Button>)}
+    </CardBody>
+    </Card>
+  );
 }
 
 export default function Farms() {
@@ -726,72 +802,30 @@ export default function Farms() {
     return () => { mountedRef.current = false }
   }, [account, library, setContract, setFarms, setTokenAddress]);
 
-
   return (
     <Container>
-      <CardNav activeIndex={2} />
-      <AppBody>
-        <PageHeader
-          title={"Earn"}
-          description={"Collect rewards and deposit liquidity for rewards here."}
-        >
-          {/*<Button id="join-pool-button" as={Link} to="/add/AVAX">*/}
-          {/*  Button*/}
-          {/*</Button>*/}
-        </PageHeader>
-        <AutoColumn gap="lg" justify="center">
-          <CardBody>
-            <AutoColumn gap="12px" style={{ width: '100%' }}>
-              <RowBetween padding="0 8px">
-                <Text color={theme.colors.text}>Locked Revenue Share</Text>
-                <Question
-                    text={"Lock up your LP for MASTER, withdraw your MASTER back to LP, or view MASTER stats here."}
-                />
-              </RowBetween>
-              <MasterRewardCard tokenAddress={tokenAddress}/>
-              <RowBetween padding="0 8px">
-                <Text color={theme.colors.text}>Automatic Rewards</Text>
-                <Question
-                  text={"Rewards you obtain from holding tokens or doing special actions."}
-                />
-              </RowBetween>
-              <GameRewardCard/>
-              <TheoryRewardCard/>
-              <RowBetween padding="0 8px">
-                <Text color={theme.colors.text}>Manual Rewards</Text>
-                <Question
-                    text={"Rewards you have to deposit collateral for."}
-                />
-              </RowBetween>
-              {!account || !library ? (
-                <LightCard padding="40px">
-                  <Text color="textDisabled" textAlign="center">
-                    Connect to a wallet to view farms.
-                  </Text>
-                </LightCard>
-              ) : farmsIsLoading ? (
-                <LightCard padding="40px">
-                  <Text color="textDisabled" textAlign="center">
-                    <Dots>Loading</Dots>
-                  </Text>
-                </LightCard>
-              ) : farms?.length > 0 ? (
-                <>
-                  {farms.map((farm) => (
-                    <FarmCard key={farm.id} farm={farm} account={account} />
-                  ))}
-                </>
-              ) : (
-                <LightCard padding="40px">
-                  <Text color="textDisabled" textAlign="center">
-                    No farms found.
-                  </Text>
-                </LightCard>
-              )}
-            </AutoColumn>
-          </CardBody>
-        </AutoColumn>
-      </AppBody>
+      <PageTitle>
+        Stake & Earn
+      </PageTitle>
+      <Text textAlign={'center'} marginBottom="40px">
+      Access your rewards and stake your tokens to earn more.
+      </Text>
+      <EarnNav activeIndex={0} />
+      <Wrapper>
+                <GridWrap>
+                    <GridItem width="375px">
+                    <FarmCard farm={farms[0]} account={account} />
+                    </GridItem>
+                    <GridItem width="375px">
+                      <MasterRewardCard tokenAddress={tokenAddress}/>
+                    </GridItem>
+                </GridWrap>
+                <GridWrap style={{marginTop: '10px'}}>
+                    <GridItem width="375px">
+                      <FarmCardClaim farm={farms[0]} account={account} />
+                    </GridItem>
+                </GridWrap>
+            </Wrapper>
     </Container>
   )
 }
@@ -852,23 +886,159 @@ const MasterRewardCard = ({ tokenAddress } : MasterRewardProps) => {
       setApprovalSubmitted(true)
     }
   }, [approvalState, approvalSubmitted]);
-  return (<LightCard padding="40px">
-    <Text textAlign="center">
-      <Grid>
-        <Box>MASTER</Box>
-        <Box>Balance: {ethers.utils.formatEther(balance)} MASTER</Box>
-        <Box>Deposited LP: {ethers.utils.formatEther(userInfo?.depositedGameUsdc ?? 0)} GAME-USDC</Box>
+
+
+  // import from other farm pool
+  const [contract2, setContract2] = useState(new Contract("0x50ad0F743278893Ed7184F8B0272c51E88493528", MasterChefABI, library));
+  const [farms, setFarms] = useState([{name: "GAME-USDC", id: 0, contract: contract2, depositTokenName: "GAME-USDC", earnTokenName: "GAME"}]);
+  const farm = farms[0];
+  const [pendingGame, setPendingGame] = useState(BigNumber.from(0));
+  const [apr, setApr] = useState(0);
+  const [dpr, setDpr] = useState(0);
+  const [tokensPerDay, setTokensPerDay] = useState(BigNumber.from(0));
+  const [tokensPerYear, setTokensPerYear] = useState(BigNumber.from(0));
+  const [oraclePrice, setOraclePrice] = useState(BigNumber.from(0));
+  const game = useGameContract(GAME?.address);
+  const [poolInfo, setPoolInfo] = useState<any>(null);
+  const lpToken = useContract(poolInfo?.lpToken, PairABI, true);
+  const [newToken, setToken] = useState<Token | undefined>(undefined);
+  const [depositPrice, setDepositPrice] = useState(BigNumber.from(0));
+
+  useEffect(() => {
+    const effect = async () =>
+    {
+        if(BigNumber.from(farm.id).gte(await farm.contract.poolLength())) return;
+        const _poolInfo = await farm.contract.poolInfo(farm.id);
+        setPoolInfo(_poolInfo);
+        if(!account) return;
+        setUserInfo(await farm.contract.userInfo(farm.id, account));
+        setPendingGame(await farm.contract.pendingGame(farm.id, account));
+        //setPendingGame(ethers.utils.parseEther("0.019545254223099787").mul(59));
+        if (_poolInfo && farm.earnTokenName === 'GAME')
         {
-          (balance.gt(0) &&
-              <>
-                <Box>Deposit Date: {(new Date(userInfo.lockFromTime.toNumber() * 1000)).toString()}</Box>
-                <Box>Withdraw Date: {(new Date(userInfo.lockFromTime.add(userInfo.lockTime).toNumber() * 1000)).toString()}</Box>
-              </>
-          )
+          const _token = new Token(43113, _poolInfo.lpToken, 18, farm.depositTokenName, farm.depositTokenName);
+          setToken(_token);
+          if(_token)
+            setTokenAmount(new TokenAmount(_token, "0xFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF"));
+          if(game)
+          {
+            const tokenPerSecond = await farm.contract.getGamePerSecondInPool(farm.id, account);
+            const tokenPerHour = tokenPerSecond.mul(60).mul(60);
+            const totalRewardTokensPerDay = tokenPerHour.mul(24);
+            const totalRewardTokensPerYear = totalRewardTokensPerDay.mul(365);
+            const totalStakingTokensInPool = _poolInfo.totalDeposited;
+            if ((await game.oracle()) !== "0x0000000000000000000000000000000000000000") {
+              const _oraclePrice = await game.getPrice();
+              setOraclePrice(_oraclePrice);
+              const totalRewardPricePerDay =
+                  totalRewardTokensPerDay.mul(_oraclePrice).div(BigNumber.from(10).pow(18));
+              const totalRewardPricePerYear =
+                  totalRewardTokensPerYear.mul(_oraclePrice).div(BigNumber.from(10).pow(18));
+
+              if(lpToken) {
+                const totalSupply = await lpToken.totalSupply();
+                //Get amount of tokenA
+                let otherToken = await lpToken.token0();
+                if(otherToken.toLowerCase() == game.address.toLowerCase()) otherToken = await lpToken.token1();
+
+                // const totalSupply = await lpToken.totalSupply();
+                // //Get amount of tokenA
+                // const tokenSupply = await game.balanceOf(lpToken.address);
+                // const priceOfToken = _oraclePrice;
+                // const tokenInLP = tokenSupply.mul(BigNumber.from(10).pow(18)).div(totalSupply);
+                // const _depositPrice = (priceOfToken.mul(tokenInLP).mul(2).div(BigNumber.from(10).pow(18))); //We multiply by 2 since half the price of the lp token is the price of each piece of the pair. So twice gives the total.
+
+                const tokenSupply = await new Contract(otherToken, ERC20_ABI, library).balanceOf(lpToken.address);
+                const priceOfToken = BigNumber.from(10).pow(18); //Lazy... USDC = $1
+                const tokenInLP = tokenSupply.mul(BigNumber.from(10).pow(12)).mul(BigNumber.from(10).pow(18)).div(totalSupply);
+                const _depositPrice = (priceOfToken.mul(tokenInLP).mul(2).div(BigNumber.from(10).pow(18))); //We multiply by 2 since half the price of the lp token is the price of each piece of the pair. So twice gives the total.
+                setDepositPrice(_depositPrice);
+                const totalStakingPriceInPool =
+                    totalStakingTokensInPool.mul(_depositPrice).div(BigNumber.from(10).pow(18))
+                const dailyAPR = (+ethers.utils.formatEther(totalRewardPricePerDay) / +ethers.utils.formatEther(totalStakingPriceInPool)) * 100;
+                const yearlyAPR = (+ethers.utils.formatEther(totalRewardPricePerYear) / +ethers.utils.formatEther(totalStakingPriceInPool)) * 100;
+                setDpr(dailyAPR);
+                setApr(yearlyAPR);
+              }
+            }
+            {
+              if(_poolInfo.totalDeposited.eq(0)) return; //Temp
+              const tokensPerSecond = await farm.contract.getPersonalGamePerSecondInPool(farm.id, account);
+              const _tokensPerDay = tokensPerSecond.mul(60).mul(60).mul(24);
+              setTokensPerDay(_tokensPerDay);
+              setTokensPerYear(_tokensPerDay.mul(365));
+            }
+          }
         }
-        <Flex flexDirection="row" justifyContent="center" alignItems="center">
+        // return tokenContract
+        //     .approve(spender, useExact ? amountToApprove.raw.toString() : MaxUint256, {
+        //       gasLimit: calculateGasMargin(estimatedGas),
+        //     })
+        //     .then((response: TransactionResponse) => {
+        //       addTransaction(response, {
+        //         summary: `Approve ${amountToApprove.currency.symbol}`,
+        //         approval: { tokenAddress: token.address, spender },
+        //       })
+        //     })
+        //     .catch((error: Error) => {
+        //       console.error('Failed to approve token', error)
+        //       throw error
+        //     })
+    }
+    effect();
+    return () => { mountedRef.current = false }
+  }, [setUserInfo, setPoolInfo, setPendingGame, setToken, setTokenAmount, farm, account, game, lpToken, refreshKey]);
+
+  return (<div className="boxed">
+    <CardBody style={{textAlign: 'center'}}>
+    <TokenSymbolWrapper>
+      <TokenSymbol symbol="MASTER" />
+    </TokenSymbolWrapper>
+    <CardTitle>MASTER Rewards Pool</CardTitle>
+    <Text textAlign="center" marginBottom="40px" fontSize="14px">  
+      Lock your GAME-USDC LP tokens & earn extra platform revenue in Passive GAME rewards.
+    </Text>
+
+    <CardMeta style={{marginBottom:'40px'}}>
+      <GridWrap>
+        <GridItem width="lg" mobile>
+          <Text color="var(--extra-color-2)" fontSize="20px">{apr.toFixed(2)}%</Text>
+          <Text className="textGlow" fontSize="14px">Yearly Rewards</Text>
+        </GridItem>
+        <GridItem width="lg" mobile>
+          <Text color="var(--extra-color-2)" fontSize="20px">{dpr.toFixed(2)}%</Text>
+          <Text className="textGlow" fontSize="14px">Daily Rewards</Text>
+        </GridItem>
+      </GridWrap>
+    </CardMeta>
+
+        <Text fontSize="36px" fontWeight="700" lineHeight="1">{formatEther4(userInfo?.depositedGameUsdc ?? 0)}</Text>
+            <Text color="var(--extra-color-2)" fontSize="20px">
+            ${formatEther2(((userInfo?.lockedAmount ?? BigNumber.from(0)))
+              .mul(depositPrice).div(BigNumber.from(10).pow(18)))}
+          </Text>
+            <Text className="textGlow" fontSize="14px" marginBottom='30px'>
+              GAME-USDC LP Tokens Staked
+          </Text>
+          <Text fontSize="36px" fontWeight="700" lineHeight="1">{formatEther4(balance)}</Text>
+          <Text className="textGlow" fontSize="14px" marginBottom='30px'>
+              MASTER Tokens Deposited
+          </Text>
+
+        {(balance.gt(0) &&
+
+          <Text fontSize="14px" marginBottom="30px">
+            Available to withdraw after lock period ends
+            <Question
+              text={`Deposit Date: ${(new Date(userInfo.lockFromTime.toNumber() * 1000)).toString()}
+Withdraw Date: ${(new Date(userInfo.lockFromTime.add(userInfo.lockTime).toNumber() * 1000)).toString()}`} />
+          </Text>
+        )}
+        <div style={{marginTop: 'auto'}}>
+          <GridWrap>
+            <GridItem width="lg" mobile>
           {approvalState !== ApprovalState.APPROVED ?
-              (<Button my="10px" mx="5px" onClick={approveCallback}
+              (<Button width="100%" onClick={approveCallback}
                        disabled={approvalState !== ApprovalState.NOT_APPROVED || approvalSubmitted}
                        variant={
                          //@ts-ignore
@@ -876,14 +1046,51 @@ const MasterRewardCard = ({ tokenAddress } : MasterRewardProps) => {
                              ? 'success' : 'primary'}>
                 Approve
               </Button>) :
-              (<Button disabled={!account || !tokenAddress} onClick={onPresentDeposit} my="10px" mx="5px">
+              (<Button disabled={!account || !tokenAddress} onClick={onPresentDeposit} width="100%">
                 Deposit
               </Button>)}
-          <Button disabled={!userInfo || balance.eq(0) || userInfo.lockFromTime.add(userInfo.lockTime).gt(Math.ceil(new Date().getTime() / 1000))} onClick={onWithdraw} my="10px" mx="5px">
+              </GridItem>
+              <GridItem width="lg" mobile>
+          <Button disabled={!userInfo || balance.eq(0) || userInfo.lockFromTime.add(userInfo.lockTime).gt(Math.ceil(new Date().getTime() / 1000))} onClick={onWithdraw} width="100%">
             Withdraw
           </Button>
-        </Flex>
-      </Grid>
-    </Text>
-  </LightCard>);
+          </GridItem>
+          </GridWrap>
+        </div>
+        </CardBody>
+  </div>);
 }
+
+
+const CardTitle = styled(Text)`
+    font-size: 20px;
+    font-family: "kallisto",sans-serif;
+    font-weight: 700;
+    margin-bottom: 20px;
+
+    span {
+        font-family: "kallisto",sans-serif;
+        font-weight: 700;
+        margin-right: 10px;
+    }
+`;
+
+const CardMeta = styled.div`
+  position: relative;
+  margin-bottom: 20px;
+
+    &:before {
+      content: "";
+      position: absolute;
+      width: 2px;
+      height: 100%;
+      background: #2ff0dd;
+      background: var(--extra-color-1);
+      left: 50%;
+      bottom: 0;
+      -webkit-transform: translateX(-50%);
+      transform: translateX(-50%);
+      box-shadow: 0 0 5px #2ff0dd;
+      box-shadow: 0 0 5px var(--extra-color-1);
+    }
+`;

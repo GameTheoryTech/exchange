@@ -39,4 +39,43 @@ function Nav({ activeIndex = 0 }: { activeIndex?: number }) {
   )
 }
 
+export function SwapNav({ activeIndex = 0 }: { activeIndex?: number }) {
+  const TranslateString = useI18n()
+
+  return (
+    <StyledNav>
+      <ButtonMenu activeIndex={activeIndex} scale="sm">
+        <ButtonMenuItem id="swap-nav-link" to="/swap" as={Link}>
+          {TranslateString(1142, 'Swap')}
+        </ButtonMenuItem>
+        <ButtonMenuItem id="pool-nav-link" to="/pool" as={Link}>
+          {TranslateString(262, 'Liquidity')}
+        </ButtonMenuItem>
+      </ButtonMenu>
+    </StyledNav>
+  )
+}
+
+export function EarnNav({ activeIndex = 0 }: { activeIndex?: number }) {
+
+  return (
+    <StyledNav>
+      <ButtonMenu activeIndex={activeIndex} scale="sm">
+        <ButtonMenuItem id="farms-nav-link" to="/farms" as={Link}>
+          Pools
+        </ButtonMenuItem>
+        <ButtonMenuItem id="bonds-nav-link" to="/rewards" as={Link}>
+          Rewards
+        </ButtonMenuItem>
+        <ButtonMenuItem id="bonds-nav-link" to="/bonds" as={Link}>
+          Bonds
+  </ButtonMenuItem>
+        <ButtonMenuItem id="redeem-nav-link" to="/redeem" as={Link}>
+          Redeem
+        </ButtonMenuItem>
+      </ButtonMenu>
+    </StyledNav>
+  )
+}
+
 export default Nav

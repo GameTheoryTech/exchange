@@ -26,13 +26,21 @@ const getBoxShadow = ({ isActive, isSuccess, isWarning, theme }: StyledCardProps
 };
 
 const StyledCard = styled.div<StyledCardProps>`
-  background-color: ${({ theme }) => theme.card.background};
-  border: ${({ theme }) => theme.card.boxShadow};
-  border-radius: ${({ theme }) => theme.radii.card};
-  box-shadow: ${getBoxShadow};
-  color: ${({ theme, isDisabled }) => theme.colors[isDisabled ? "textDisabled" : "text"]};
+  border: 2px solid var(--extra-color-1);
+  border-radius: 20px;
+  box-shadow: 0 0 5px var(--extra-color-1);
+  backdrop-filter: blur(15px);
   overflow: hidden;
   position: relative;
+
+  &.link {
+    cursor: pointer;
+    transition: box-shadow 0.2s ease-out;
+
+    &:hover {
+      box-shadow: 0px 0px 20px 0px var(--extra-color-1);
+    }
+  }
 
   ${space}
 `;
