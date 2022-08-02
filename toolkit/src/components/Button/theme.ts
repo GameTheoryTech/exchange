@@ -2,17 +2,15 @@ import { scales, variants } from "./types";
 
 export const scaleVariants = {
   [scales.MD]: {
-    height: "48px",
-    padding: "0 24px",
+    padding: "10px 30px",
+    fontSize: "16px",
   },
   [scales.SM]: {
-    height: "32px",
-    padding: "0 16px",
+    padding: "10px 30px",
+    fontSize: "14px",
   },
   [scales.XS]: {
-    height: "20px",
-    fontSize: "12px",
-    padding: "0 8px",
+    fontSize: "12px"
   },
 };
 
@@ -37,8 +35,12 @@ export const styleVariants = {
     color: "primary",
   },
   [variants.SUBTLE]: {
-    backgroundColor: "textSubtle",
-    color: "backgroundAlt",
+    backgroundColor: "rgba(0, 0, 0, 0.4)",
+    boxShadow: "none",
+    color: "primary",
+    '&:hover': {
+      backgroundColor: "rgba(0, 0, 0, 0.4)!important",
+    }
   },
   [variants.DANGER]: {
     backgroundColor: "failure",
@@ -52,5 +54,13 @@ export const styleVariants = {
     backgroundColor: "transparent",
     color: "primary",
     boxShadow: "none",
+    textShadow: "none",
+    padding: 0,
+    paddingRight: '10px',
+    paddingTop: '5px',
+    '&:hover': {
+      backgroundColor: "transparent!important",
+      textShadow: "var(--accent) 0px 0px 20px",
+    }
   },
 };

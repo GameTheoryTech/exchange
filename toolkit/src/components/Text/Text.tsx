@@ -20,6 +20,7 @@ const Text = styled.div<TextProps>`
   font-size: ${getFontSize};
   font-weight: ${({ bold }) => (bold ? 600 : 400)};
   line-height: 1.5;
+  ${({ heading }) => heading && `font-family: "kallisto", sans-serif`};
   ${({ textTransform }) => textTransform && `text-transform: ${textTransform};`}
   ${({ ellipsis }) =>
     ellipsis &&
@@ -36,6 +37,7 @@ Text.defaultProps = {
   color: "text",
   small: false,
   ellipsis: false,
+  heading: false,
 };
 
 export default Text;

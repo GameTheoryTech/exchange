@@ -2,7 +2,7 @@ import React, {useCallback, useContext, useEffect, useMemo, useRef, useState} fr
 import styled, { ThemeContext } from 'styled-components'
 import {currencyEquals, ETHER, Pair, Token, TokenAmount, Trade} from '@gametheory/sdk'
 import {Box, Button, CardBody, ChevronDownIcon, Flex, Grid, Modal, Slider, Text, useModal} from '@gametheory/uikit'
-import CardNav from 'components/CardNav'
+import {EarnNav} from 'components/CardNav'
 import Question from 'components/QuestionHelper'
 import FullPositionCard from 'components/PositionCard'
 import { useTokenBalancesWithLoadingIndicator } from 'state/wallet/hooks'
@@ -16,7 +16,7 @@ import {ApprovalState, useApproveCallback} from "../../hooks/useApproveCallback"
 import {Currency, CurrencyAmount} from "@gametheory/sdk";
 import {useActiveWeb3React} from "../../hooks";
 import AppBody from "../AppBody";
-import PageHeader from "../../components/PageHeader";
+import PageHeader, {PageTitle} from "../../components/PageHeader";
 import {Link} from "react-router-dom";
 import MasterChefABI from '../../constants/abis/MasterChef.json';
 import MasterABI from '../../constants/abis/master.json';
@@ -354,7 +354,10 @@ export default function Bonds() {
 
   return (
     <Container>
-      <CardNav activeIndex={4} />
+      <PageTitle style={{marginBottom: '40px'}}>
+        Bonds
+      </PageTitle>
+      <EarnNav activeIndex={2} />
       <AppBody>
         <PageHeader
           title={"Bonds"}

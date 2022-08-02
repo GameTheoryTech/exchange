@@ -12,18 +12,30 @@ interface PageHeaderProps {
 }
 
 const StyledPageHeader = styled.div`
-  border-bottom: 1px solid ${({ theme }) => theme.colors.cardBorder};
   padding: 24px;
+  padding-bottom: 0;
 `
 
 const Details = styled.div`
   flex: 1;
+  text-align: center;
 `
+
+export const PageTitle = styled(Text)`
+font-family: "kallisto",sans-serif;
+font-weight: 500;
+font-size: 40px;
+text-align: center;
+color: var(--accent);
+text-Shadow: 0px 0px 20px var(--accent);
+
+@media (max-width: 767px) {
+    font-size: 30px;
+}
+`;
 
 const PageHeader = ({ title, description, children }: PageHeaderProps) => {
   const TranslateString = useI18n()
-  const [onPresentSettings] = useModal(<SettingsModal translateString={TranslateString} />)
-  const [onPresentRecentTransactions] = useModal(<RecentTransactionsModal translateString={TranslateString} />)
 
   return (
     <StyledPageHeader>
@@ -35,19 +47,10 @@ const PageHeader = ({ title, description, children }: PageHeaderProps) => {
               {description}
             </Text>
           )}
+          {children && <Text mt="16px">{children}</Text>}
         </Details>
-        <IconButton variant="text" onClick={onPresentSettings} title={TranslateString(1200, 'Settings')}>
-          <TuneIcon width="24px" color="currentColor" />
-        </IconButton>
-        <IconButton
-          variant="text"
-          onClick={onPresentRecentTransactions}
-          title={TranslateString(1202, 'Recent transactions')}
-        >
-          <HistoryIcon width="24px" color="currentColor" />
-        </IconButton>
+
       </Flex>
-      {children && <Text mt="16px">{children}</Text>}
     </StyledPageHeader>
   )
 }

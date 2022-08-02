@@ -15,7 +15,8 @@ const Tabs = styled.div`
 `
 
 const ActiveText = styled.div`
-  font-weight: 500;
+font-family: "kallisto",sans-serif;
+font-weight: 600;
   font-size: 20px;
 `
 

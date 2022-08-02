@@ -4,7 +4,7 @@ import { Card } from '@gametheory/uikit'
 
 export const BodyWrapper = styled(Card)`
   position: relative;
-  max-width: 436px;
+  max-width: 375px;
   width: 100%;
   z-index: 5;
 `

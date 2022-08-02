@@ -40,6 +40,11 @@ import useENS from "../../hooks/useENS";
 import {useCurrencyBalances} from "../../state/wallet/hooks";
 import {useAllCommonPairs, useTradeExactIn, useTradeExactOut} from "../../hooks/Trades";
 import {tryParseAmount} from "../../state/swap/hooks";
+import { PageTitle } from 'components/PageHeader'
+
+import { ButtonMenu, ButtonMenuItem } from '@gametheory/uikit';
+import { Link } from 'react-router-dom';
+import styled from 'styled-components';
 
 export default function AddLiquidity({
   match: {
@@ -358,9 +363,25 @@ export default function AddLiquidity({
 
   const cannotBuybackGame = noLiquidity && !!currencyA && !!currencyB && !currencyEquals(currencyA, GAME) && !currencyEquals(currencyB, GAME) && desiredRouteA.length <= 1 && desiredRouteB.length <= 1;
 
+  const StyledNav = styled.div`
+margin-bottom: 40px;
+`;
+
   return (
     <Container>
-      <CardNav activeIndex={1} />
+      <PageTitle style={{marginBottom: '40px'}}>
+      Celestial Exchange
+      </PageTitle>
+      <StyledNav>
+      <ButtonMenu activeIndex={1} scale="sm">
+        <ButtonMenuItem id="swap-nav-link" to="/swap" as={Link}>
+          {TranslateString(1142, 'Swap')}
+        </ButtonMenuItem>
+        <ButtonMenuItem id="pool-nav-link" to="/pool" as={Link}>
+          {TranslateString(262, 'Liquidity')}
+        </ButtonMenuItem>
+      </ButtonMenu>
+      </StyledNav>
       <AppBody>
         <AddRemoveTabs adding />
         <Wrapper>
@@ -516,7 +537,7 @@ export default function AddLiquidity({
         </Wrapper>
       </AppBody>
       {pair && !noLiquidity && pairState !== PairState.INVALID ? (
-        <AutoColumn style={{ minWidth: '20rem', marginTop: '1rem' }}>
+        <AutoColumn style={{ width: '100%',maxWidth: '375px', marginTop: '20px' }}>
           <MinimalPositionCard showUnwrapped={oneCurrencyIsWAVAX} pair={pair} />
         </AutoColumn>
       ) : null}

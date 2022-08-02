@@ -18,7 +18,8 @@ const StyledDialogOverlay = styled(AnimatedDialogOverlay)`
     align-items: center;
     justify-content: center;
 
-    background-color: rgba(0, 0, 0, 0.3);
+    background-color: rgba(10,16,28,0.8);
+    backdrop-filter: blur(5px);
   }
 `
 
@@ -32,9 +33,7 @@ const StyledDialogContent = styled(({ minHeight, maxHeight, mobile, isOpen, ...r
 })`
   &[data-reach-dialog-content] {
     margin: 0 0 2rem 0;
-    border: 1px solid ${({ theme }) => theme.colors.invertedContrast};
-    background-color: ${({ theme }) => theme.colors.invertedContrast};
-    box-shadow: 0 4px 8px 0 ${transparentize(0.95, '#191326')};
+    background-color: #212e4d;
     padding: 0px;
     width: 80%;
     overflow: hidden;

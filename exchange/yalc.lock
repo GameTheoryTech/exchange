@@ -2,7 +2,7 @@
   "version": "v1",
   "packages": {
     "@gametheory/uikit": {
-      "signature": "c371ee66f5db4ed12d29cd250a5dff3a"
+      "signature": "1cd4d8715ec046266fbae95c59929124"
     },
     "@gametheory/sdk": {
       "signature": "eb83aeee1a2a43430bf33f72b3c18cb0"

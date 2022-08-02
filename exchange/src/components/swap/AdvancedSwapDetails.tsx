@@ -25,7 +25,7 @@ function TradeSummary({ trade, allowedSlippage }: { trade: Trade; allowedSlippag
       <CardBody>
         <RowBetween>
           <RowFixed>
-            <Text fontSize="14px">
+            <Text className="textGlow" fontSize="14px">
               {isExactIn ? TranslateString(1210, 'Minimum received') : TranslateString(220, 'Maximum sold')}
             </Text>
             <QuestionHelper
@@ -47,7 +47,7 @@ function TradeSummary({ trade, allowedSlippage }: { trade: Trade; allowedSlippag
         </RowBetween>
         <RowBetween>
           <RowFixed>
-            <Text fontSize='14px'>{TranslateString(226, 'Price Impact')}</Text>
+            <Text className="textGlow" fontSize='14px'>{TranslateString(226, 'Price Impact')}</Text>
             <QuestionHelper
               text={TranslateString(
                 224,
@@ -60,7 +60,7 @@ function TradeSummary({ trade, allowedSlippage }: { trade: Trade; allowedSlippag
 
         <RowBetween>
           <RowFixed>
-            <Text fontSize="14px">{TranslateString(228, 'Liquidity Provider Fee')}</Text>
+            <Text className="textGlow" fontSize="14px">{TranslateString(228, 'Liquidity Provider Fee')}</Text>
             <QuestionHelper
                 text={'For each trade, a 0.25% fee is paid. 0.2% goes to liquidity providers and 0.05% goes to buyback (1/3), dev (1/4), and revenue (5/12).'}
             />

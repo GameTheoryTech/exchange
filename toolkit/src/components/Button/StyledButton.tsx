@@ -17,6 +17,8 @@ const getDisabledStyles = ({ $isLoading, theme }: TransientButtonProps) => {
       &:disabled,
       &.pancake-button--disabled {
         cursor: not-allowed;
+        text-shadow: none;
+        box-shadow: none;
       }
     `;
   }
@@ -24,11 +26,11 @@ const getDisabledStyles = ({ $isLoading, theme }: TransientButtonProps) => {
   return `
     &:disabled,
     &.pancake-button--disabled {
-      background-color: ${theme.colors.backgroundDisabled};
-      border-color: ${theme.colors.backgroundDisabled};
+      background-color: rgba(0,0,0,0.4);
       box-shadow: none;
       color: ${theme.colors.textDisabled};
       cursor: not-allowed;
+      text-shadow: none;
     }
   `;
 };
@@ -46,22 +48,24 @@ const getOpacity = ({ $isLoading = false }: TransientButtonProps) => {
 const StyledButton = styled.button<BaseButtonProps>`
   align-items: center;
   border: 0;
-  border-radius: 16px;
-  box-shadow: 0px -1px 0px 0px rgba(14, 14, 44, 0.4) inset;
   cursor: pointer;
   display: inline-flex;
   font-family: inherit;
-  font-size: 16px;
-  font-weight: 600;
   justify-content: center;
   letter-spacing: 0.03em;
-  line-height: 1;
-  opacity: ${getOpacity};
+  line-height: 1.75;
   outline: 0;
-  transition: background-color 0.2s, opacity 0.2s;
+  border-radius: 20px;
+  font-weight: 700;
+  box-shadow: 0px 0px 20px 0px var(--accent);
+  text-shadow: rgb(255,255,255) 0px 0px 20px;
+  transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, border-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  opacity: ${getOpacity};
 
   &:hover:not(:disabled):not(.pancake-button--disabled):not(.pancake-button--disabled):not(:active) {
-    opacity: 0.65;
+    text-decoration: none;
+    background-color: rgb(178, 22, 156);
+    box-shadow: rgba(0,0,0,.2) 0px 2px 4px -1px, rgba(0,0,0,.14) 0px 4px 5px 0px, rgba(0,0,0,.12) 0px 1px 10px 0px;
   }
 
   &:active:not(:disabled):not(.pancake-button--disabled):not(.pancake-button--disabled) {

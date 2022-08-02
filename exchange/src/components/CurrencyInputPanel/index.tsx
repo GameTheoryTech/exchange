@@ -36,7 +36,7 @@ const CurrencySelect = styled.button<{ selected: boolean }>`
   padding: 0 0.5rem;
   :focus,
   :hover {
-    background-color: ${({ theme }) => darken(0.05, theme.colors.input)};
+    background-color: rgba(0,0,0,0.4);
   }
 `
 const LabelRow = styled.div`
@@ -62,13 +62,11 @@ const InputPanel = styled.div<{ hideInput?: boolean }>`
   flex-flow: column nowrap;
   position: relative;
   border-radius: ${({ hideInput }) => (hideInput ? '8px' : '20px')};
-  background-color: ${({ theme }) => theme.colors.background};
+  background-color: rgba(0,0,0,0.4);
   z-index: 1;
 `
 const Container = styled.div<{ hideInput: boolean }>`
-  border-radius: 16px;
-  background-color: ${({ theme }) => theme.colors.input};
-  box-shadow: ${({ theme }) => theme.shadows.inset};
+  
 `
 interface CurrencyInputPanelProps {
   value: string
@@ -121,20 +119,13 @@ export default function CurrencyInputPanel({
         {!hideInput && (
           <LabelRow>
             <RowBetween>
-              <Text fontSize="14px">{translatedLabel}</Text>
+              <Text className="textGlow" fontSize="14px">{translatedLabel}</Text>
               {account && label === 'From' && !!currency && currencyEquals(currency, GAME) && (
-                <Text onClick={onMax} fontSize="14px" style={{ display: 'inline', cursor: 'pointer' }}>
+                <Text className="textGlow" onClick={onMax} fontSize="14px" style={{ display: 'inline', cursor: 'pointer' }}>
                   {!hideBalance && !!currency && selectedCurrencyBalance
                     ? `Sell Tax: ${parseFloat(ethers.utils.formatUnits(sellTax, 2)).toFixed(2)}%`
                     : ' -'}
                 </Text>
-              )}
-              {account && (
-                  <Text onClick={onMax} fontSize="14px" style={{ display: 'inline', cursor: 'pointer' }}>
-                    {!hideBalance && !!currency && selectedCurrencyBalance
-                        ? `Balance: ${balanceOverride ? balanceOverride : selectedCurrencyBalance?.toSignificant(6)}`
-                        : ' -'}
-                  </Text>
               )}
             </RowBetween>
           </LabelRow>
@@ -190,6 +181,24 @@ export default function CurrencyInputPanel({
             </Aligner>
           </CurrencySelect>
         </InputRow>
+        {!hideInput && (
+          <LabelRow style={{paddingTop: '0', paddingBottom: '1rem'}}>
+            <RowBetween>
+              {account && (
+                <>
+                  <Text className="textGlow" onClick={onMax} fontSize="14px" style={{ display: 'inline' }}>
+                    Balance
+                  </Text>
+                  <Text className="textGlow" fontSize="14px" style={{ display: 'inline', cursor: 'pointer' }}>
+                  {!hideBalance && !!currency && selectedCurrencyBalance
+                      ? `${balanceOverride ? balanceOverride : selectedCurrencyBalance?.toSignificant(6)}`
+                      : ' -'}
+                </Text>
+                </>
+              )}
+            </RowBetween>
+          </LabelRow>
+        )}
       </Container>
       {!disableCurrencySelect && onCurrencySelect && (
         <CurrencySearchModal

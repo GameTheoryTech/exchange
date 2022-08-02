@@ -13,7 +13,7 @@ const QuestionWrapper = styled.div`
   outline: none;
   cursor: default;
   border-radius: 36px;
-  background-color: ${({ theme }) => theme.colors.invertedContrast};
+  background-color: rgba(0,0,0,0.4);
   color: ${({ theme }) => theme.colors.textSubtle};
 
   :hover,

@@ -2,6 +2,29 @@ import React from "react";
 import Button from "../../../components/Button/Button";
 import { useWalletModal } from "../../WalletModal";
 import { Login } from "../../WalletModal/types";
+import { WalletIcon } from "../icons";
+import styled from "styled-components";
+
+const StyledButton = styled(Button)`
+  span {
+    margin-left: 10px;
+  }
+
+  svg {
+    position: relative;
+    top: -2.5px;
+    height: 24px;
+  }
+
+  @media (max-width: 767px) {
+    padding: 10px 0;
+    min-width: 64px;
+
+    span {
+      display: none;
+    }
+  }
+`;
 
 interface Props {
   account?: string;
@@ -15,24 +38,25 @@ const UserBlock: React.FC<Props> = ({ account, login, logout }) => {
   return (
     <div>
       {account ? (
-        <Button
+        <StyledButton
           scale="sm"
-          variant="tertiary"
           onClick={() => {
             onPresentAccountModal();
           }}
         >
-          {accountEllipsis}
-        </Button>
+          <WalletIcon />
+          <span>{accountEllipsis}</span>
+        </StyledButton>
       ) : (
-        <Button
+        <StyledButton
           scale="sm"
           onClick={() => {
             onPresentConnectModal();
           }}
         >
-          Connect
-        </Button>
+          <WalletIcon />
+          <span>Connect</span>
+        </StyledButton>
       )}
     </div>
   );

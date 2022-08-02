@@ -8,7 +8,6 @@ import Card, { GreyCard } from 'components/Card'
 import { AutoColumn } from 'components/Column'
 import ConfirmSwapModal from 'components/swap/ConfirmSwapModal'
 import CurrencyInputPanel from 'components/CurrencyInputPanel'
-import CardNav from 'components/CardNav'
 import { AutoRow, RowBetween } from 'components/Row'
 import AdvancedSwapDetailsDropdown from 'components/swap/AdvancedSwapDetailsDropdown'
 import confirmPriceImpactWithoutFee from 'components/swap/confirmPriceImpactWithoutFee'
@@ -34,11 +33,12 @@ import { maxAmountSpend } from 'utils/maxAmountSpend'
 import { computeTradePriceBreakdown, warningSeverity } from 'utils/prices'
 import Loader from 'components/Loader'
 import useI18n from 'hooks/useI18n'
-import PageHeader from 'components/PageHeader'
+import PageHeader, {PageTitle} from 'components/PageHeader'
 import ConnectWalletButton from 'components/ConnectWalletButton'
 import {ethers} from "ethers";
 import AppBody from '../AppBody'
 import {useSellTax} from "../../state/wallet/hooks";
+import { SwapNav } from 'components/CardNav'
 
 const StyledLink = styled(Link)`
   display: inline;
@@ -306,12 +306,18 @@ const Swap = () => {
 
   return (
     <Container>
+      <PageTitle >
+        Celestial Exchange
+      </PageTitle>
+      <Text textAlign={'center'} marginBottom="40px">
+      Buy and sell GAME and create liquidity pool tokens.
+      </Text>
+      <SwapNav activeIndex={0} />
       <TokenWarningModal
         isOpen={urlLoadedTokens.length > 0 && !dismissTokenWarning && !urlLoadedTokens.every(isTrustedToken)}
         tokens={urlLoadedTokens}
         onConfirm={handleConfirmTokenWarning}
       />
-      <CardNav />
       <AppBody>
         <Wrapper id="swap-page">
           <ConfirmSwapModal
@@ -353,7 +359,7 @@ const Swap = () => {
                 <AutoRow justify={isExpertMode ? 'space-between' : 'center'} style={{ padding: '0 1rem' }}>
                   <ArrowWrapper clickable>
                     <IconButton
-                      variant="tertiary"
+                      variant="subtle"
                       onClick={() => {
                         setApprovalSubmitted(false) // reset 2 step UI for approvals
                         onSwitchTokens()
@@ -361,7 +367,7 @@ const Swap = () => {
                       style={{ borderRadius: '50%' }}
                       scale="sm"
                     >
-                      <ArrowDownIcon color="primary" width="24px" />
+                      <ArrowDownIcon width="24px" />
                     </IconButton>
                   </ArrowWrapper>
                   {recipient === null && !showWrap && isExpertMode ? (

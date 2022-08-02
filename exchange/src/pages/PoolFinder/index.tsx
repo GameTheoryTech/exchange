@@ -18,6 +18,10 @@ import { currencyId } from 'utils/currencyId'
 import useI18n from 'hooks/useI18n'
 import AppBody from '../AppBody'
 import { Dots } from '../Pool/styleds'
+import { ButtonMenu, ButtonMenuItem } from '@gametheory/uikit'
+import { Link } from 'react-router-dom'
+import styled from 'styled-components'
+import { PageTitle } from 'components/PageHeader'
 
 enum Fields {
   TOKEN0 = 0,
@@ -80,9 +84,25 @@ export default function PoolFinder() {
     </LightCard>
   )
 
+  const StyledNav = styled.div`
+  margin-bottom: 40px;
+`;
+
   return (
     <Container>
-      <CardNav activeIndex={1} />
+      <PageTitle style={{marginBottom: '40px'}}>
+      Celestial Exchange
+      </PageTitle>
+      <StyledNav>
+      <ButtonMenu activeIndex={1} scale="sm">
+        <ButtonMenuItem id="swap-nav-link" to="/swap" as={Link}>
+          {TranslateString(1142, 'Swap')}
+        </ButtonMenuItem>
+        <ButtonMenuItem id="pool-nav-link" to="/pool" as={Link}>
+          {TranslateString(262, 'Liquidity')}
+        </ButtonMenuItem>
+      </ButtonMenu>
+      </StyledNav>
       <AppBody>
         <FindPoolTabs />
         <CardBody>

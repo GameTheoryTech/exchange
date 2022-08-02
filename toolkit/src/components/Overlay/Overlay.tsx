@@ -7,9 +7,9 @@ const Overlay = styled.div.attrs({ role: "presentation" })<OverlayProps>`
   left: 0px;
   width: 100%;
   height: 100%;
-  background-color: ${({ theme }) => theme.colors.overlay};
-  transition: opacity 0.4s;
-  opacity: ${({ show }) => (show ? 0.6 : 0)};
+  background-color: rgba(10,16,28,0.8);
+  backdrop-filter: blur(5px);
+  opacity: ${({ show }) => (show ? 1 : 0)};
   z-index: ${({ zIndex }) => zIndex};
   pointer-events: ${({ show }) => (show ? "initial" : "none")};
 `;
