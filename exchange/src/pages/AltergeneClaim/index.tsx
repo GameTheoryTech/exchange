@@ -183,11 +183,11 @@ const ClaimModal = ({ onDismiss = defaultOnDismiss, contract, account, nftAddres
     return () => { mountedRef.current = false }
   }, [setApproved, setOwned, account, contract, nftId, refreshKey]);
 
-  const onClaim = useTransactionCallback(contract, "claimCredits", `Claim NFT ID ${nftId} for 5 Altergene Credits.`, nftAddress, nftId ? nftId : "0");
+  const onClaim = useTransactionCallback(contract, "claimCredits", `Claim NFT ID ${nftId} for Altergene Credits.`, nftAddress, nftId ? nftId : "0");
 
   return (
       <Modal title="Claim" onDismiss={onDismiss}>
-        <Text>Nft Id</Text>
+        <Text>Type your NFT ID here</Text>
         <InputPanel id="claim-input-token">
           <InputContainer hideInput={false}>
             <InputRow selected={true}>
@@ -214,13 +214,22 @@ export default function AltergeneClaim() {
   const theme = useContext(ThemeContext)
   const nftAddress = "0xBbD9786f178e2AEBb4b4329c41A821921ca05339"
   const nftAddress2 = "0xB4e8ae04dDA4509f4246D01e2801b98484D40134"
+  const nftAddress3 = "0xC581CC4582AbD5aA4aB5B6D1F27F71D13518c9dD"
+  const nftAddress4 = "0x05C777AB4E4aA3B48Fd6FDE9D391e1eA2BD92887"
+  const nftAddress5 = "0x4B3903952A25961B9E66216186Efd9B21903AEd3"
   const nftContract = useContract(nftAddress, ERC721_ABI, true);
   const nftContract2 = useContract(nftAddress2, ERC721_ABI, true);
+  const nftContract3 = useContract(nftAddress3, ERC721_ABI, true);
+  const nftContract4 = useContract(nftAddress4, ERC721_ABI, true);
+  const nftContract5 = useContract(nftAddress5, ERC721_ABI, true);
   const { account, library } = useActiveWeb3React();
   const redeemablesIsLoading = false;
   const [contract, setContract] = useState(new Contract("0xfccFA7C523A91d3E6E72E0Fa68Df01E4aE1e6173", AltergeneABI, library));
   const [maxNum, setMaxNum] = useState(BigNumber.from(0));
   const [maxNum2, setMaxNum2] = useState(BigNumber.from(0));
+  const [maxNum3, setMaxNum3] = useState(BigNumber.from(0));
+  const [maxNum4, setMaxNum4] = useState(BigNumber.from(0));
+  const [maxNum5, setMaxNum5] = useState(BigNumber.from(0));
   const mountedRef = useRef(true);
   useEffect(() => {
     const effect = async () =>
@@ -230,15 +239,25 @@ export default function AltergeneClaim() {
       else setContract(_contract);
       if(nftContract) setMaxNum(await nftContract.balanceOf(account));
       if(nftContract2) setMaxNum2(await nftContract2.balanceOf(account));
+      if(nftContract3) setMaxNum3(await nftContract3.balanceOf(account));
+      if(nftContract4) setMaxNum4(await nftContract4.balanceOf(account));
+      if(nftContract5) setMaxNum5(await nftContract5.balanceOf(account));
     }
     effect();
     return () => { mountedRef.current = false }
   }, [account, library, nftContract, setContract, setMaxNum]);
 
   const [onPresentClaim] = useModal(<ClaimModal contract={contract} account={account} nftAddress={nftAddress} />);
-  const onClaim = useTransactionCallback(contract, "claimAll", `Claim all owned NFTs for 5 Altergene Credits each.`, nftAddress, 0, maxNum);
+  const onClaim = useTransactionCallback(contract, "claimAll", `Claim all owned NFTs for Altergene Credits each.`, nftAddress, 0, maxNum);
   const [onPresentClaim2] = useModal(<ClaimModal contract={contract} account={account} nftAddress={nftAddress2} />);
   //const onClaim2 = useTransactionCallback(contract, "claimAll", `Claim all owned NFTs for 5 Altergene Credits each.`, nftAddress2, 0, maxNum2);
+  const [onPresentClaim3] = useModal(<ClaimModal contract={contract} account={account} nftAddress={nftAddress3} />);
+  const onClaim3 = useTransactionCallback(contract, "claimAll", `Claim all owned NFTs for Altergene Credits each.`, nftAddress3, 0, maxNum3);
+  const [onPresentClaim4] = useModal(<ClaimModal contract={contract} account={account} nftAddress={nftAddress4} />);
+  const onClaim4 = useTransactionCallback(contract, "claimAll", `Claim all owned NFTs for Altergene Credits each.`, nftAddress4, 0, maxNum4);
+  const [onPresentClaim5] = useModal(<ClaimModal contract={contract} account={account} nftAddress={nftAddress5} />);
+  const onClaim5 = useTransactionCallback(contract, "claimAll", `Claim all owned NFTs for Altergene Credits each.`, nftAddress5, 0, maxNum5);
+
 
   return (
     <Container>
@@ -272,6 +291,81 @@ export default function AltergeneClaim() {
                         {/*<Button disabled={!account} onClick={onClaim2} my="10px" mx="5px">*/}
                         {/*  Claim All*/}
                         {/*</Button>*/}
+                      </Flex>
+                    </LightCard>
+                  </>
+              }
+            </AutoColumn>
+          </CardBody>
+          <CardBody style={{ width: '100%' }}>
+            <AutoColumn gap="12px" style={{ width: '100%' }}>
+              <RowBetween padding="0 8px">
+                <Text color={theme.colors.text}>Alterego Punk</Text>
+                <Question
+                    text={"Claim Altergene Credits with Alterego Punk NFTs here."}
+                />
+              </RowBetween>
+              {
+                  account && library &&
+                  <>
+                    <LightCard padding="40px">
+                      <Flex flexDirection="row" justifyContent="center" alignItems="center">
+                        <Button disabled={!account} onClick={onPresentClaim3} my="10px" mx="5px">
+                          Claim One
+                        </Button>
+                        <Button disabled={!account} onClick={onClaim3} my="10px" mx="5px">
+                          Claim All
+                        </Button>
+                      </Flex>
+                    </LightCard>
+                  </>
+              }
+            </AutoColumn>
+          </CardBody>
+          <CardBody style={{ width: '100%' }}>
+            <AutoColumn gap="12px" style={{ width: '100%' }}>
+              <RowBetween padding="0 8px">
+                <Text color={theme.colors.text}>Yobi Samurai</Text>
+                <Question
+                    text={"Claim Altergene Credits with Yobi Samurai NFTs here."}
+                />
+              </RowBetween>
+              {
+                  account && library &&
+                  <>
+                    <LightCard padding="40px">
+                      <Flex flexDirection="row" justifyContent="center" alignItems="center">
+                        <Button disabled={!account} onClick={onPresentClaim4} my="10px" mx="5px">
+                          Claim One
+                        </Button>
+                        <Button disabled={!account} onClick={onClaim4} my="10px" mx="5px">
+                          Claim All
+                        </Button>
+                      </Flex>
+                    </LightCard>
+                  </>
+              }
+            </AutoColumn>
+          </CardBody>
+          <CardBody style={{ width: '100%' }}>
+            <AutoColumn gap="12px" style={{ width: '100%' }}>
+              <RowBetween padding="0 8px">
+                <Text color={theme.colors.text}>Wyndblast</Text>
+                <Question
+                    text={"Claim Altergene Credits with Wyndblast NFTs here."}
+                />
+              </RowBetween>
+              {
+                  account && library &&
+                  <>
+                    <LightCard padding="40px">
+                      <Flex flexDirection="row" justifyContent="center" alignItems="center">
+                        <Button disabled={!account} onClick={onPresentClaim5} my="10px" mx="5px">
+                          Claim One
+                        </Button>
+                        <Button disabled={!account} onClick={onClaim5} my="10px" mx="5px">
+                          Claim All
+                        </Button>
                       </Flex>
                     </LightCard>
                   </>

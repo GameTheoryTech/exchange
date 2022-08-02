@@ -382,7 +382,7 @@ const BoostModal = ({ onDismiss = defaultOnDismiss, farm, token, account }: Farm
 
   return (
       <Modal title="Boost" onDismiss={onDismiss}>
-        <Text>Nft Id</Text>
+        <Text>Type your NFT ID here</Text>
         <InputPanel id="boost-input-token">
           <InputContainer hideInput={false}>
             <InputRow selected={true}>
