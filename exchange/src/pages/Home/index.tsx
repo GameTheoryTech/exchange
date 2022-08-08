@@ -73,7 +73,7 @@ const Home = () => {
                                     <StyledText>
                                         Swap
                                     </StyledText>
-                                    <Text className="textGlow">Pay less fees when you swap tokens on the AVAX Blockchain using Game Swap.</Text>
+                                    <Text className="textGlow">Pay less fees when you swap tokens on the AVAX Blockchain using Celestial Exchange.</Text>
                                 </CardBody>
                             </StyledCard>
                         </Link>
