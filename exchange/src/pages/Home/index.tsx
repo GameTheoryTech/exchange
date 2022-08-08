@@ -102,7 +102,7 @@ const Home = () => {
                     Rewards
                 </PageTitle>
                 <StyledParagraph>
-                    GAME token holders can earn rewards passively. Just buy holding GAME tokens you automatically earn a share of all protocol profits. If you buy GAME tokens while the price is under $1, you earn additional rewards in USDC, paid to you when the price reaches $1 again.
+                    GAME token holders can earn rewards passively. Just by holding GAME tokens you automatically earn a share of all protocol profits. If you buy GAME tokens while the price is under $1, you earn additional rewards in USDC, paid to you when the price reaches $1 again.
                 </StyledParagraph>
                 <PageTitle className="textGlow pink">
                     Decentralized Finance
