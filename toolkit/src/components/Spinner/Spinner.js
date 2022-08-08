@@ -14,8 +14,8 @@ var FloatingPanIcon = styled(PanIcon)(templateObject_5 || (templateObject_5 = __
 var Spinner = function (_a) {
     var _b = _a.size, size = _b === void 0 ? 128 : _b;
     return (React.createElement(Container, null,
-        React.createElement(RotatingPancakeIcon, { width: "".concat(size * 0.5, "px") }),
-        React.createElement(FloatingPanIcon, { width: "".concat(size, "px") })));
+        React.createElement(RotatingPancakeIcon, { width: size * 0.5 + "px" }),
+        React.createElement(FloatingPanIcon, { width: size + "px" })));
 };
 export default Spinner;
 var templateObject_1, templateObject_2, templateObject_3, templateObject_4, templateObject_5;

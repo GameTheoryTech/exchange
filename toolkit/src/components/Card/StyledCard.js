@@ -20,19 +20,7 @@ var getBoxShadow = function (_a) {
     }
     return theme.card.boxShadow;
 };
-var StyledCard = styled.div(templateObject_1 || (templateObject_1 = __makeTemplateObject(["\n  background-color: ", ";\n  border: ", ";\n  border-radius: ", ";\n  box-shadow: ", ";\n  color: ", ";\n  overflow: hidden;\n  position: relative;\n\n  ", "\n"], ["\n  background-color: ", ";\n  border: ", ";\n  border-radius: ", ";\n  box-shadow: ", ";\n  color: ", ";\n  overflow: hidden;\n  position: relative;\n\n  ", "\n"])), function (_a) {
-    var theme = _a.theme;
-    return theme.card.background;
-}, function (_a) {
-    var theme = _a.theme;
-    return theme.card.boxShadow;
-}, function (_a) {
-    var theme = _a.theme;
-    return theme.radii.card;
-}, getBoxShadow, function (_a) {
-    var theme = _a.theme, isDisabled = _a.isDisabled;
-    return theme.colors[isDisabled ? "textDisabled" : "text"];
-}, space);
+var StyledCard = styled.div(templateObject_1 || (templateObject_1 = __makeTemplateObject(["\n  border: 2px solid var(--extra-color-1);\n  border-radius: 20px;\n  box-shadow: 0 0 5px var(--extra-color-1);\n  backdrop-filter: blur(15px);\n  overflow: hidden;\n  position: relative;\n\n  &.link {\n    cursor: pointer;\n    transition: box-shadow 0.2s ease-out;\n\n    &:hover {\n      box-shadow: 0px 0px 20px 0px var(--extra-color-1);\n    }\n  }\n\n  ", "\n"], ["\n  border: 2px solid var(--extra-color-1);\n  border-radius: 20px;\n  box-shadow: 0 0 5px var(--extra-color-1);\n  backdrop-filter: blur(15px);\n  overflow: hidden;\n  position: relative;\n\n  &.link {\n    cursor: pointer;\n    transition: box-shadow 0.2s ease-out;\n\n    &:hover {\n      box-shadow: 0px 0px 20px 0px var(--extra-color-1);\n    }\n  }\n\n  ", "\n"])), space);
 StyledCard.defaultProps = {
     isActive: false,
     isSuccess: false,

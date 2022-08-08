@@ -1,8 +1,6 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-var react_1 = require("react");
+import { useEffect } from "react";
 var useKonamiCheatCode = function (matchedCodeHandler) {
-    react_1.useEffect(function () {
+    useEffect(function () {
         var pattern = [
             "ArrowUp",
             "ArrowUp",
@@ -31,4 +29,4 @@ var useKonamiCheatCode = function (matchedCodeHandler) {
         return function () { return document.removeEventListener("keyup", onKeyUpHandler); };
     }, [matchedCodeHandler]);
 };
-exports.default = useKonamiCheatCode;
+export default useKonamiCheatCode;

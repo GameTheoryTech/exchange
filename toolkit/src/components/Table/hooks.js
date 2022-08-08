@@ -9,21 +9,17 @@ var __assign = (this && this.__assign) || function () {
     };
     return __assign.apply(this, arguments);
 };
-var __spreadArray = (this && this.__spreadArray) || function (to, from, pack) {
-    if (pack || arguments.length === 2) for (var i = 0, l = from.length, ar; i < l; i++) {
-        if (ar || !(i in from)) {
-            if (!ar) ar = Array.prototype.slice.call(from, 0, i);
-            ar[i] = from[i];
-        }
-    }
-    return to.concat(ar || Array.prototype.slice.call(from));
+var __spreadArray = (this && this.__spreadArray) || function (to, from) {
+    for (var i = 0, il = from.length, j = to.length; i < il; i++, j++)
+        to[j] = from[i];
+    return to;
 };
 import { useMemo, useReducer, useEffect, useCallback } from "react";
 import noop from "lodash/noop";
 import { byTextAscending, byTextDescending } from "./utils";
 var sortByColumn = function (data, sortColumn, columns) {
     var isAscending = null;
-    var sortedRows = __spreadArray([], data, true);
+    var sortedRows = __spreadArray([], data);
     columns.forEach(function (column) {
         // if the row was found
         if (sortColumn === column.name) {
@@ -75,7 +71,7 @@ var createReducer = function () {
         var rowIds = {};
         switch (action.type) {
             case "SET_ROWS":
-                rows = __spreadArray([], action.data, true);
+                rows = __spreadArray([], action.data);
                 // preserve sorting if a sort is already enabled when data changes
                 if (state.sortColumn) {
                     rows = sortByColumn(action.data, state.sortColumn, state.columns);
@@ -104,7 +100,7 @@ var createReducer = function () {
                 return __assign(__assign({}, state), { rows: getPaginatedData(state.originalRows, state.pagination.perPage, prevPage), pagination: __assign(__assign({}, state.pagination), { page: prevPage, canNext: prevPage * state.pagination.perPage < state.originalRows.length, canPrev: prevPage !== 1 }) });
             case "TOGGLE_SORT":
                 if (!(action.columnName in state.columnsByName)) {
-                    throw new Error("Invalid column, ".concat(action.columnName, " not found"));
+                    throw new Error("Invalid column, " + action.columnName + " not found");
                 }
                 // loop through all columns and set the sort parameter to off unless
                 // it's the specified column (only one column at a time for )
@@ -215,7 +211,7 @@ var sortDataInOrder = function (data, columns) {
         var newRow = {};
         columns.forEach(function (column) {
             if (!(column.name in row)) {
-                throw new Error("Invalid row data, ".concat(column.name, " not found"));
+                throw new Error("Invalid row data, " + column.name + " not found");
             }
             newRow[column.name] = row[column.name];
         });
@@ -298,7 +294,7 @@ export var useTable = function (columns, data, options) {
         return __spreadArray([], state.columns.map(function (column) {
             var label = column.label ? column.label : column.name;
             return __assign(__assign({}, column), { render: makeHeaderRender(label, column.headerRender) });
-        }), true);
+        }));
     }, [state.columns]);
     useEffect(function () {
         if (options && options.filter) {

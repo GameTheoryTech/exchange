@@ -1,7 +1,4 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.data = exports.columns = void 0;
-exports.columns = [
+export var columns = [
     {
         id: 1,
         name: "id",
@@ -42,4 +39,4 @@ exports.columns = [
         name: "TAGS",
     },
 ];
-exports.data = [];
+export var data = [];

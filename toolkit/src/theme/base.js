@@ -1,23 +1,20 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.shadows = exports.breakpointMap = void 0;
-exports.breakpointMap = {
-    xs: 370,
-    sm: 576,
-    md: 852,
-    lg: 968,
-    xl: 1080,
+export var breakpointMap = {
+    xs: 0,
+    sm: 767,
+    md: 900,
+    lg: 1200,
+    xl: 1600,
 };
-var breakpoints = Object.values(exports.breakpointMap).map(function (breakpoint) { return breakpoint + "px"; });
+var breakpoints = Object.values(breakpointMap).map(function (breakpoint) { return breakpoint + "px"; });
 var mediaQueries = {
-    xs: "@media screen and (min-width: " + exports.breakpointMap.xs + "px)",
-    sm: "@media screen and (min-width: " + exports.breakpointMap.sm + "px)",
-    md: "@media screen and (min-width: " + exports.breakpointMap.md + "px)",
-    lg: "@media screen and (min-width: " + exports.breakpointMap.lg + "px)",
-    xl: "@media screen and (min-width: " + exports.breakpointMap.xl + "px)",
-    nav: "@media screen and (min-width: " + exports.breakpointMap.lg + "px)",
+    xs: "@media screen and (min-width: " + breakpointMap.xs + "px)",
+    sm: "@media screen and (min-width: " + breakpointMap.sm + "px)",
+    md: "@media screen and (min-width: " + breakpointMap.md + "px)",
+    lg: "@media screen and (min-width: " + breakpointMap.lg + "px)",
+    xl: "@media screen and (min-width: " + breakpointMap.xl + "px)",
+    nav: "@media screen and (min-width: " + breakpointMap.lg + "px)",
 };
-exports.shadows = {
+export var shadows = {
     level1: "0px 2px 12px -8px rgba(25, 19, 38, 0.1), 0px 1px 1px rgba(25, 19, 38, 0.05)",
     active: "0px 0px 0px 1px #0098A1, 0px 0px 4px 8px rgba(31, 199, 212, 0.4)",
     success: "0px 0px 0px 1px #31D0AA, 0px 0px 0px 4px rgba(49, 208, 170, 0.2)",
@@ -36,12 +33,12 @@ var zIndices = {
     dropdown: 10,
     modal: 100,
 };
-exports.default = {
+export default {
     siteWidth: 1200,
     breakpoints: breakpoints,
     mediaQueries: mediaQueries,
     spacing: spacing,
-    shadows: exports.shadows,
+    shadows: shadows,
     radii: radii,
     zIndices: zIndices,
 };

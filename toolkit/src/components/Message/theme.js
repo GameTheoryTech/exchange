@@ -1,5 +1,3 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
 var variants = {
     warning: {
         background: "#FFB23719",
@@ -10,4 +8,4 @@ var variants = {
         borderColor: "failure",
     },
 };
-exports.default = variants;
+export default variants;

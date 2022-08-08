@@ -1,4 +1,3 @@
-"use strict";
 var __assign = (this && this.__assign) || function () {
     __assign = Object.assign || function(t) {
         for (var s, i = 1, n = arguments.length; i < n; i++) {
@@ -10,9 +9,8 @@ var __assign = (this && this.__assign) || function () {
     };
     return __assign.apply(this, arguments);
 };
-Object.defineProperty(exports, "__esModule", { value: true });
-var react_1 = require("react");
-var debounce_1 = require("lodash/debounce");
+import { useCallback, useEffect } from "react";
+import debounce from "lodash/debounce";
 var defaultParticleOptions = {
     size: 30,
     distance: 500,
@@ -66,8 +64,8 @@ var defaultOptions = {
  */
 var useParticleBurst = function (options) {
     var _a = __assign(__assign({}, defaultOptions), options), selector = _a.selector, numberOfParticles = _a.numberOfParticles, debounceDuration = _a.debounceDuration, imgSrc = _a.imgSrc, disableWhen = _a.disableWhen, particleOptions = _a.particleOptions;
-    var makeListener = react_1.useCallback(function () {
-        return debounce_1.default(function (event) {
+    var makeListener = useCallback(function () {
+        return debounce(function (event) {
             var isDisabled = disableWhen && disableWhen();
             if (!isDisabled) {
                 var node = event.currentTarget;
@@ -88,7 +86,7 @@ var useParticleBurst = function (options) {
         }, debounceDuration, { leading: true });
     }, [debounceDuration, numberOfParticles, imgSrc, disableWhen, particleOptions]);
     var listener = makeListener();
-    var initialize = react_1.useCallback(function () {
+    var initialize = useCallback(function () {
         if (selector) {
             document.querySelectorAll(selector).forEach(function (element) {
                 element.addEventListener("click", listener);
@@ -98,7 +96,7 @@ var useParticleBurst = function (options) {
             document.addEventListener("click", listener);
         }
     }, [selector, listener]);
-    var teardown = react_1.useCallback(function () {
+    var teardown = useCallback(function () {
         if (selector) {
             document.querySelectorAll(selector).forEach(function (element) {
                 element.removeEventListener("click", listener);
@@ -108,10 +106,10 @@ var useParticleBurst = function (options) {
             document.removeEventListener("click", listener);
         }
     }, [selector, listener]);
-    react_1.useEffect(function () {
+    useEffect(function () {
         initialize();
         return function () { return teardown(); };
     }, [initialize, teardown]);
     return { initialize: initialize, teardown: teardown };
 };
-exports.default = useParticleBurst;
+export default useParticleBurst;

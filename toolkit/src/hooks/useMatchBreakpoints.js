@@ -1,4 +1,3 @@
-"use strict";
 var __assign = (this && this.__assign) || function () {
     __assign = Object.assign || function(t) {
         for (var s, i = 1, n = arguments.length; i < n; i++) {
@@ -10,9 +9,8 @@ var __assign = (this && this.__assign) || function () {
     };
     return __assign.apply(this, arguments);
 };
-Object.defineProperty(exports, "__esModule", { value: true });
-var react_1 = require("react");
-var base_1 = require("../theme/base");
+import { useEffect, useState } from "react";
+import { breakpointMap } from "../theme/base";
 /**
  * Can't use the media queries from "base.mediaQueries" because of how matchMedia works
  * In order for the listener to trigger we need have have the media query with a range, e.g.
@@ -21,14 +19,14 @@ var base_1 = require("../theme/base");
  */
 var mediaQueries = (function () {
     var prevMinWidth = 0;
-    return Object.keys(base_1.breakpointMap).reduce(function (accum, size, index) {
+    return Object.keys(breakpointMap).reduce(function (accum, size, index) {
         var _a, _b;
         // Largest size is just a min-width of second highest max-width
-        if (index === Object.keys(base_1.breakpointMap).length - 1) {
+        if (index === Object.keys(breakpointMap).length - 1) {
             return __assign(__assign({}, accum), (_a = {}, _a[size] = "(min-width: " + prevMinWidth + "px)", _a));
         }
         var minWidth = prevMinWidth;
-        var breakpoint = base_1.breakpointMap[size];
+        var breakpoint = breakpointMap[size];
         // Min width for next iteration
         prevMinWidth = breakpoint + 1;
         return __assign(__assign({}, accum), (_b = {}, _b[size] = "(min-width: " + minWidth + "px) and (max-width: " + breakpoint + "px)", _b));
@@ -36,7 +34,7 @@ var mediaQueries = (function () {
 })();
 var getKey = function (size) { return "is" + size.charAt(0).toUpperCase() + size.slice(1); };
 var useMatchBreakpoints = function () {
-    var _a = react_1.useState(function () {
+    var _a = useState(function () {
         return Object.keys(mediaQueries).reduce(function (accum, size) {
             var _a;
             var key = getKey(size);
@@ -44,7 +42,7 @@ var useMatchBreakpoints = function () {
             return __assign(__assign({}, accum), (_a = {}, _a[key] = mql.matches, _a));
         }, {});
     }), state = _a[0], setState = _a[1];
-    react_1.useEffect(function () {
+    useEffect(function () {
         // Create listeners for each media query returning a function to unsubscribe
         var handlers = Object.keys(mediaQueries).map(function (size) {
             var mql = window.matchMedia(mediaQueries[size]);
@@ -74,4 +72,4 @@ var useMatchBreakpoints = function () {
     }, [setState]);
     return state;
 };
-exports.default = useMatchBreakpoints;
+export default useMatchBreakpoints;

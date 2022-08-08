@@ -35,8 +35,8 @@ var ParentSize = function (args) {
 };
 exports.ParentSize = ParentSize;
 var Text = function (args) {
-    var _a = react_1.useState(true), loading = _a[0], setLoading = _a[1];
-    react_1.useEffect(function () {
+    var _a = (0, react_1.useState)(true), loading = _a[0], setLoading = _a[1];
+    (0, react_1.useEffect)(function () {
         var timer = setTimeout(function () {
             setLoading(false);
         }, 2000);

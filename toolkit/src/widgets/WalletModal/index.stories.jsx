@@ -10,7 +10,7 @@ exports.default = {
     argTypes: {},
 };
 var Wallet = function () {
-    var _a = useWalletModal_1.default(function () { return null; }, function () { return null; }, "0xbdda50183d817c3289f895a4472eb475967dc980"), onPresentConnectModal = _a.onPresentConnectModal, onPresentAccountModal = _a.onPresentAccountModal;
+    var _a = (0, useWalletModal_1.default)(function () { return null; }, function () { return null; }, "0xbdda50183d817c3289f895a4472eb475967dc980"), onPresentConnectModal = _a.onPresentConnectModal, onPresentAccountModal = _a.onPresentAccountModal;
     return (<Flex_1.default>
       <Button_1.default onClick={onPresentConnectModal}>Open connect modal</Button_1.default>
       <Button_1.default onClick={onPresentAccountModal}>Open account modal</Button_1.default>

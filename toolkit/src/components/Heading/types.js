@@ -1,7 +1,4 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.scales = exports.tags = void 0;
-exports.tags = {
+export var tags = {
     H1: "h1",
     H2: "h2",
     H3: "h3",
@@ -9,7 +6,7 @@ exports.tags = {
     H5: "h5",
     H6: "h6",
 };
-exports.scales = {
+export var scales = {
     MD: "md",
     LG: "lg",
     XL: "xl",

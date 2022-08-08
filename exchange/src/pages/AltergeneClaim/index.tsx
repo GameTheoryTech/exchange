@@ -237,6 +237,7 @@ export default function AltergeneClaim() {
       let _contract: Contract = new Contract(contract.address, AltergeneABI, library);
       if (account && library) setContract(_contract.connect(getProviderOrSigner(library, account)));
       else setContract(_contract);
+      if(!account) return;
       if(nftContract) setMaxNum(await nftContract.balanceOf(account));
       if(nftContract2) setMaxNum2(await nftContract2.balanceOf(account));
       if(nftContract3) setMaxNum3(await nftContract3.balanceOf(account));
@@ -261,7 +262,7 @@ export default function AltergeneClaim() {
 
   return (
     <Container>
-      <CardNav activeIndex={6} />
+      {/*<CardNav activeIndex={6} />*/}
       <AppBody>
         <PageHeader
           title={"Altergene Claim"}

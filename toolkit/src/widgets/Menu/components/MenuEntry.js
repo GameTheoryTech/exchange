@@ -25,7 +25,7 @@ var MenuEntry = styled.div(templateObject_3 || (templateObject_3 = __makeTemplat
     return theme.colors.textSubtle;
 }, function (_a) {
     var isActive = _a.isActive, theme = _a.theme;
-    return (isActive ? "inset 4px 0px 0px ".concat(theme.colors.primary) : "none");
+    return (isActive ? "inset 4px 0px 0px " + theme.colors.primary : "none");
 }, function (_a) {
     var theme = _a.theme;
     return theme.colors.textSubtle;

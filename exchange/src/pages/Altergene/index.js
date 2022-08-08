@@ -1,4 +1,4 @@
-import React, {useEffect, useMemo, useRef} from 'react';
+import React, {useContext, useEffect, useMemo, useRef} from 'react';
 
 import {Unity, useUnityContext} from "react-unity-webgl";
 import {ButtonMenu, CardBody, Text} from "@gametheory/uikit";
@@ -11,6 +11,40 @@ import Question from "../../components/QuestionHelper";
 import {LightCard} from "../../components/Card";
 import {Dots} from "../Pool/styleds";
 import Container from "../../components/Container";
+import {useHistory} from "react-router-dom";
+
+/**
+ * Blocks all navigation attempts. This is useful for preventing the page from
+ * changing until some condition is met, like saving form data.
+ *
+ * @param  blocker
+ * @param  when
+ * @see https://reactrouter.com/api/useBlocker
+ */
+export function useBlocker( blocker, when = true ) {
+    const navigator = useHistory();
+
+    useEffect( () => {
+        if ( ! when ) return;
+
+        const unblock = navigator.block( ( tx ) => {
+            const autoUnblockingTx = {
+                ...tx,
+                retry() {
+                    // Automatically unblock the transition so it can play all the way
+                    // through before retrying it. TODO: Figure out how to re-enable
+                    // this block if the transition is cancelled for some reason.
+                    unblock();
+                    tx.retry();
+                },
+            };
+
+            blocker( autoUnblockingTx );
+        } );
+
+        return unblock;
+    }, [ navigator, blocker, when ] );
+}
 
 const useScript = url => {
     useEffect(() => {
@@ -27,6 +61,33 @@ const useScript = url => {
     }, [url]);
 };
 
+class ErrorBoundary extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = { hasError: false };
+    }
+
+    static getDerivedStateFromError(error) {
+        // Update state so the next render will show the fallback UI.
+        return { hasError: true };
+    }
+
+    componentDidCatch(error, errorInfo) {
+        // You can also log the error to an error reporting service
+        //logErrorToMyService(error, errorInfo);
+        if(!error.message.includes('getBoundingClientRect')) console.log(error);
+    }
+
+    render() {
+        if (this.state.hasError) {
+            // You can render any custom fallback UI
+            return <></>;
+        }
+
+        return this.props.children;
+    }
+}
+
 const Altergene = () => {
     useScript("web3/index.js");
     const unityContext = useUnityContext({
@@ -40,32 +101,43 @@ const Altergene = () => {
         console.log("use effect content:");
         return () => {
             if (iframeRef !== null) {
-                window.document
-                    .getElementById("iframeContainer")
-                    .removeChild(iframeRef.current);
+                //window.location.reload();
+
+                unityContext?.unload()?.then(()=>{
+                    window.document
+                        .getElementById("iframeContainer")
+                        .removeChild(iframeRef.current);
+                });
+
             }
         };
     }, []);
+    const history = useHistory();
+    useEffect(() => {
+        const unblock = history.block((location, action) => {
+            if(location.pathname.startsWith("/")) {
+                window.location.href = `/#${location.pathname}`;
+                window.location.reload();
+                return false;
+            }
+            return true;
+        });
+
+        return () => {
+            unblock();
+        };
+    }, []);
     return (
+        <ErrorBoundary>
         <Container>
             {/*<CardNav activeIndex={5} />*/}
             <AppBody>
-                <div id="iframeContainer" ref={iframeRef}>
-                <Unity unityProvider={unityContext.unityProvider} style={{
-                    display: 'block',
-                    position: 'fixed',
-                    width: "90%",
-                    height: "90%",
-                    //top: "50%",
-                    left: "50%",
-                    marginTop: "-2%", /* Negative half of height. */
-                    marginLeft: "-45%", /* Negative half of width. */
-                    justifyContent: 'center',
-                    alignItems: 'center'
-                }}/>
+                <div id="iframeContainer">
+                <Unity unityProvider={unityContext.unityProvider} style={{width: "100%"}} ref={iframeRef}/>
                 </div>
             </AppBody>
         </Container>
+        </ErrorBoundary>
     )
 };
 

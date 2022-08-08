@@ -1,29 +1,24 @@
-"use strict";
 var _a, _b;
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.styleVariants = exports.scaleVariants = void 0;
-var types_1 = require("./types");
-exports.scaleVariants = (_a = {},
-    _a[types_1.scales.MD] = {
-        height: "48px",
-        padding: "0 24px",
+import { scales, variants } from "./types";
+export var scaleVariants = (_a = {},
+    _a[scales.MD] = {
+        padding: "10px 30px",
+        fontSize: "16px",
     },
-    _a[types_1.scales.SM] = {
-        height: "32px",
-        padding: "0 16px",
+    _a[scales.SM] = {
+        padding: "10px 30px",
+        fontSize: "14px",
     },
-    _a[types_1.scales.XS] = {
-        height: "20px",
-        fontSize: "12px",
-        padding: "0 8px",
+    _a[scales.XS] = {
+        fontSize: "12px"
     },
     _a);
-exports.styleVariants = (_b = {},
-    _b[types_1.variants.PRIMARY] = {
+export var styleVariants = (_b = {},
+    _b[variants.PRIMARY] = {
         backgroundColor: "primary",
         color: "white",
     },
-    _b[types_1.variants.SECONDARY] = {
+    _b[variants.SECONDARY] = {
         backgroundColor: "transparent",
         border: "2px solid",
         borderColor: "primary",
@@ -33,26 +28,38 @@ exports.styleVariants = (_b = {},
             backgroundColor: "transparent",
         },
     },
-    _b[types_1.variants.TERTIARY] = {
+    _b[variants.TERTIARY] = {
         backgroundColor: "tertiary",
         boxShadow: "none",
         color: "primary",
     },
-    _b[types_1.variants.SUBTLE] = {
-        backgroundColor: "textSubtle",
-        color: "backgroundAlt",
+    _b[variants.SUBTLE] = {
+        backgroundColor: "rgba(0, 0, 0, 0.4)",
+        boxShadow: "none",
+        color: "primary",
+        '&:hover': {
+            backgroundColor: "rgba(0, 0, 0, 0.4)!important",
+        }
     },
-    _b[types_1.variants.DANGER] = {
+    _b[variants.DANGER] = {
         backgroundColor: "failure",
         color: "white",
     },
-    _b[types_1.variants.SUCCESS] = {
+    _b[variants.SUCCESS] = {
         backgroundColor: "success",
         color: "white",
     },
-    _b[types_1.variants.TEXT] = {
+    _b[variants.TEXT] = {
         backgroundColor: "transparent",
         color: "primary",
         boxShadow: "none",
+        textShadow: "none",
+        padding: 0,
+        paddingRight: '10px',
+        paddingTop: '5px',
+        '&:hover': {
+            backgroundColor: "transparent!important",
+            textShadow: "var(--accent) 0px 0px 20px",
+        }
     },
     _b);

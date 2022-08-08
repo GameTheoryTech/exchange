@@ -24,7 +24,7 @@ var Default = function () {
 exports.Default = Default;
 var Row = styled_components_1.default.div(templateObject_1 || (templateObject_1 = __makeTemplateObject(["\n  & > * + * {\n    margin-left: 16px;\n  }\n"], ["\n  & > * + * {\n    margin-left: 16px;\n  }\n"])));
 var MenuButtons = function () {
-    var _a = react_1.useState(0), index = _a[0], setIndex = _a[1];
+    var _a = (0, react_1.useState)(0), index = _a[0], setIndex = _a[1];
     var handleClick = function (newIndex) { return setIndex(newIndex); };
     return (<Row>
       <ButtonMenu_1.default activeIndex={index} onItemClick={handleClick}>

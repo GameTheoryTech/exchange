@@ -33,18 +33,18 @@ var Slider = function (_a) {
     var isMax = value === max;
     var progressWidth;
     if (progressPercentage <= 10) {
-        progressWidth = "".concat(progressPercentage + 0.5, "%");
+        progressWidth = progressPercentage + 0.5 + "%";
     }
     else if (progressPercentage >= 90) {
-        progressWidth = "".concat(progressPercentage - 4, "%");
+        progressWidth = progressPercentage - 4 + "%";
     }
     else if (progressPercentage >= 60) {
-        progressWidth = "".concat(progressPercentage - 2.5, "%");
+        progressWidth = progressPercentage - 2.5 + "%";
     }
     else {
-        progressWidth = "".concat(progressPercentage, "%");
+        progressWidth = progressPercentage + "%";
     }
-    var labelProgress = isMax ? "calc(100% - 12px)" : "".concat(progressPercentage, "%");
+    var labelProgress = isMax ? "calc(100% - 12px)" : progressPercentage + "%";
     var displayValueLabel = isMax ? "MAX" : valueLabel;
     return (React.createElement(Box, __assign({ position: "relative", height: "48px" }, props),
         React.createElement(BunnyButt, { disabled: disabled }),

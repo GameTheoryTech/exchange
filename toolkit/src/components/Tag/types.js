@@ -1,7 +1,4 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.scales = exports.variants = void 0;
-exports.variants = {
+export var variants = {
     PRIMARY: "primary",
     SECONDARY: "secondary",
     SUCCESS: "success",
@@ -11,7 +8,7 @@ exports.variants = {
     FAILURE: "failure",
     WARNING: "warning",
 };
-exports.scales = {
+export var scales = {
     MD: "md",
     SM: "sm",
 };

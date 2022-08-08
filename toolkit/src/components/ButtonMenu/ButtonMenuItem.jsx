@@ -19,7 +19,7 @@ var react_1 = require("react");
 var styled_components_1 = require("styled-components");
 var Button_1 = require("../Button/Button");
 var types_1 = require("../Button/types");
-var InactiveButton = styled_components_1.default(Button_1.default)(templateObject_1 || (templateObject_1 = __makeTemplateObject(["\n  background-color: transparent;\n  color: ", ";\n  &:hover:not(:disabled):not(:active) {\n    background-color: transparent;\n  }\n"], ["\n  background-color: transparent;\n  color: ", ";\n  &:hover:not(:disabled):not(:active) {\n    background-color: transparent;\n  }\n"])), function (_a) {
+var InactiveButton = styled_components_1.default(Button_1.default)(templateObject_1 || (templateObject_1 = __makeTemplateObject(["\n  background-color: transparent;\n  color: ", ";\n  box-shadow: none;\n  text-shadow: none;\n  &:hover:not(:disabled):not(:active) {\n    background-color: transparent!important;\n    color: #fff;\n    box-shadow: none!important;\n  }\n"], ["\n  background-color: transparent;\n  color: ", ";\n  box-shadow: none;\n  text-shadow: none;\n  &:hover:not(:disabled):not(:active) {\n    background-color: transparent!important;\n    color: #fff;\n    box-shadow: none!important;\n  }\n"])), function (_a) {
     var theme = _a.theme, variant = _a.variant;
     return (variant === types_1.variants.PRIMARY ? theme.colors.primary : theme.colors.textSubtle);
 });
@@ -28,7 +28,7 @@ var ButtonMenuItem = function (_a) {
     if (!isActive) {
         return <InactiveButton forwardedAs={as} variant="tertiary" {...props}/>;
     }
-    return <Button_1.default as={as} variant={variant} {...props}/>;
+    return <Button_1.default as={as} variant={types_1.variants.PRIMARY} {...props} style={{ cursor: 'initial', boxShadow: '0px 0px 20px 0px var(--accent)', backgroundColor: 'var(--accent)', transform: 'none', opacity: '1' }}/>;
 };
 exports.default = ButtonMenuItem;
 var templateObject_1;

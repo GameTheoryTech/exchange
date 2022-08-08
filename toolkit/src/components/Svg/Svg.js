@@ -9,7 +9,7 @@ var rotate = keyframes(templateObject_1 || (templateObject_1 = __makeTemplateObj
 var spinStyle = css(templateObject_2 || (templateObject_2 = __makeTemplateObject(["\n  animation: ", " 2s linear infinite;\n"], ["\n  animation: ", " 2s linear infinite;\n"])), rotate);
 var Svg = styled.svg(templateObject_3 || (templateObject_3 = __makeTemplateObject(["\n  align-self: center; // Safari fix\n  fill: ", ";\n  flex-shrink: 0;\n  ", "\n  ", "\n"], ["\n  align-self: center; // Safari fix\n  fill: ", ";\n  flex-shrink: 0;\n  ", "\n  ", "\n"])), function (_a) {
     var theme = _a.theme, color = _a.color;
-    return getThemeValue("colors.".concat(color), color)(theme);
+    return getThemeValue("colors." + color, color)(theme);
 }, function (_a) {
     var spin = _a.spin;
     return spin && spinStyle;

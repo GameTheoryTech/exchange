@@ -8,7 +8,7 @@ exports.default = {
     component: PancakeToggle_1.default,
 };
 var Default = function () {
-    var _a = react_1.useState(false), isChecked = _a[0], setIsChecked = _a[1];
+    var _a = (0, react_1.useState)(false), isChecked = _a[0], setIsChecked = _a[1];
     var toggle = function () { return setIsChecked(!isChecked); };
     return (<>
       <div style={{ marginBottom: "32px" }}>

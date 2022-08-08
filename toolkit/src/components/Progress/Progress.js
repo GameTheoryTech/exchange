@@ -15,9 +15,9 @@ var stepGuard = function (step) {
 var Progress = function (_a) {
     var _b = _a.variant, variant = _b === void 0 ? variants.ROUND : _b, _c = _a.scale, scale = _c === void 0 ? scales.MD : _c, _d = _a.primaryStep, primaryStep = _d === void 0 ? 0 : _d, _e = _a.secondaryStep, secondaryStep = _e === void 0 ? null : _e, _f = _a.showProgressBunny, showProgressBunny = _f === void 0 ? false : _f;
     return (React.createElement(StyledProgress, { variant: variant, scale: scale },
-        showProgressBunny && (React.createElement(ProgressBunnyWrapper, { style: { left: "".concat(stepGuard(primaryStep), "%") } },
+        showProgressBunny && (React.createElement(ProgressBunnyWrapper, { style: { left: stepGuard(primaryStep) + "%" } },
             React.createElement(ProgressBunny, null))),
-        React.createElement(Bar, { primary: true, style: { width: "".concat(stepGuard(primaryStep), "%") } }),
-        secondaryStep ? React.createElement(Bar, { style: { width: "".concat(stepGuard(secondaryStep), "%") } }) : null));
+        React.createElement(Bar, { primary: true, style: { width: stepGuard(primaryStep) + "%" } }),
+        secondaryStep ? React.createElement(Bar, { style: { width: stepGuard(secondaryStep) + "%" } }) : null));
 };
 export default Progress;

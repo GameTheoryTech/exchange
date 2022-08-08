@@ -31,7 +31,7 @@ var BalanceInput = function (_a) {
         }
     };
     return (React.createElement(StyledBalanceInput, __assign({ isWarning: isWarning }, props),
-        React.createElement(StyledInput, __assign({ pattern: "^[0-9]*[.,]?[0-9]{0,".concat(decimals, "}$"), inputMode: "decimal", min: "0", value: value, onChange: handleOnChange, placeholder: placeholder }, inputProps)),
+        React.createElement(StyledInput, __assign({ pattern: "^[0-9]*[.,]?[0-9]{0," + decimals + "}$", inputMode: "decimal", min: "0", value: value, onChange: handleOnChange, placeholder: placeholder }, inputProps)),
         currencyValue && (React.createElement(Text, { fontSize: "12px", textAlign: "right", color: "textSubtle" }, currencyValue))));
 };
 export default BalanceInput;

@@ -10,7 +10,7 @@ import { ArrowDropDownIcon, ArrowDropUpIcon } from "../../../components/Svg";
 var Container = styled.div(templateObject_1 || (templateObject_1 = __makeTemplateObject(["\n  display: flex;\n  flex-direction: column;\n  // Safari fix\n  flex-shrink: 0;\n"], ["\n  display: flex;\n  flex-direction: column;\n  // Safari fix\n  flex-shrink: 0;\n"])));
 var AccordionContent = styled.div(templateObject_2 || (templateObject_2 = __makeTemplateObject(["\n  max-height: ", ";\n  transition: max-height 0.3s ease-out;\n  overflow: hidden;\n  border-color: ", ";\n  border-style: solid;\n  border-width: 1px 0;\n"], ["\n  max-height: ", ";\n  transition: max-height 0.3s ease-out;\n  overflow: hidden;\n  border-color: ", ";\n  border-style: solid;\n  border-width: 1px 0;\n"])), function (_a) {
     var isOpen = _a.isOpen, maxHeight = _a.maxHeight;
-    return (isOpen ? "".concat(maxHeight, "px") : 0);
+    return (isOpen ? maxHeight + "px" : 0);
 }, function (_a) {
     var isOpen = _a.isOpen, isPushed = _a.isPushed;
     return (isOpen && isPushed ? "rgba(133, 133, 133, 0.1)" : "transparent");

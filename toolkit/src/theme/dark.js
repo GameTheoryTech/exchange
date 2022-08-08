@@ -1,4 +1,3 @@
-"use strict";
 var __assign = (this && this.__assign) || function () {
     __assign = Object.assign || function(t) {
         for (var s, i = 1, n = arguments.length; i < n; i++) {
@@ -10,16 +9,15 @@ var __assign = (this && this.__assign) || function () {
     };
     return __assign.apply(this, arguments);
 };
-Object.defineProperty(exports, "__esModule", { value: true });
-var theme_1 = require("../components/Alert/theme");
-var theme_2 = require("../components/Card/theme");
-var theme_3 = require("../components/PancakeToggle/theme");
-var theme_4 = require("../components/Radio/theme");
-var theme_5 = require("../components/Toggle/theme");
-var theme_6 = require("../widgets/Menu/theme");
-var theme_7 = require("../widgets/Modal/theme");
-var theme_8 = require("../components/Tooltip/theme");
-var base_1 = require("./base");
-var colors_1 = require("./colors");
-var darkTheme = __assign(__assign({}, base_1.default), { isDark: true, alert: theme_1.dark, colors: colors_1.darkColors, card: theme_2.dark, toggle: theme_5.dark, nav: theme_6.dark, modal: theme_7.dark, pancakeToggle: theme_3.dark, radio: theme_4.dark, tooltip: theme_8.dark });
-exports.default = darkTheme;
+import { dark as darkAlert } from "../components/Alert/theme";
+import { dark as darkCard } from "../components/Card/theme";
+import { dark as darkPancakeToggle } from "../components/PancakeToggle/theme";
+import { dark as darkRadio } from "../components/Radio/theme";
+import { dark as darkToggle } from "../components/Toggle/theme";
+import { dark as darkNav } from "../widgets/Menu/theme";
+import { dark as darkModal } from "../widgets/Modal/theme";
+import { dark as darkTooltip } from "../components/Tooltip/theme";
+import base from "./base";
+import { darkColors } from "./colors";
+var darkTheme = __assign(__assign({}, base), { isDark: true, alert: darkAlert, colors: darkColors, card: darkCard, toggle: darkToggle, nav: darkNav, modal: darkModal, pancakeToggle: darkPancakeToggle, radio: darkRadio, tooltip: darkTooltip });
+export default darkTheme;

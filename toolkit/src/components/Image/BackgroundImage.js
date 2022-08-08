@@ -40,7 +40,7 @@ var BackgroundImage = function (_a) {
                 entries.forEach(function (entry) {
                     var isIntersecting = entry.isIntersecting;
                     if (isIntersecting) {
-                        div_1.style.backgroundImage = "url(\"".concat(src, "\")");
+                        div_1.style.backgroundImage = "url(\"" + src + "\")";
                         observer.disconnect();
                     }
                 });

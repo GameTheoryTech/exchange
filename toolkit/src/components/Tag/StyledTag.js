@@ -11,7 +11,7 @@ var getOutlineStyles = function (_a) {
     if (outline) {
         var themeColorKey = styleVariants[variantKey].backgroundColor;
         var color = theme.colors[themeColorKey];
-        return "\n      color: ".concat(color, ";\n      background: transparent;\n      border: 2px solid ").concat(color, ";\n    ");
+        return "\n      color: " + color + ";\n      background: transparent;\n      border: 2px solid " + color + ";\n    ";
     }
     return "";
 };

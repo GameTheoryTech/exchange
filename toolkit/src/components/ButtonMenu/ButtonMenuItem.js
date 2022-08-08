@@ -28,7 +28,7 @@ import React from "react";
 import styled from "styled-components";
 import Button from "../Button/Button";
 import { variants } from "../Button/types";
-var InactiveButton = styled(Button)(templateObject_1 || (templateObject_1 = __makeTemplateObject(["\n  background-color: transparent;\n  color: ", ";\n  &:hover:not(:disabled):not(:active) {\n    background-color: transparent;\n  }\n"], ["\n  background-color: transparent;\n  color: ", ";\n  &:hover:not(:disabled):not(:active) {\n    background-color: transparent;\n  }\n"])), function (_a) {
+var InactiveButton = styled(Button)(templateObject_1 || (templateObject_1 = __makeTemplateObject(["\n  background-color: transparent;\n  color: ", ";\n  box-shadow: none;\n  text-shadow: none;\n  &:hover:not(:disabled):not(:active) {\n    background-color: transparent!important;\n    color: #fff;\n    box-shadow: none!important;\n  }\n"], ["\n  background-color: transparent;\n  color: ", ";\n  box-shadow: none;\n  text-shadow: none;\n  &:hover:not(:disabled):not(:active) {\n    background-color: transparent!important;\n    color: #fff;\n    box-shadow: none!important;\n  }\n"])), function (_a) {
     var theme = _a.theme, variant = _a.variant;
     return (variant === variants.PRIMARY ? theme.colors.primary : theme.colors.textSubtle);
 });
@@ -37,7 +37,7 @@ var ButtonMenuItem = function (_a) {
     if (!isActive) {
         return React.createElement(InactiveButton, __assign({ forwardedAs: as, variant: "tertiary" }, props));
     }
-    return React.createElement(Button, __assign({ as: as, variant: variant }, props));
+    return React.createElement(Button, __assign({ as: as, variant: variants.PRIMARY }, props, { style: { cursor: 'initial', boxShadow: '0px 0px 20px 0px var(--accent)', backgroundColor: 'var(--accent)', transform: 'none', opacity: '1' } }));
 };
 export default ButtonMenuItem;
 var templateObject_1;

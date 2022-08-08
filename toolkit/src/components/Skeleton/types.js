@@ -1,11 +1,8 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.variant = exports.animation = void 0;
-exports.animation = {
+export var animation = {
     WAVES: "waves",
     PULSE: "pulse",
 };
-exports.variant = {
+export var variant = {
     RECT: "rect",
     CIRCLE: "circle",
 };

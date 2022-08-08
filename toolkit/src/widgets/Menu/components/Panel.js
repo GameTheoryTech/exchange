@@ -26,7 +26,7 @@ var StyledPanel = styled.div(templateObject_1 || (templateObject_1 = __makeTempl
     return theme.nav.background;
 }, function (_a) {
     var isPushed = _a.isPushed;
-    return (isPushed ? "".concat(SIDEBAR_WIDTH_FULL, "px") : 0);
+    return (isPushed ? SIDEBAR_WIDTH_FULL + "px" : 0);
 }, function (_a) {
     var isPushed = _a.isPushed;
     return (isPushed ? "2px solid rgba(133, 133, 133, 0.1)" : 0);
@@ -41,7 +41,7 @@ var StyledPanel = styled.div(templateObject_1 || (templateObject_1 = __makeTempl
     return theme.mediaQueries.nav;
 }, function (_a) {
     var isPushed = _a.isPushed;
-    return "".concat(isPushed ? SIDEBAR_WIDTH_FULL : SIDEBAR_WIDTH_REDUCED, "px");
+    return (isPushed ? SIDEBAR_WIDTH_FULL : SIDEBAR_WIDTH_REDUCED) + "px";
 });
 var Panel = function (props) {
     var isPushed = props.isPushed, showMenu = props.showMenu;

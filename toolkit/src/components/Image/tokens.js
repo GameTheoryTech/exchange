@@ -1,5 +1,3 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
 /**
  * @see https://github.com/pancakeswap/pancake-frontend/blob/develop/src/config/constants/tokens.ts
  */
@@ -1544,4 +1542,4 @@ var tokens = {
         projectLink: "https://www.ampleforth.org/",
     },
 };
-exports.default = tokens;
+export default tokens;

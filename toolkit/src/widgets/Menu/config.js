@@ -1,7 +1,4 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.SIDEBAR_WIDTH_REDUCED = exports.SIDEBAR_WIDTH_FULL = exports.MENU_ENTRY_HEIGHT = exports.MENU_HEIGHT = exports.socials = exports.links = exports.status = void 0;
-exports.status = {
+export var status = {
     LIVE: {
         text: "LIVE",
         color: "failure",
@@ -15,7 +12,7 @@ exports.status = {
         color: "success",
     },
 };
-exports.links = [
+export var links = [
     {
         label: "Home",
         icon: "HomeIcon",
@@ -39,13 +36,13 @@ exports.links = [
         label: "Farms",
         icon: "FarmIcon",
         href: "/farms",
-        status: exports.status.LIVE,
+        status: status.LIVE,
     },
     {
         label: "Redeem",
         icon: "RedeemIcon",
         href: "/redeem",
-        status: exports.status.LIVE,
+        status: status.LIVE,
     },
     {
         label: "Pools",
@@ -66,17 +63,17 @@ exports.links = [
         label: "Team Battle",
         icon: "TeamBattleIcon",
         href: "/competition",
-        status: exports.status.SOON,
+        status: status.SOON,
     },
     {
         label: "Profile & Teams",
         icon: "GroupsIcon",
-        status: exports.status.LIVE,
+        status: status.LIVE,
         items: [
             {
                 label: "Leaderboard",
                 href: "/teams",
-                status: exports.status.NEW,
+                status: status.NEW,
             },
             {
                 label: "YourProfile",
@@ -144,7 +141,7 @@ exports.links = [
         ],
     },
 ];
-exports.socials = [
+export var socials = [
     {
         label: "Telegram",
         icon: "TelegramIcon",
@@ -209,7 +206,7 @@ exports.socials = [
         href: "https://twitter.com/pancakeswap",
     },
 ];
-exports.MENU_HEIGHT = 64;
-exports.MENU_ENTRY_HEIGHT = 48;
-exports.SIDEBAR_WIDTH_FULL = 240;
-exports.SIDEBAR_WIDTH_REDUCED = 56;
+export var MENU_HEIGHT = 64;
+export var MENU_ENTRY_HEIGHT = 48;
+export var SIDEBAR_WIDTH_FULL = 240;
+export var SIDEBAR_WIDTH_REDUCED = 56;

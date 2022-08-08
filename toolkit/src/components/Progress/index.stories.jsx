@@ -14,13 +14,13 @@ exports.default = {
     argTypes: {},
 };
 var Default = function () {
-    var _a = react_1.useState(lodash_1.random(1, 100)), progress = _a[0], setProgress = _a[1];
-    var handleClick = function () { return setProgress(lodash_1.random(1, 100)); };
+    var _a = (0, react_1.useState)((0, lodash_1.random)(1, 100)), progress = _a[0], setProgress = _a[1];
+    var handleClick = function () { return setProgress((0, lodash_1.random)(1, 100)); };
     return (<div style={{ padding: "32px", width: "400px" }}>
       {Object.values(types_1.variants).map(function (variant) {
             return (<Box_1.default key={variant} mb="16px">
             <Heading_1.default size="md" mb="8px">
-              {lodash_1.capitalize(variant)}
+              {(0, lodash_1.capitalize)(variant)}
             </Heading_1.default>
             <Progress_1.default variant={variant} primaryStep={progress}/>
           </Box_1.default>);
@@ -38,15 +38,15 @@ var Default = function () {
 };
 exports.Default = Default;
 var WithSecondary = function () {
-    var _a = react_1.useState(10), primaryStep = _a[0], setPrimaryStep = _a[1];
-    var _b = react_1.useState(40), secondaryStep = _b[0], setSecondaryStep = _b[1];
+    var _a = (0, react_1.useState)(10), primaryStep = _a[0], setPrimaryStep = _a[1];
+    var _b = (0, react_1.useState)(40), secondaryStep = _b[0], setSecondaryStep = _b[1];
     return (<div style={{ padding: "32px", width: "400px" }}>
       <Progress_1.default primaryStep={primaryStep} secondaryStep={secondaryStep}/>
       <div style={{ marginTop: "32px" }}>
-        <Button_1.default type="button" scale="sm" onClick={function () { return setPrimaryStep(lodash_1.random(1, 100)); }}>
+        <Button_1.default type="button" scale="sm" onClick={function () { return setPrimaryStep((0, lodash_1.random)(1, 100)); }}>
           Random Primary Progress
         </Button_1.default>
-        <Button_1.default style={{ marginTop: "16px" }} type="button" scale="sm" onClick={function () { return setSecondaryStep(lodash_1.random(1, 100)); }}>
+        <Button_1.default style={{ marginTop: "16px" }} type="button" scale="sm" onClick={function () { return setSecondaryStep((0, lodash_1.random)(1, 100)); }}>
           Random Secondary Progress
         </Button_1.default>
       </div>
@@ -54,15 +54,15 @@ var WithSecondary = function () {
 };
 exports.WithSecondary = WithSecondary;
 var WithSecondaryAndProgressBunny = function () {
-    var _a = react_1.useState(10), primaryStep = _a[0], setPrimaryStep = _a[1];
-    var _b = react_1.useState(40), secondaryStep = _b[0], setSecondaryStep = _b[1];
+    var _a = (0, react_1.useState)(10), primaryStep = _a[0], setPrimaryStep = _a[1];
+    var _b = (0, react_1.useState)(40), secondaryStep = _b[0], setSecondaryStep = _b[1];
     return (<div style={{ padding: "32px", width: "400px" }}>
       <Progress_1.default primaryStep={primaryStep} secondaryStep={secondaryStep} showProgressBunny/>
       <div style={{ marginTop: "32px" }}>
-        <Button_1.default type="button" scale="sm" onClick={function () { return setPrimaryStep(lodash_1.random(1, 100)); }}>
+        <Button_1.default type="button" scale="sm" onClick={function () { return setPrimaryStep((0, lodash_1.random)(1, 100)); }}>
           Random Primary Progress
         </Button_1.default>
-        <Button_1.default style={{ marginTop: "16px" }} type="button" scale="sm" onClick={function () { return setSecondaryStep(lodash_1.random(1, 100)); }}>
+        <Button_1.default style={{ marginTop: "16px" }} type="button" scale="sm" onClick={function () { return setSecondaryStep((0, lodash_1.random)(1, 100)); }}>
           Random Secondary Progress
         </Button_1.default>
       </div>

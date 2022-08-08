@@ -21,9 +21,9 @@ var Modal = function (_a) {
     var theme = styled_components_1.useTheme();
     return (<styles_1.ModalContainer minWidth={minWidth} {...props}>
       <styles_1.ModalHeader background={getThemeValue_1.default("colors." + headerBackground, headerBackground)(theme)}>
-        <styles_1.ModalTitle>
+        <styles_1.ModalTitle className="textGlow pink">
           {onBack && <styles_1.ModalBackButton onBack={onBack}/>}
-          <Heading_1.default>{title}</Heading_1.default>
+          <Heading_1.default color="var(--accent)">{title}</Heading_1.default>
         </styles_1.ModalTitle>
         {!hideCloseButton && <styles_1.ModalCloseButton onDismiss={onDismiss}/>}
       </styles_1.ModalHeader>

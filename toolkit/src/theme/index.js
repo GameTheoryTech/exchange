@@ -1,11 +1,4 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.darkColors = exports.lightColors = exports.light = exports.dark = void 0;
-var dark_1 = require("./dark");
-Object.defineProperty(exports, "dark", { enumerable: true, get: function () { return dark_1.default; } });
-var light_1 = require("./light");
-Object.defineProperty(exports, "light", { enumerable: true, get: function () { return light_1.default; } });
-var colors_1 = require("./colors");
-Object.defineProperty(exports, "lightColors", { enumerable: true, get: function () { return colors_1.lightColors; } });
-var colors_2 = require("./colors");
-Object.defineProperty(exports, "darkColors", { enumerable: true, get: function () { return colors_2.darkColors; } });
+export { default as dark } from "./dark";
+export { default as light } from "./light";
+export { lightColors } from "./colors";
+export { darkColors } from "./colors";

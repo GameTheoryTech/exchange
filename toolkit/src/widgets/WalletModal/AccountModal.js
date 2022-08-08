@@ -11,10 +11,10 @@ var AccountModal = function (_a) {
     return (React.createElement(Modal, { title: "Your wallet", onDismiss: onDismiss },
         React.createElement(Text, { fontSize: "20px", bold: true, style: { whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis", marginBottom: "8px" } }, account),
         React.createElement(Flex, { mb: "32px" },
-            React.createElement(LinkExternal, { small: true, href: "https://snowtrace.io/address/".concat(account), mr: "16px" }, "View on SnowTrace"),
+            React.createElement(LinkExternal, { small: true, href: "https://snowtrace.io/address/" + account, mr: "16px" }, "View on SnowTrace"),
             React.createElement(CopyToClipboard, { toCopy: account }, "Copy Address")),
         React.createElement(Flex, { justifyContent: "center" },
-            React.createElement(Button, { scale: "sm", variant: "secondary", onClick: function () {
+            React.createElement(Button, { scale: "sm", variant: "primary", onClick: function () {
                     logout();
                     window.localStorage.removeItem(connectorLocalStorageKey);
                     onDismiss();

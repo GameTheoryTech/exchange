@@ -15,7 +15,7 @@ var ToastContainer = function (_a) {
         React.createElement(TransitionGroup, null, toasts.map(function (toast, index) {
             var zIndex = (ZINDEX - index).toString();
             var top = TOP_POSITION + index * stackSpacing;
-            return (React.createElement(Toast, { key: toast.id, toast: toast, onRemove: onRemove, ttl: ttl, style: { top: "".concat(top, "px"), zIndex: zIndex } }));
+            return (React.createElement(Toast, { key: toast.id, toast: toast, onRemove: onRemove, ttl: ttl, style: { top: top + "px", zIndex: zIndex } }));
         }))));
 };
 export default ToastContainer;

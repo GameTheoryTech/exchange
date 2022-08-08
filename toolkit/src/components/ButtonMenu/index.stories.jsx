@@ -16,8 +16,8 @@ exports.default = {
     argTypes: {},
 };
 var Default = function () {
-    var _a = react_1.useState(0), index = _a[0], setIndex = _a[1];
-    var _b = react_1.useState(1), index1 = _b[0], setIndex1 = _b[1];
+    var _a = (0, react_1.useState)(0), index = _a[0], setIndex = _a[1];
+    var _b = (0, react_1.useState)(1), index1 = _b[0], setIndex1 = _b[1];
     var handleClick = function (newIndex) { return setIndex(newIndex); };
     var handleClick1 = function (newIndex) { return setIndex1(newIndex); };
     return (<>

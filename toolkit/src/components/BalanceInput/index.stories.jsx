@@ -10,13 +10,13 @@ exports.default = {
     argTypes: {},
 };
 var Default = function () {
-    var _a = react_1.useState(1.43333), decimalValue = _a[0], setDecimalValue = _a[1];
-    var _b = react_1.useState(5), numericValue = _b[0], setNumericValue = _b[1];
+    var _a = (0, react_1.useState)(1.43333), decimalValue = _a[0], setDecimalValue = _a[1];
+    var _b = (0, react_1.useState)(5), numericValue = _b[0], setNumericValue = _b[1];
     var currencyValue = function (input) {
-        return "~" + (input * 1.3).toLocaleString(undefined, {
+        return "~".concat((input * 1.3).toLocaleString(undefined, {
             minimumFractionDigits: 2,
             maximumFractionDigits: 2,
-        }) + " USD";
+        }), " USD");
     };
     var handleDecimalChange = function (input) {
         setDecimalValue(input);

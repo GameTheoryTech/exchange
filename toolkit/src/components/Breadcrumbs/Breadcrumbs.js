@@ -2,14 +2,10 @@ var __makeTemplateObject = (this && this.__makeTemplateObject) || function (cook
     if (Object.defineProperty) { Object.defineProperty(cooked, "raw", { value: raw }); } else { cooked.raw = raw; }
     return cooked;
 };
-var __spreadArray = (this && this.__spreadArray) || function (to, from, pack) {
-    if (pack || arguments.length === 2) for (var i = 0, l = from.length, ar; i < l; i++) {
-        if (ar || !(i in from)) {
-            if (!ar) ar = Array.prototype.slice.call(from, 0, i);
-            ar[i] = from[i];
-        }
-    }
-    return to.concat(ar || Array.prototype.slice.call(from));
+var __spreadArray = (this && this.__spreadArray) || function (to, from) {
+    for (var i = 0, il = from.length, j = to.length; i < il; i++, j++)
+        to[j] = from[i];
+    return to;
 };
 /* eslint-disable react/no-array-index-key */
 import React, { Children, isValidElement } from "react";
@@ -30,12 +26,12 @@ var StyledBreadcrumbs = styled.ul(templateObject_2 || (templateObject_2 = __make
 var insertSeparators = function (items, separator) {
     return items.reduce(function (accum, item, index) {
         if (index === 0) {
-            return __spreadArray(__spreadArray([], accum, true), [item], false);
+            return __spreadArray(__spreadArray([], accum), [item]);
         }
-        return __spreadArray(__spreadArray([], accum, true), [
-            React.createElement(Separator, { "aria-hidden": true, key: "seperator-".concat(index) }, separator),
+        return __spreadArray(__spreadArray([], accum), [
+            React.createElement(Separator, { "aria-hidden": true, key: "seperator-" + index }, separator),
             item,
-        ], false);
+        ]);
     }, []);
 };
 var DefaultSeparator = React.createElement(ChevronRightIcon, { color: "currentColor", width: "24px" });
@@ -43,7 +39,7 @@ var Breadcrumbs = function (_a) {
     var _b = _a.separator, separator = _b === void 0 ? DefaultSeparator : _b, children = _a.children;
     var validItems = Children.toArray(children).filter(function (child) { return isValidElement(child); });
     var items = insertSeparators(validItems, separator);
-    return (React.createElement(StyledBreadcrumbs, null, items.map(function (item, index) { return (React.createElement("li", { key: "child-".concat(index) }, item)); })));
+    return (React.createElement(StyledBreadcrumbs, null, items.map(function (item, index) { return (React.createElement("li", { key: "child-" + index }, item)); })));
 };
 export default Breadcrumbs;
 var templateObject_1, templateObject_2;

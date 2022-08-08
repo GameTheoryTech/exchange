@@ -1,11 +1,8 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.scaleKeys = exports.scales = void 0;
-exports.scales = {
+export var scales = {
     SM: "sm",
     MD: "md",
 };
-exports.scaleKeys = {
+export var scaleKeys = {
     pancakeSize: "pancakeSize",
     travelDistance: "travelDistance",
     toggleHeight: "toggleHeight",

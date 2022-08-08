@@ -12,7 +12,7 @@ var CakePrice = function (_a) {
     var cakePriceUsd = _a.cakePriceUsd;
     return cakePriceUsd ? (React.createElement(PriceLink, { href: "https://exchange.pancakeswap.finance/#/swap?outputCurrency=0x0e09fabb73bd3ade0a17ecc321fd13a19e81ce82", target: "_blank" },
         React.createElement(PancakeRoundIcon, { width: "24px", mr: "8px" }),
-        React.createElement(Text, { color: "textSubtle", bold: true }, "$".concat(cakePriceUsd.toFixed(3))))) : (React.createElement(Skeleton, { width: 80, height: 24 }));
+        React.createElement(Text, { color: "textSubtle", bold: true }, "$" + cakePriceUsd.toFixed(3)))) : (React.createElement(Skeleton, { width: 80, height: 24 }));
 };
 export default React.memo(CakePrice);
 var templateObject_1;

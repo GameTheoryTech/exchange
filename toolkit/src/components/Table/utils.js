@@ -1,7 +1,4 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.byTextDescending = exports.byTextAscending = void 0;
-var byTextAscending = function (getTextProperty) {
+export var byTextAscending = function (getTextProperty) {
     return function (objectA, objectB) {
         var upperA = getTextProperty(objectA).toUpperCase();
         var upperB = getTextProperty(objectB).toUpperCase();
@@ -14,8 +11,7 @@ var byTextAscending = function (getTextProperty) {
         return 0;
     };
 };
-exports.byTextAscending = byTextAscending;
-var byTextDescending = function (getTextProperty) {
+export var byTextDescending = function (getTextProperty) {
     return function (objectA, objectB) {
         var upperA = getTextProperty(objectA).toUpperCase();
         var upperB = getTextProperty(objectB).toUpperCase();
@@ -28,4 +24,3 @@ var byTextDescending = function (getTextProperty) {
         return 0;
     };
 };
-exports.byTextDescending = byTextDescending;

@@ -15,9 +15,12 @@ var getFontSize = function (_a) {
     var fontSize = _a.fontSize, small = _a.small;
     return small ? "14px" : fontSize || "16px";
 };
-var Text = styled_components_1.default.div(templateObject_1 || (templateObject_1 = __makeTemplateObject(["\n  color: ", ";\n  font-size: ", ";\n  font-weight: ", ";\n  line-height: 1.5;\n  ", "\n  ", "\n\n  ", "\n  ", "\n  ", "\n"], ["\n  color: ", ";\n  font-size: ", ";\n  font-weight: ", ";\n  line-height: 1.5;\n  ", "\n  ", "\n\n  ", "\n  ", "\n  ", "\n"])), getColor, getFontSize, function (_a) {
+var Text = styled_components_1.default.div(templateObject_1 || (templateObject_1 = __makeTemplateObject(["\n  color: ", ";\n  font-size: ", ";\n  font-weight: ", ";\n  line-height: 1.5;\n  ", ";\n  ", "\n  ", "\n\n  ", "\n  ", "\n  ", "\n"], ["\n  color: ", ";\n  font-size: ", ";\n  font-weight: ", ";\n  line-height: 1.5;\n  ", ";\n  ", "\n  ", "\n\n  ", "\n  ", "\n  ", "\n"])), getColor, getFontSize, function (_a) {
     var bold = _a.bold;
     return (bold ? 600 : 400);
+}, function (_a) {
+    var heading = _a.heading;
+    return heading && "font-family: \"kallisto\", sans-serif";
 }, function (_a) {
     var textTransform = _a.textTransform;
     return textTransform && "text-transform: " + textTransform + ";";
@@ -30,6 +33,7 @@ Text.defaultProps = {
     color: "text",
     small: false,
     ellipsis: false,
+    heading: false,
 };
 exports.default = Text;
 var templateObject_1;

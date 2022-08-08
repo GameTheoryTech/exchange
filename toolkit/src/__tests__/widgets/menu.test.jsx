@@ -1,8 +1,12 @@
 "use strict";
-var __spreadArray = (this && this.__spreadArray) || function (to, from) {
-    for (var i = 0, il = from.length, j = to.length; i < il; i++, j++)
-        to[j] = from[i];
-    return to;
+var __spreadArray = (this && this.__spreadArray) || function (to, from, pack) {
+    if (pack || arguments.length === 2) for (var i = 0, l = from.length, ar; i < l; i++) {
+        if (ar || !(i in from)) {
+            if (!ar) ar = Array.prototype.slice.call(from, 0, i);
+            ar[i] = from[i];
+        }
+    }
+    return to.concat(ar || Array.prototype.slice.call(from));
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var react_1 = require("react");
@@ -26,13 +30,13 @@ Object.defineProperty(window, "matchMedia", {
         dispatchEvent: jest.fn(),
     }); }),
 });
-var langs = __spreadArray([], Array(20)).map(function (_, i) { return ({
-    code: "en" + i,
-    language: "English" + i,
-    locale: "en" + i + "-locale",
+var langs = __spreadArray([], Array(20), true).map(function (_, i) { return ({
+    code: "en".concat(i),
+    language: "English".concat(i),
+    locale: "en".concat(i, "-locale"),
 }); });
 it("renders correctly", function () {
-    var asFragment = testHelpers_1.renderWithTheme(<react_router_dom_1.BrowserRouter>
+    var asFragment = (0, testHelpers_1.renderWithTheme)(<react_router_dom_1.BrowserRouter>
       <Menu_1.Menu account="0xbdda50183d817c3289f895a4472eb475967dc980" login={noop_1.default} logout={noop_1.default} isDark={true} toggleTheme={noop_1.default} langs={langs} setLang={noop_1.default} currentLang="en-US" cakePriceUsd={0.23158668932877668} links={Menu_1.menuConfig}>
         body
       </Menu_1.Menu>

@@ -21,7 +21,7 @@ var AccountModal = function (_a) {
       <CopyToClipboard_1.default toCopy={account}>Copy Address</CopyToClipboard_1.default>
     </Flex_1.default>
     <Flex_1.default justifyContent="center">
-      <Button_1.default scale="sm" variant="secondary" onClick={function () {
+      <Button_1.default scale="sm" variant="primary" onClick={function () {
             logout();
             window.localStorage.removeItem(config_1.connectorLocalStorageKey);
             onDismiss();
