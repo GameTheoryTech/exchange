@@ -497,11 +497,10 @@ const Menu: React.FC<NavProps> = ({
 
       <BodyWrapper>
         <Inner isPushed={true} showMenu={showMenu}>
-          {!location.pathname.includes("altergene") && children}
+          {children}
         </Inner>
       </BodyWrapper>
     </Wrapper>
-    {location.pathname.includes("altergene") && children}
       </>
   );
 };

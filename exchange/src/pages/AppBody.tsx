@@ -13,7 +13,6 @@ export const BodyWrapper = styled(Card)`
 export const AltergeneBodyWrapper = styled(Card)`
   position: relative;
   width: 100%;
-  z-index: 5;
 `
 
 /**

@@ -3890,8 +3890,7 @@ var Menu = function (_a) {
                         React.createElement("li", null,
                             React.createElement(StyledMobileLink, { as: "a", href: "https://snowtrace.io/address/0x148988f296b5B8B8e619434546A4C674397777dd", target: "_blank" }, "Treasury Wallet")))))),
             React.createElement(BodyWrapper, null,
-                React.createElement(Inner, { isPushed: true, showMenu: showMenu }, !location.pathname.includes("altergene") && children))),
-        location.pathname.includes("altergene") && children));
+                React.createElement(Inner, { isPushed: true, showMenu: showMenu }, children)))));
 };
 var templateObject_1$3, templateObject_2, templateObject_3, templateObject_4, templateObject_5, templateObject_6, templateObject_7, templateObject_8, templateObject_9, templateObject_10, templateObject_11, templateObject_12, templateObject_13, templateObject_14, templateObject_15, templateObject_16;
 
