@@ -416,9 +416,9 @@ const Menu: React.FC<NavProps> = ({
                 <StyledLink to="/about" className={location.pathname === '/about' ? 'active' : ''}>
                   About Game Theory
                 </StyledLink>
-                <StyledLink to="/about#community">
-                  Community
-                </StyledLink>
+                {/*<StyledLink to="/about#community">*/}
+                {/*  Community*/}
+                {/*</StyledLink>*/}
                 <StyledLink as="a" href="https://snowtrace.io/address/0x148988f296b5B8B8e619434546A4C674397777dd" target="_blank">
                   Treasury Wallet
                 </StyledLink>
@@ -481,9 +481,9 @@ const Menu: React.FC<NavProps> = ({
                 </StyledMobileLink>
                 </li>
                 <li>
-                <StyledMobileLink to="/about#community">
-                  Community
-                </StyledMobileLink>
+                {/*<StyledMobileLink to="/about#community">*/}
+                {/*  Community*/}
+                {/*</StyledMobileLink>*/}
                 </li>
                 <li>
                 <StyledMobileLink as="a" href="https://snowtrace.io/address/0x148988f296b5B8B8e619434546A4C674397777dd" target="_blank">

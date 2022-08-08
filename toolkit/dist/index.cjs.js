@@ -3874,7 +3874,6 @@ var Menu = function (_a) {
                                     React__default['default'].createElement(StyledLink, { as: "a", href: "https://docs.gametheory.tech", target: "_blank" }, "Documentation"),
                                     React__default['default'].createElement(StyledLink, { as: "a", href: "https://dexscreener.com/avalanche/0x0129d2b26a576916cd588da437f27e315c086b0a", target: "_blank" }, "GAME Chart"),
                                     React__default['default'].createElement(StyledLink, { to: "/about", className: location.pathname === '/about' ? 'active' : '' }, "About Game Theory"),
-                                    React__default['default'].createElement(StyledLink, { to: "/about#community" }, "Community"),
                                     React__default['default'].createElement(StyledLink, { as: "a", href: "https://snowtrace.io/address/0x148988f296b5B8B8e619434546A4C674397777dd", target: "_blank" }, "Treasury Wallet")))))),
                     !!login && !!logout && (React__default['default'].createElement(Flex, null,
                         React__default['default'].createElement(UserBlock$1, { account: account, login: login, logout: logout }))))),
