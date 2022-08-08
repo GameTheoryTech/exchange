@@ -51,7 +51,7 @@ const Play = () => {
                     Game Library
                 </PageTitle>
                 <Text textAlign={'center'} marginBottom="40px">
-                All our current and future release games require GAME tokens to play.
+                    All our current and future games will utilize the GAME token.
                 </Text>
                 <StyledSubtitle>
                     Latest Releases
