@@ -168,8 +168,11 @@ const MasterModal = ({ onDismiss = defaultOnDismiss, master, token, account }: M
       let _minDays = 30;
       if((await master.balanceOf(account)).gt(0))
       {
-        _minDays = Math.ceil((await master.userInfo(account)).lockTime.toNumber() / 60 / 60 / 24);
-        setMinDays(_minDays);
+        const masterInfo = (await master.userInfo(account));
+        if(masterInfo && masterInfo.lockTime !== undefined) {
+          _minDays = Math.ceil(masterInfo.lockTime.toNumber() / 60 / 60 / 24);
+          setMinDays(_minDays);
+        }
       }
       setMasterReceived(ethers.utils.formatEther(await master.lpToMaster(account, amount ? ethers.utils.parseEther(amount) : "0", BigNumber.from(Math.max(days, _minDays)).mul(24).mul(60).mul(60))));
     };
@@ -899,9 +902,10 @@ const MasterRewardCard = ({ tokenAddress } : MasterRewardProps) => {
   const [tokensPerYear, setTokensPerYear] = useState(BigNumber.from(0));
   const [oraclePrice, setOraclePrice] = useState(BigNumber.from(0));
   const game = useGameContract(GAME?.address);
-  const [poolInfo, setPoolInfo] = useState<any>(null);
-  const lpToken = useContract(poolInfo?.lpToken, PairABI, true);
-  const [newToken, setToken] = useState<Token | undefined>(undefined);
+  const [userInfo2, setUserInfo2] = useState<any>(null);
+  const [poolInfo2, setPoolInfo2] = useState<any>(null);
+  const lpToken = useContract(poolInfo2?.lpToken, PairABI, true);
+  const [newToken, setNewToken] = useState<Token | undefined>(undefined);
   const [depositPrice, setDepositPrice] = useState(BigNumber.from(0));
 
   useEffect(() => {
@@ -909,15 +913,15 @@ const MasterRewardCard = ({ tokenAddress } : MasterRewardProps) => {
     {
         if(BigNumber.from(farm.id).gte(await farm.contract.poolLength())) return;
         const _poolInfo = await farm.contract.poolInfo(farm.id);
-        setPoolInfo(_poolInfo);
+        setPoolInfo2(_poolInfo);
         if(!account) return;
-        setUserInfo(await farm.contract.userInfo(farm.id, account));
+        setUserInfo2(await farm.contract.userInfo(farm.id, account));
         setPendingGame(await farm.contract.pendingGame(farm.id, account));
         //setPendingGame(ethers.utils.parseEther("0.019545254223099787").mul(59));
         if (_poolInfo && farm.earnTokenName === 'GAME')
         {
           const _token = new Token(43113, _poolInfo.lpToken, 18, farm.depositTokenName, farm.depositTokenName);
-          setToken(_token);
+          setNewToken(_token);
           if(_token)
             setTokenAmount(new TokenAmount(_token, "0xFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF"));
           if(game)
@@ -987,7 +991,7 @@ const MasterRewardCard = ({ tokenAddress } : MasterRewardProps) => {
     }
     effect();
     return () => { mountedRef.current = false }
-  }, [setUserInfo, setPoolInfo, setPendingGame, setToken, setTokenAmount, farm, account, game, lpToken, refreshKey]);
+  }, [setUserInfo2, setPoolInfo2, setPendingGame, setNewToken, setTokenAmount, farm, account, game, lpToken, refreshKey]);
 
   return (<div className="boxed">
     <CardBody style={{textAlign: 'center'}}>
@@ -1025,7 +1029,7 @@ const MasterRewardCard = ({ tokenAddress } : MasterRewardProps) => {
               MASTER Tokens Deposited
           </Text>
 
-        {(balance.gt(0) &&
+        {(balance.gt(0) && userInfo && userInfo.lockFromTime !== undefined && userInfo.lockTime !== undefined &&
 
           <Text fontSize="14px" marginBottom="30px">
             Available to withdraw after lock period ends
@@ -1051,7 +1055,7 @@ Withdraw Date: ${(new Date(userInfo.lockFromTime.add(userInfo.lockTime).toNumber
               </Button>)}
               </GridItem>
               <GridItem width="lg" mobile>
-          <Button disabled={!userInfo || balance.eq(0) || userInfo.lockFromTime.add(userInfo.lockTime).gt(Math.ceil(new Date().getTime() / 1000))} onClick={onWithdraw} width="100%">
+          <Button disabled={!userInfo || userInfo.lockFromTime === undefined || userInfo.lockTime === undefined || balance.eq(0) || userInfo.lockFromTime.add(userInfo.lockTime).gt(Math.ceil(new Date().getTime() / 1000))} onClick={onWithdraw} width="100%">
             Withdraw
           </Button>
           </GridItem>
